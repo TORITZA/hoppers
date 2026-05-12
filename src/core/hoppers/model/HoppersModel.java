@@ -188,6 +188,16 @@ public class HoppersModel {
     }
 
     /**
+     *
+     */
+    public void create() {
+        String createMsg = "Creating Hoppers puzzle...";
+
+
+    }
+
+
+    /**
      * A getter for the HoppersConfiguration representing the model's current
      * puzzle.
      *

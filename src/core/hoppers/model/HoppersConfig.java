@@ -64,6 +64,42 @@ public class HoppersConfig implements Configuration {
     }
 
     /**
+     * A constructor for the purpose of creating a board emptied of frogs so
+     * that the user can make their own Hoppers puzzle, populating it with
+     * frogs in places of their choosing.
+     *
+     * @param row amount of rows in the empty board
+     * @param col amount of columns in the empty board
+     */
+    public HoppersConfig(int row, int col) {
+        ROW = row;
+        COL = col;
+        board = new String[ROW][COL];
+
+        for (int r = 0; r < ROW; r++) {
+            for (int c = 0; c < COL; c++) {
+                // if current row is even...
+                if (r % 2 == 0) {
+                    if (c % 2 == 0) {
+                        board[r][c] = EMPTY_SPACE;
+                    } else {
+                        board[r][c] = INVALID_SPACE;
+                    }
+                } else { // if current row is odd...
+                    if (c % 2 == 0) {
+                        board[r][c] = INVALID_SPACE;
+                    } else {
+                        board[r][c] = EMPTY_SPACE;
+                    }
+                }
+
+            }
+        }
+
+    }
+
+
+    /**
      * A deep copy constructor designed to keep the game boards of each successor
      * configuration isolated, preventing any unintended modification.
      * The dimensions of the board remain the same, while the 2D array itself is
