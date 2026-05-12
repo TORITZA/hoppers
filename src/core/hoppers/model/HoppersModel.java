@@ -29,6 +29,9 @@ public class HoppersModel {
     /** number of frogs on the player-created board */
     private int redFrogCount;
     private int greenFrogCount;
+    /** max number of frogs on the player-created board */
+    private int maxRedFrog;
+    private int maxGreenFrogs;
 
     /** the solver that stores the path to the puzzle's solution */
     private Solver sol = new Solver();
@@ -202,6 +205,8 @@ public class HoppersModel {
         creationConfig = new HoppersConfig(row, col);
         redFrogCount = 0;
         greenFrogCount = 0;
+        maxRedFrog = 1;
+        maxGreenFrogs = creationConfig.getValidSpaces() - 1;
 
         alertObservers(createMsg);
     }
@@ -213,9 +218,6 @@ public class HoppersModel {
      * @param c
      */
     public void place(String r, String c, String frogType) {
-        int maxRedFrog = 1;
-        int maxGreenFrogs = creationConfig.getValidSpaces() - 1;
-
         String placeMsg;
         int row = Integer.parseInt(r);
         int col = Integer.parseInt(c);
@@ -241,6 +243,29 @@ public class HoppersModel {
 
 
             alertObservers(placeMsg);
+        }
+
+    /**
+     * delete frog at space
+     *
+     * @param r
+     * @param c
+     */
+    public void delete(String r, String c) {
+        String deleteMsg;
+        int row = Integer.parseInt(r);
+        int col = Integer.parseInt(c);
+
+
+        if (creationConfig.getCell(row, col).equals(HoppersConfig.GREEN_FROG)) {
+            creationConfig.changeCell(row, col, HoppersConfig.EMPTY_SPACE);
+            greenFrogCount--;
+        } else if (creationConfig.getCell(row, col).equals(HoppersConfig.RED_FROG)) {
+            creationConfig.changeCell(row, col, HoppersConfig.EMPTY_SPACE);
+            redFrogCount--;
+        }
+
+
         }
 
 
