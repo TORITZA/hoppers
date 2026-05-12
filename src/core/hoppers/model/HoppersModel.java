@@ -23,6 +23,8 @@ public class HoppersModel {
     private HoppersConfig currentConfig;
     /** a file's initial configuration */
     private HoppersConfig originalConfig;
+    /** "blank slate" config for front-end puzzle creation */
+    private HoppersConfig creationConfig;
 
     /** the solver that stores the path to the puzzle's solution */
     private Solver sol = new Solver();
@@ -188,23 +190,31 @@ public class HoppersModel {
     }
 
     /**
-     *
+     * Create a blank board upon entering creation mode, priming it
+     * for user-driven frog placement.
      */
-    public void create() {
+    public void create(int row, int col) {
         String createMsg = "Creating Hoppers puzzle...";
+        creationConfig = new HoppersConfig(row, col);
 
-
+        alertObservers(createMsg);
     }
 
-
     /**
-     * A getter for the HoppersConfiguration representing the model's current
+     * A getter for the HoppersConfig representing the model's current
      * puzzle.
      *
      * @return the model's HoppersConfig
      */
     public HoppersConfig getBoard() { return currentConfig; }
 
+    /**
+     * A getter for the HoppersConfig being manually created & designed by
+     * the user.
+     *
+     * @return the model's creationConfig
+     */
+    public HoppersConfig getCreationConfig() { return creationConfig; }
 
     /**
      * The string representation of the Hoppers puzzle with some added
