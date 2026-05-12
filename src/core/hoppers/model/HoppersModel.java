@@ -23,8 +23,12 @@ public class HoppersModel {
     private HoppersConfig currentConfig;
     /** a file's initial configuration */
     private HoppersConfig originalConfig;
+
     /** "blank slate" config for front-end puzzle creation */
     private HoppersConfig creationConfig;
+    /** number of frogs on the player-created board */
+    private int redFrogCount;
+    private int greenFrogCount;
 
     /** the solver that stores the path to the puzzle's solution */
     private Solver sol = new Solver();
@@ -190,14 +194,41 @@ public class HoppersModel {
     }
 
     /**
-     * Create a blank board upon entering creation mode, priming it
+     * Create a new, blank board upon entering creation mode, priming it
      * for user-driven frog placement.
      */
     public void create(int row, int col) {
-        String createMsg = "Creating Hoppers puzzle...";
+        String createMsg = "Creating new Hoppers puzzle...";
         creationConfig = new HoppersConfig(row, col);
+        redFrogCount = 0;
+        greenFrogCount = 0;
 
         alertObservers(createMsg);
+    }
+
+    /**
+     * _____
+     *
+     * @param r
+     * @param c
+     */
+    public void place(String r, String c, String frogType) {
+        int maxRedFrog = 1;
+        int maxGreenFrogs = (creationConfig.getRow() * creationConfig.getCol()) - 1;
+
+        String placeMsg;
+        int row = Integer.parseInt(r);
+        int col = Integer.parseInt(c);
+
+
+        if (row < 0 || row >= creationConfig.getRow() ||
+                col < 0 || col >= creationConfig.getCol()) {
+            placeMsg = "Cannot build off the board";
+        } else if (creationConfig.getCell(row, col).equals(HoppersConfig.INVALID_SPACE)) {
+            placeMsg = "Invalid space for frog placement!";
+        }
+
+
     }
 
     /**

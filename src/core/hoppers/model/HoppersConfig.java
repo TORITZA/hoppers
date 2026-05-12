@@ -259,6 +259,19 @@ public class HoppersConfig implements Configuration {
     public String getCell(int r, int c) { return board[r][c]; }
 
     /**
+     * A setter for changing the contents of a specified space on this
+     * configuration's game board.
+     *
+     * @param r the row of the desired cell to be changed
+     * @param c the column of the desired cell to be changed
+     * @param content the character to replace the one at the specified
+     *                space
+     */
+    public void changeCell(int r, int c, String content) {
+        board[r][c] = content;
+    }
+
+    /**
      * A helper function that validates a potential move on the game board. If the
      * intended operation passes all constraints, then the configuration is successfully
      * added to the parent configuration's list of neighbors.
