@@ -214,22 +214,35 @@ public class HoppersModel {
      */
     public void place(String r, String c, String frogType) {
         int maxRedFrog = 1;
-        int maxGreenFrogs = (creationConfig.getRow() * creationConfig.getCol()) - 1;
+        int maxGreenFrogs = creationConfig.getValidSpaces() - 1;
 
         String placeMsg;
         int row = Integer.parseInt(r);
         int col = Integer.parseInt(c);
-
 
         if (row < 0 || row >= creationConfig.getRow() ||
                 col < 0 || col >= creationConfig.getCol()) {
             placeMsg = "Cannot build off the board";
         } else if (creationConfig.getCell(row, col).equals(HoppersConfig.INVALID_SPACE)) {
             placeMsg = "Invalid space for frog placement!";
+        } else if (frogType.equals(HoppersConfig.RED_FROG) && redFrogCount == maxRedFrog) {
+            placeMsg = "Exceeded Red Frog placement!";
+        } else if (frogType.equals(HoppersConfig.GREEN_FROG) && greenFrogCount ==
+                maxGreenFrogs) {
+            placeMsg = "Exceeded Green Frog placement!";
+        } else {
+            creationConfig.changeCell(row, col, frogType);
+            if (frogType.equals(HoppersConfig.RED_FROG)) {
+                placeMsg = "Placed Red Frog at (" + row + ", " + col + ")";
+            } else {
+                placeMsg = "Placed Green Frog at ("+ row + ", " + col + ")";
+            }
         }
 
 
-    }
+            alertObservers(placeMsg);
+        }
+
 
     /**
      * A getter for the HoppersConfig representing the model's current

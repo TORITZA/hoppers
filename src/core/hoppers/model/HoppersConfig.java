@@ -28,6 +28,8 @@ public class HoppersConfig implements Configuration {
     /** amt of cell spaces that frogs can move */
     private static final int DIAGONAL = 2;
     private static final int CARDINAL = 4;
+    /** amt of valid spaces on empty board */
+    private int validSpaces;
 
     /** the board and its dimensions */
     private int ROW;
@@ -75,6 +77,7 @@ public class HoppersConfig implements Configuration {
         ROW = row;
         COL = col;
         board = new String[ROW][COL];
+        validSpaces = 0;
 
         for (int r = 0; r < ROW; r++) {
             for (int c = 0; c < COL; c++) {
@@ -82,6 +85,7 @@ public class HoppersConfig implements Configuration {
                 if (r % 2 == 0) {
                     if (c % 2 == 0) {
                         board[r][c] = EMPTY_SPACE;
+                        validSpaces++;
                     } else {
                         board[r][c] = INVALID_SPACE;
                     }
@@ -90,6 +94,7 @@ public class HoppersConfig implements Configuration {
                         board[r][c] = INVALID_SPACE;
                     } else {
                         board[r][c] = EMPTY_SPACE;
+                        validSpaces++;
                     }
                 }
 
@@ -247,6 +252,14 @@ public class HoppersConfig implements Configuration {
      * @return this config's COL value
      */
     public int getCol() { return this.COL; }
+
+    /**
+     * A getter for the number of valid spaces in this configuration's
+     * game board.
+     *
+     * @return this config's number of validSpaces
+     */
+    public int getValidSpaces() { return this.validSpaces; }
 
     /**
      * A getter for the contents of a specified space on this configuration's
