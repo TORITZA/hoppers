@@ -212,10 +212,11 @@ public class HoppersModel {
     }
 
     /**
-     * _____
+     * In creation mode, place a frog at a valid space selected by the
+     * user.
      *
-     * @param r
-     * @param c
+     * @param r the row value of the space selected
+     * @param c the column value of the space selected
      */
     public void place(String r, String c, String frogType) {
         String placeMsg;
@@ -246,10 +247,11 @@ public class HoppersModel {
         }
 
     /**
-     * delete frog at space
+     * In creation mode, deletes a frog off the board, emptying the
+     * space.
      *
-     * @param r
-     * @param c
+     * @param r the row value of the space selected
+     * @param c the column value of the space selected
      */
     public void delete(String r, String c) {
         String deleteMsg;
@@ -260,12 +262,17 @@ public class HoppersModel {
         if (creationConfig.getCell(row, col).equals(HoppersConfig.GREEN_FROG)) {
             creationConfig.changeCell(row, col, HoppersConfig.EMPTY_SPACE);
             greenFrogCount--;
+            deleteMsg = "Green Frog deleted at (" + row + ", " + col + ")";
         } else if (creationConfig.getCell(row, col).equals(HoppersConfig.RED_FROG)) {
             creationConfig.changeCell(row, col, HoppersConfig.EMPTY_SPACE);
             redFrogCount--;
+            deleteMsg = "Red Frog deleted at (" + row + "," + col + ")";
+        } else {
+            deleteMsg = "Nothing to delete here!";
         }
 
 
+        alertObservers(deleteMsg);
         }
 
 
