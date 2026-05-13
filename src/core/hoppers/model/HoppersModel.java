@@ -4,7 +4,12 @@ import core.common.Observer;
 import core.common.solver.Configuration;
 import core.common.solver.Solver;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,6 +21,10 @@ import java.util.List;
  * @author Tereza Lang (@TORITZA)
  */
 public class HoppersModel {
+    /** defines storage path for customCounter in user's home folder */
+    private static final Path CUSTOM_COUNTER = Paths.get(System.getProperty("user.home"),
+            ".custom_counter");
+
     /** the collection of observers of this model */
     private final List<Observer<HoppersModel, String>> observers = new LinkedList<>();
 
@@ -32,6 +41,8 @@ public class HoppersModel {
     /** max number of frogs on the player-created board */
     private int maxRedFrog;
     private int maxGreenFrogs;
+    /** the number of custom puzzles the user has already created */
+    private static int customCount;
 
     /** the solver that stores the path to the puzzle's solution */
     private Solver sol = new Solver();
@@ -196,6 +207,9 @@ public class HoppersModel {
         alertObservers(resetMsg);
     }
 
+
+    // ---------------------------CREATION MODE-------------------------------
+
     /**
      * Create a new, blank board upon entering creation mode, priming it
      * for user-driven frog placement.
@@ -242,7 +256,6 @@ public class HoppersModel {
             }
         }
 
-
             alertObservers(placeMsg);
         }
 
@@ -258,7 +271,6 @@ public class HoppersModel {
         int row = Integer.parseInt(r);
         int col = Integer.parseInt(c);
 
-
         if (creationConfig.getCell(row, col).equals(HoppersConfig.GREEN_FROG)) {
             creationConfig.changeCell(row, col, HoppersConfig.EMPTY_SPACE);
             greenFrogCount--;
@@ -271,10 +283,42 @@ public class HoppersModel {
             deleteMsg = "Nothing to delete here!";
         }
 
-
         alertObservers(deleteMsg);
-        }
+    }
 
+    /**
+     * Upon Hoppers start-up, verify if the customCounter exists. If it does,
+     * read & store the number within the CUSTOM_COUNTER filer; if not, default to
+     * count zero.
+     *
+     * @return the number of times the user has created a custom puzzle
+     */
+    public int loadCount() {
+        try {
+            if (Files.exists(CUSTOM_COUNTER)) {
+                // read through all text content & parse first line as int
+                String content = Files.readAllLines(CUSTOM_COUNTER).getFirst().trim();
+                return Integer.parseInt(content);
+            }
+        } catch (IOException e) {
+            System.err.println("Cannot read counter, defaulting to 0: " + e.getMessage());
+        }
+        return 0;
+    }
+
+    /**
+     *
+     */
+    public void save() {
+        String saveMsg;
+        String content = creationConfig.getRow() + " " + creationConfig.getCol();
+
+        //try (BufferedWriter writer = new BufferedWriter(new FileWriter()))
+
+    }
+
+
+    // -----------------GETTERS & TOSTRING--------------------
 
     /**
      * A getter for the HoppersConfig representing the model's current
