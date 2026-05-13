@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -221,6 +222,7 @@ public class HoppersModel {
         greenFrogCount = 0;
         maxRedFrog = 1;
         maxGreenFrogs = creationConfig.getValidSpaces() - 1;
+        customCount = loadCount();
 
         alertObservers(createMsg);
     }
@@ -287,7 +289,7 @@ public class HoppersModel {
     }
 
     /**
-     * Upon Hoppers start-up, verify if the customCounter exists. If it does,
+     * Upon Hoppers start-up, verify if the customCount exists. If it does,
      * read & store the number within the CUSTOM_COUNTER filer; if not, default to
      * count zero.
      *
@@ -304,6 +306,25 @@ public class HoppersModel {
             System.err.println("Cannot read counter, defaulting to 0: " + e.getMessage());
         }
         return 0;
+    }
+
+    /**
+     * Each time the user makes & saves a puzzle in creation mode,
+     * increment the customCount in their application memory, overwriting
+     * the local CUSTOM_COUNTER file with the new value.
+     *
+     * @param newCount the updated integer, chronicling the total amount of puzzles
+     *                 that the user has created & saved
+     */
+    public void saveCount(int newCount) {
+        try {
+            // converts the int to a string & overwrites the existing content in the file
+            Files.writeString(CUSTOM_COUNTER, String.valueOf(newCount),
+                    StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (IOException e) {
+            System.err.println("Failed to save counter! " + e.getMessage());
+        }
+
     }
 
     /**
