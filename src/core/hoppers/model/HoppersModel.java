@@ -5,6 +5,7 @@ import core.common.solver.Configuration;
 import core.common.solver.Solver;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -332,7 +333,20 @@ public class HoppersModel {
      */
     public void save() {
         String saveMsg;
+        customCount++;
+        saveCount(customCount);
+
+        String subFolder = "custom";
+        String fileName = "hopped-" + customCount + ".txt";
         String content = creationConfig.getRow() + " " + creationConfig.getCol();
+        content = "\n" + creationConfig.toString();
+
+        // get working root directory
+        Path workingDir = Paths.get(".").toAbsolutePath().normalize();
+
+        // target existing data folder
+        File dataDir = new File(workingDir.toFile(), "data");
+
 
         //try (BufferedWriter writer = new BufferedWriter(new FileWriter()))
 
