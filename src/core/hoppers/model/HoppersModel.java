@@ -329,7 +329,17 @@ public class HoppersModel {
     }
 
     /**
-     *
+     * Saves a custom, user-created puzzle to a subdirectory (which is constructed
+     * if it does not already exist) in the Hoppers data folder. Then, increments
+     * the total number of such puzzles that the user has already saved.
+     * Written into a file in the same format as the rest of the default Hoppers
+     * puzzles:
+     * (example)
+     *                [# of rows] [# of columns]
+     *  [content of HoppersConfig represented by its toString]
+     *                           .
+     *                           .
+     *                           .
      */
     public void save() {
         String saveMsg;
@@ -347,13 +357,30 @@ public class HoppersModel {
         // target existing data folder
         File dataDir = new File(workingDir.toFile(), "data");
 
+        // nest new subdirectory inside data folder
+        File targetSubDir = new File(dataDir, subFolder);
+        File targetFile = new File(targetSubDir, fileName);
 
-        //try (BufferedWriter writer = new BufferedWriter(new FileWriter()))
+        // safely create subdirectory if it does not already exist
+        try {
+            if (!targetSubDir.exists()) {
+                targetSubDir.mkdirs();
+            }
+            // write custom puzzle to file
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(targetFile))) {
+                writer.write(content);
+            }
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        saveMsg = "Saved puzzle as " + fileName;
+        alertObservers(saveMsg);
     }
 
 
-    // -----------------GETTERS & TOSTRING--------------------
+    // -----------------GETTERS & toSTRING--------------------
 
     /**
      * A getter for the HoppersConfig representing the model's current
