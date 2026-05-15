@@ -56,7 +56,7 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
     }
 
     /*
-     ******************* THE CONTROLLER *********************************
+     **************************** THE CONTROLLER *********************************
      */
 
     /**
@@ -90,10 +90,16 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
                         System.out.println("ERROR: Please provide a row and/or column.");
                     }
                 } else if (words[0].startsWith("c")){
-                    // enter creation mode
-                    System.out.println("Entering **CREATION MODE**!");
-                    model.create(words[1], words[2]);
+                    if (Integer.parseInt(words[1]) * Integer.parseInt(words[2]) > 144) {
+                        System.out.println("ERROR: Please ensure the board has less than 145 tiles.");
+                    } else {
+                        // ---------------- enter creation mode ------------------
+                        System.out.println("Entering **CREATION MODE**!");
+                        model.create(words[1], words[2]);
 
+
+                        // -------------------------------------------------------
+                    }
                 } else if (words[0].startsWith("r")) {
                     model.reset();
                 } else {
