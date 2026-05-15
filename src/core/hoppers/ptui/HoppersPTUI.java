@@ -55,6 +55,16 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
         System.out.println( "r(eset)             -- reset the current game" );
     }
 
+    /**
+     * Displays in standard output the list of available commands in Creation Mode.
+     */
+    private void displayCreationCommands() {
+        System.out.println( "p(lace)             -- place frog (R or G) on board" );
+        System.out.println( "d(elete)            -- delete placed frog from board" );
+        System.out.println( "s(ave)              -- save puzzle as a text file" );
+        System.out.println( "q(uit)              -- quit creation mode" );
+    }
+
     /*
      **************************** THE CONTROLLER *********************************
      */
