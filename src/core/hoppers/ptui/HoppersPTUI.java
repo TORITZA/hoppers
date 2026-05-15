@@ -50,7 +50,7 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
         System.out.println( "h(int)              -- hint next move" );
         System.out.println( "l(oad) filename     -- load new puzzle file" );
         System.out.println( "s(elect) r c        -- select cell at r, c" );
-        System.out.println( "c(reate)            -- enter creation mode" );
+        System.out.println( "c(reate) r c        -- enter creation mode" );
         System.out.println( "q(uit)              -- quit the game" );
         System.out.println( "r(eset)             -- reset the current game" );
     }
@@ -81,9 +81,6 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
                     } catch (ArrayIndexOutOfBoundsException a) {
                         System.out.println("ERROR: Please provide a file name.");
                     }
-                } else if (words[0].startsWith("c")){
-                    // enter creation mode
-
                 } else if (words[0].startsWith("s")) {
                     // have model select internal cell using other two arguments (words[1] & [2])
                     // wait for next selection
@@ -92,6 +89,11 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
                     } catch (ArrayIndexOutOfBoundsException a) {
                         System.out.println("ERROR: Please provide a row and/or column.");
                     }
+                } else if (words[0].startsWith("c")){
+                    // enter creation mode
+                    System.out.println("Entering **CREATION MODE**!");
+                    model.create(words[1], words[2]);
+
                 } else if (words[0].startsWith("r")) {
                     model.reset();
                 } else {

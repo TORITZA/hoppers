@@ -242,14 +242,16 @@ public class HoppersModel {
      * Create a new, blank board upon entering creation mode, priming it
      * for user-driven frog placement.
      */
-    public void create(int row, int col) {
+    public void create(String row, String col) {
         String createMsg = "Creating new Hoppers puzzle...";
-        creationConfig = new HoppersConfig(row, col);
+        creationConfig = new HoppersConfig(Integer.parseInt(row),
+                Integer.parseInt(col));
         redFrogCount = 0;
         greenFrogCount = 0;
         maxRedFrog = 1;
         maxGreenFrogs = creationConfig.getValidSpaces() - 1;
         customCount = loadCount();
+        creationMode = true;
 
         alertObservers(createMsg);
     }
