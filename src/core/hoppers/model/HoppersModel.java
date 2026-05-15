@@ -23,37 +23,63 @@ import java.util.List;
  * @author Tereza Lang (@TORITZA)
  */
 public class HoppersModel {
-    /** defines storage path for customCounter in user's home folder */
+    /**
+     * defines storage path for customCounter in user's home folder
+     */
     private static final Path CUSTOM_COUNTER = Paths.get(System.getProperty("user.home"),
             ".custom_counter");
 
-    /** the collection of observers of this model */
+    /**
+     * the collection of observers of this model
+     */
     private final List<Observer<HoppersModel, String>> observers = new LinkedList<>();
 
-    /** the current configuration */
+    /**
+     * the current configuration
+     */
     private HoppersConfig currentConfig;
-    /** a file's initial configuration */
+    /**
+     * a file's initial configuration
+     */
     private HoppersConfig originalConfig;
 
-    /** "blank slate" config for front-end puzzle creation */
+    /**
+     * "blank slate" config for front-end puzzle creation
+     */
     private HoppersConfig creationConfig;
-    /** number of frogs on the player-created board */
+    /**
+     * number of frogs on the player-created board
+     */
     private int redFrogCount;
     private int greenFrogCount;
-    /** max number of frogs on the player-created board */
+    /**
+     * max number of frogs on the player-created board
+     */
     private int maxRedFrog;
     private int maxGreenFrogs;
-    /** the number of custom puzzles the user has already created */
+    /**
+     * the number of custom puzzles the user has already created
+     */
     private static int customCount;
+    /**
+     * Is the model currently in creation mode?
+     */
+    private boolean creationMode = false;
 
-    /** the solver that stores the path to the puzzle's solution */
+    /**
+     * the solver that stores the path to the puzzle's solution
+     */
     private Solver sol = new Solver();
 
-    /** has the puzzle been solved? */
+    /**
+     * has the puzzle been solved?
+     */
     private boolean solved = false;
     private static final String IS_SOLVED = "Already solved!";
 
-    /** is the user on their second selection? */
+    /**
+     * is the user on their second selection?
+     */
     private boolean selectTwo = false;
     private int selectedRow;
     private int selectedCol;
@@ -255,12 +281,12 @@ public class HoppersModel {
             if (frogType.equals(HoppersConfig.RED_FROG)) {
                 placeMsg = "Placed Red Frog at (" + row + ", " + col + ")";
             } else {
-                placeMsg = "Placed Green Frog at ("+ row + ", " + col + ")";
+                placeMsg = "Placed Green Frog at (" + row + ", " + col + ")";
             }
         }
 
-            alertObservers(placeMsg);
-        }
+        alertObservers(placeMsg);
+    }
 
     /**
      * In creation mode, deletes a frog off the board, emptying the
@@ -335,11 +361,11 @@ public class HoppersModel {
      * Written into a file in the same format as the rest of the default Hoppers
      * puzzles:
      * (example)
-     *                [# of rows] [# of columns]
-     *  [content of HoppersConfig represented by its toString]
-     *                           .
-     *                           .
-     *                           .
+     * [# of rows] [# of columns]
+     * [content of HoppersConfig represented by its toString]
+     * .
+     * .
+     * .
      */
     public void save() {
         String saveMsg;
@@ -388,7 +414,9 @@ public class HoppersModel {
      *
      * @return the model's HoppersConfig
      */
-    public HoppersConfig getBoard() { return currentConfig; }
+    public HoppersConfig getBoard() {
+        return currentConfig;
+    }
 
     /**
      * A getter for the HoppersConfig being manually created & designed by
@@ -396,19 +424,47 @@ public class HoppersModel {
      *
      * @return the model's creationConfig
      */
-    public HoppersConfig getCreationConfig() { return creationConfig; }
+    public HoppersConfig getCreationConfig() {
+        return creationConfig;
+    }
+
+    /**
+     * A helper function that builds the provided HoppersConfig into the format
+     * of HoppersModel's string representation.
+     *
+     * @param buildString StringBuilder used to construct the resulting string
+     * @param config the HoppersConfig whose state is represented
+     * @return
+     */
+    public String formatHoppersConfig(StringBuilder buildString, HoppersConfig config) {
+        for (int i = 0; i < config.getCol(); i++) {
+            buildString.append(" ").append(i);
+        }
+        buildString.append("\n  ");
+        buildString.append("-".repeat(config.getCol() * 2));
+
+        // build side header & main Hoppers grid
+        buildString.append("\n");
+        String[] boardRows = config.toString().split("\n");
+        for (int i = 0; i < config.getRow(); i++) {
+            buildString.append(i).append("| ").append(boardRows[i])
+                    .append("\n");
+        }
+        return buildString.toString();
+    }
+
 
     /**
      * The string representation of the Hoppers puzzle with some added
      * row/column index visuals:
      * (example)
-     *         0 1 2 3 4
-     *        ----------
-     *      0| . * . * .
-     *      1| * G * . *
-     *      2| . * R * .
-     *      3| * G * G *
-     *      4| G * . * .
+     * 0 1 2 3 4
+     * ----------
+     * 0| . * . * .
+     * 1| * G * . *
+     * 2| . * R * .
+     * 3| * G * G *
+     * 4| G * . * .
      *
      * @return the string in the format showcased above
      */
@@ -416,22 +472,14 @@ public class HoppersModel {
     public String toString() {
         // create index header
         StringBuilder finalString = new StringBuilder("  ");
-        for (int i = 0; i < currentConfig.getCol(); i++) {
-            finalString.append(" ").append(i);
+        if (!creationMode) {
+            return formatHoppersConfig(finalString, currentConfig);
+        } else {
+            // in creation mode:
+            return formatHoppersConfig(finalString, creationConfig);
         }
-        finalString.append("\n  ");
-        finalString.append("-".repeat(currentConfig.getCol() * 2));
-
-        // build side header & main Hoppers grid
-        finalString.append("\n");
-        String[] boardRows = currentConfig.toString().split("\n");
-        for (int i = 0; i < currentConfig.getRow(); i++) {
-            finalString.append(i).append("| ").append(boardRows[i])
-                    .append("\n");
-        }
-
-        return finalString.toString();
     }
+
 
 }
 

@@ -94,7 +94,6 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
                     }
                 } else if (words[0].startsWith("r")) {
                     model.reset();
-                // else if (...) Creation Mode
                 } else {
                     displayHelp();
                 }
