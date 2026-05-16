@@ -106,9 +106,11 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
                         // ---------------- enter creation mode ------------------
                         System.out.println("Entering **CREATION MODE**!");
                         model.create(words[1], words[2]);
-                        if ( (words[0].matches("^[hlcr].*")) ||
+                        displayCreationCommands();
+
+                        if ( (words[0].matches("^[hlr].*")) ||
                            (words[0].startsWith("s") && words[0].matches(".elect")) ) {
-                            continue;
+                            displayCreationCommands();
                         }
 
                         // -------------------------------------------------------
