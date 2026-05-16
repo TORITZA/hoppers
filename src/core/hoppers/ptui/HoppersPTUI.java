@@ -59,7 +59,7 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
      * Displays in standard output the list of available commands in Creation Mode.
      */
     private void displayCreationCommands() {
-        System.out.println( "p(lace)             -- place frog (R or G) on board" );
+        System.out.println( "p(lace) r c F       -- place frog (R or G) on board" );
         System.out.println( "d(elete)            -- delete placed frog from board" );
         System.out.println( "s(ave)              -- save puzzle as a text file" );
         System.out.println( "q(uit)              -- quit creation mode" );
@@ -111,6 +111,8 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
                         if ( (words[0].matches("^[hlr].*")) ||
                            (words[0].startsWith("s") && words[0].matches(".elect")) ) {
                             displayCreationCommands();
+                        } else if (words[0].startsWith("p")) {
+                            model.place(words[1], words[2], words[3]);
                         }
 
                         // -------------------------------------------------------

@@ -262,6 +262,7 @@ public class HoppersModel {
      *
      * @param r the row value of the space selected
      * @param c the column value of the space selected
+     * @param frogType the kind of frog to be placed at the specified spot
      */
     public void place(String r, String c, String frogType) {
         String placeMsg;
@@ -429,6 +430,20 @@ public class HoppersModel {
     public HoppersConfig getCreationConfig() {
         return creationConfig;
     }
+
+    /**
+     * A getter for the current number of Red Frogs on the creation board.
+     *
+     * @return the model's redFrogCount
+     */
+    public int getRedFrogCount() { return redFrogCount; }
+
+    /**
+     * A getter for the current number of Green Frogs on the creation board.
+     *
+     * @return the model's greenFrogCount
+     */
+    public int getGreenFrogCount() { return greenFrogCount; }
 
     /**
      * A helper function that builds the provided HoppersConfig into the format
