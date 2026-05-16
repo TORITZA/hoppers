@@ -280,13 +280,18 @@ public class HoppersModel {
                 maxGreenFrogs) {
             placeMsg = "Exceeded Green Frog placement!";
         } else {
-            creationConfig.changeCell(row, col, frogType);
-            if (frogType.equals(HoppersConfig.RED_FROG)) {
-                placeMsg = "Placed Red Frog at (" + row + ", " + col + ")";
+            if (frogType.equals(HoppersConfig.RED_FROG) || frogType.equals(HoppersConfig.GREEN_FROG)) {
+                creationConfig.changeCell(row, col, frogType);
+                placeMsg = switch (frogType) {
+                    case HoppersConfig.RED_FROG -> "Placed Red Frog at (" + row + ", " + col + ")";
+                    case HoppersConfig.GREEN_FROG -> "Placed Green Frog at (" + row + ", " + col + ")";
+                    default -> "ERROR!";
+                };
             } else {
-                placeMsg = "Placed Green Frog at (" + row + ", " + col + ")";
+                placeMsg = "Invalid frog type!";
             }
         }
+
 
         alertObservers(placeMsg);
     }
