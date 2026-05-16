@@ -108,11 +108,20 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
                         model.create(words[1], words[2]);
                         displayCreationCommands();
 
-                        if ( (words[0].matches("^[hlr].*")) ||
-                           (words[0].startsWith("s") && words[0].matches(".elect")) ) {
-                            displayCreationCommands();
-                        } else if (words[0].startsWith("p")) {
-                            model.place(words[1], words[2], words[3]);
+                            // initiate nested for-loop for creation mode sub-menu
+                        Scanner in2 = new Scanner(System.in);
+                        for ( ; ; ) {
+                            System.out.print("> ");
+                            String line2 = in2.nextLine();
+                            String[] words2 = line2.split("\\s+");
+
+                            if (words2[0].startsWith("p")) {
+                                model.place(words2[1], words2[2], words2[3]);
+                            } else if (words[0].startsWith("q")) {
+                                break;
+                            } else {
+                                displayCreationCommands();
+                            }
                         }
 
                         // -------------------------------------------------------

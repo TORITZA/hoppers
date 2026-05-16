@@ -283,10 +283,17 @@ public class HoppersModel {
             if (frogType.equals(HoppersConfig.RED_FROG) || frogType.equals(HoppersConfig.GREEN_FROG)) {
                 creationConfig.changeCell(row, col, frogType);
                 placeMsg = switch (frogType) {
-                    case HoppersConfig.RED_FROG -> "Placed Red Frog at (" + row + ", " + col + ")";
-                    case HoppersConfig.GREEN_FROG -> "Placed Green Frog at (" + row + ", " + col + ")";
+                    case HoppersConfig.RED_FROG -> {
+                        redFrogCount++;
+                        yield "Placed Red Frog at (" + row + ", " + col + ")";
+                    }
+                    case HoppersConfig.GREEN_FROG -> {
+                        greenFrogCount++;
+                        yield "Placed Green Frog at (" + row + ", " + col + ")";
+                    }
                     default -> "ERROR!";
                 };
+                placeMsg += "\nR(ed Frog): " + getRedFrogCount() + " | G(reen Frog(s)): " + getGreenFrogCount();
             } else {
                 placeMsg = "Invalid frog type!";
             }
