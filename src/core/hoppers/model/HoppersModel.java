@@ -315,7 +315,10 @@ public class HoppersModel {
         int row = Integer.parseInt(r);
         int col = Integer.parseInt(c);
 
-        if (creationConfig.getCell(row, col).equals(HoppersConfig.GREEN_FROG)) {
+        if (row < 0 || row >= creationConfig.getRow() ||
+                col < 0 || col >= creationConfig.getCol()) {
+            deleteMsg = "Cannot delete off the board";
+        } else if (creationConfig.getCell(row, col).equals(HoppersConfig.GREEN_FROG)) {
             creationConfig.changeCell(row, col, HoppersConfig.EMPTY_SPACE);
             greenFrogCount--;
             deleteMsg = "Green Frog deleted at (" + row + ", " + col + ")";

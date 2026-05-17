@@ -60,7 +60,7 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
      */
     private void displayCreationCommands() {
         System.out.println( "p(lace) r c F       -- place frog (R or G) on board" );
-        System.out.println( "d(elete)            -- delete placed frog from board" );
+        System.out.println( "d(elete) r c        -- delete placed frog from board" );
         System.out.println( "s(ave)              -- save puzzle as a text file" );
         System.out.println( "q(uit)              -- quit creation mode" );
     }
@@ -122,7 +122,17 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
                             String[] words2 = line2.split("\\s+");
 
                             if (words2[0].startsWith("p")) {
-                                model.place(words2[1], words2[2], words2[3]);
+                                try {
+                                    model.place(words2[1], words2[2], words2[3]);
+                                } catch (ArrayIndexOutOfBoundsException e) {
+                                    System.out.println("ERROR: Please provide all proper arguments.");
+                                }
+                            } else if (words2[0].startsWith("d")) {
+                                try {
+                                    model.delete(words2[1], words2[2]);
+                                } catch (ArrayIndexOutOfBoundsException e) {
+                                    System.out.println("ERROR: Please provide a row and/or column.");
+                                }
                             } else if (words2[0].startsWith("q")) {
                                 model.toggleCreationMode();
                                 displayHelp();
