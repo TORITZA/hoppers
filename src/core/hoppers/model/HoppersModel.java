@@ -421,7 +421,7 @@ public class HoppersModel {
     }
 
 
-    // -----------------GETTERS & toSTRING--------------------
+    // -----------------GETTERS, SETTERS, & toSTRING--------------------
 
     /**
      * A getter for the HoppersConfig representing the model's current
@@ -456,6 +456,12 @@ public class HoppersModel {
      * @return the model's greenFrogCount
      */
     public int getGreenFrogCount() { return greenFrogCount; }
+
+    /**
+     * A setter for toggling the model's tag indicating if Creation Mode is
+     * currently ongoing or not.
+     */
+    public void toggleCreationMode() { creationMode = false; }
 
     /**
      * A helper function that builds the provided HoppersConfig into the format

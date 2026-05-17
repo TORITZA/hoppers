@@ -74,6 +74,8 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
      */
     public void run() {
         Scanner in = new Scanner( System.in );
+
+        mainLoop:
         for ( ; ; ) {
             System.out.print( "> " );
             String line = in.nextLine();
@@ -105,7 +107,11 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
                     } else {
                         // ---------------- enter creation mode ------------------
                         System.out.println("Entering **CREATION MODE**!");
-                        model.create(words[1], words[2]);
+                        try {
+                            model.create(words[1], words[2]);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println("ERROR: Please provide the dimensions of the board.");
+                        }
                         displayCreationCommands();
 
                             // initiate nested for-loop for creation mode sub-menu
@@ -117,8 +123,10 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
 
                             if (words2[0].startsWith("p")) {
                                 model.place(words2[1], words2[2], words2[3]);
-                            } else if (words[0].startsWith("q")) {
-                                break;
+                            } else if (words2[0].startsWith("q")) {
+                                model.toggleCreationMode();
+                                displayHelp();
+                                continue mainLoop;
                             } else {
                                 displayCreationCommands();
                             }
