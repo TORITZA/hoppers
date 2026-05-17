@@ -393,7 +393,7 @@ public class HoppersModel {
         String subFolder = "custom";
         String fileName = "hopped-" + customCount + ".txt";
         String content = creationConfig.getRow() + " " + creationConfig.getCol();
-        content = "\n" + creationConfig.toString();
+        content += "\n" + creationConfig.toString();
 
         // get working root directory
         Path workingDir = Paths.get(".").toAbsolutePath().normalize();

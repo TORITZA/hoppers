@@ -133,6 +133,8 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
                                 } catch (ArrayIndexOutOfBoundsException e) {
                                     System.out.println("ERROR: Please provide a row and/or column.");
                                 }
+                            } else if (words2[0].startsWith("s")) {
+                                model.save();
                             } else if (words2[0].startsWith("q")) {
                                 model.toggleCreationMode();
                                 displayHelp();
