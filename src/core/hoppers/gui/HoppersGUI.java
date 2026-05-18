@@ -39,6 +39,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     /** PRIMARY VIEW COMPONENTS */
     private Stage stage;
     private BorderPane mainPane;
+    private VBox titlePane;
     private GridPane grid;
     private Label displayLabel;
     private Button loadBtn;
@@ -83,7 +84,40 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
 
-        // titleScreen()
+        mainScreen();
+    }
+
+    /**
+     * Displays the initial title screen upon program start-up.
+     */
+    public void titleScreen() {
+        // Create VBox for title, buttons & character animation
+        titlePane = new VBox();
+        titlePane.setAlignment(Pos.CENTER);
+        Scene scene = new Scene(titlePane);
+
+        Label title = new Label("Hoppers");
+        title.setStyle("-fx-font-size: 64px;");
+        title.setTextAlignment(TextAlignment.CENTER);
+
+        Button playButton = new Button("Play");
+        Button helpButton = new Button("Help");
+        Button creditButton = new Button("Credits");
+        Button quitButton = new Button("Quit");
+
+        ImageView poliDancer = new ImageView(politoed);
+
+        titlePane.getChildren().addAll(title, playButton, helpButton, creditButton, quitButton);
+
+    }
+
+    /**
+     * WIP
+     */
+    public void helpMenu() {
+        // WIP
+        // How to Play
+        // Report Bug
     }
 
     /**
