@@ -51,7 +51,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     // Pokémon assets!
     // > Politoed represents a Green Frog
     private Image politoed = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"lily_padPolitoed.png"));
-    // > A pokeball substitutes for the Red Frog
+    // > A Pokeball represents the Red Frog
     private Image pokeball = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"lily_padSmallBall.png"));
 
     /**
@@ -83,6 +83,13 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
 
+        // titleScreen()
+    }
+
+    /**
+     * Displays the primary Hoppers screen.
+     */
+    public void mainScreen() {
         // Create borderPane w/ intent to fill top, center, and bottom sections
         mainPane = new BorderPane();
         Scene scene = new Scene(mainPane);
