@@ -2,6 +2,7 @@ package core.hoppers.gui;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -102,10 +103,10 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         title.setStyle("-fx-font-size: 64px; -fx-padding: 12px;");
         title.setTextAlignment(TextAlignment.CENTER);
 
-        Button playButton = new Button("Play");
-        Button helpButton = new Button("Help");
-        Button creditButton = new Button("Credits");
-        Button quitButton = new Button("Quit");
+        Button playBtn = new Button("Play");
+        Button helpBtn = new Button("Help");
+        Button creditBtn = new Button("Credits");
+        Button quitBtn = new Button("Quit");
 
         ImageView poliDancer = new ImageView(politoed);
         poliDancer.setFitHeight(230);
@@ -115,13 +116,20 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         imageBox.setAlignment(Pos.CENTER);
         imageBox.setPadding(new Insets(12));
 
+
+        // ******************* THE CONTROLLER ***************************
+
+        playBtn.setOnAction(e -> mainScreen());
+
+        // **************************************************************
+
+
         titlePane.setSpacing(12);
-        titlePane.setPrefWidth(500);
-        titlePane.getChildren().addAll(title, playButton, helpButton, creditButton, quitButton, imageBox);
+        titlePane.getChildren().addAll(title, playBtn, helpBtn, creditBtn, quitBtn, imageBox);
+        titlePane.setPrefSize(376.0, 419.2);
 
         stage.setTitle("Hoppers GUI");
         stage.setScene(scene);
-        stage.sizeToScene();
         stage.setResizable(false);
         stage.show();
     }
@@ -182,7 +190,9 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
 
         // Initialize the Stage
+        stage.hide();
         stage.setTitle("Hoppers GUI");
+        stage.setResizable(true);
         stage.setScene(scene);
         stage.sizeToScene();
         stage.setResizable(false);
