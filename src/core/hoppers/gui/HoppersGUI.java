@@ -100,7 +100,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Scene scene = new Scene(titlePane);
 
         Label title = new Label("Hoppers");
-        title.setStyle("-fx-font-size: 64px; -fx-padding: 12px;");
+        title.setStyle("-fx-font-size: 48px; -fx-padding: 8px;");
         title.setTextAlignment(TextAlignment.CENTER);
 
         Button playBtn = new Button("Play");
@@ -109,8 +109,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Button quitBtn = new Button("Quit");
 
         ImageView poliDancer = new ImageView(politoed);
-        poliDancer.setFitHeight(230);
-        poliDancer.setFitWidth(230);
+        poliDancer.setFitHeight(160);
+        poliDancer.setFitWidth(160);
         poliDancer.setPreserveRatio(true);
         HBox imageBox = new HBox(poliDancer);
         imageBox.setAlignment(Pos.CENTER);
@@ -124,7 +124,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         // **************************************************************
 
 
-        titlePane.setSpacing(12);
+        titlePane.setSpacing(8);
         titlePane.getChildren().addAll(title, playBtn, helpBtn, creditBtn, quitBtn, imageBox);
         titlePane.setPrefSize(376.0, 419.2);
 
@@ -190,7 +190,6 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
 
         // Initialize the Stage
-        stage.hide();
         stage.setTitle("Hoppers GUI");
         stage.setResizable(true);
         stage.setScene(scene);
