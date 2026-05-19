@@ -1,5 +1,6 @@
 package core.hoppers.gui;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -51,7 +52,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     private Image water = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"water.png"));
     // Pokémon assets!
     // > Politoed represents a Green Frog
-    private Image politoed = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"lily_padPolitoed.png"));
+    private Image poliPad = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"lily_padPolitoed.png"));
+    private Image politoed = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"politoed.png"));
     // > A Pokeball represents the Red Frog
     private Image pokeball = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"lily_padSmallBall.png"));
 
@@ -84,7 +86,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
 
-        mainScreen();
+        titleScreen();
     }
 
     /**
@@ -97,7 +99,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Scene scene = new Scene(titlePane);
 
         Label title = new Label("Hoppers");
-        title.setStyle("-fx-font-size: 64px;");
+        title.setStyle("-fx-font-size: 64px; -fx-padding: 12px;");
         title.setTextAlignment(TextAlignment.CENTER);
 
         Button playButton = new Button("Play");
@@ -106,9 +108,22 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Button quitButton = new Button("Quit");
 
         ImageView poliDancer = new ImageView(politoed);
+        poliDancer.setFitHeight(230);
+        poliDancer.setFitWidth(230);
+        poliDancer.setPreserveRatio(true);
+        HBox imageBox = new HBox(poliDancer);
+        imageBox.setAlignment(Pos.CENTER);
+        imageBox.setPadding(new Insets(12));
 
-        titlePane.getChildren().addAll(title, playButton, helpButton, creditButton, quitButton);
+        titlePane.setSpacing(12);
+        titlePane.setPrefWidth(500);
+        titlePane.getChildren().addAll(title, playButton, helpButton, creditButton, quitButton, imageBox);
 
+        stage.setTitle("Hoppers GUI");
+        stage.setScene(scene);
+        stage.sizeToScene();
+        stage.setResizable(false);
+        stage.show();
     }
 
     /**
@@ -254,7 +269,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
             Image graphic;
             graphic = switch (model.getBoard().getCell(r, c)) {
-                case HoppersConfig.GREEN_FROG -> politoed;
+                case HoppersConfig.GREEN_FROG -> poliPad;
                 case HoppersConfig.RED_FROG -> pokeball;
                 case HoppersConfig.EMPTY_SPACE -> lilyPad;
                 case HoppersConfig.INVALID_SPACE -> water;
