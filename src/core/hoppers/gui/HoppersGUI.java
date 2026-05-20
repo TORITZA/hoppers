@@ -165,17 +165,27 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         updateGrid();
         mainPane.setCenter(grid);
 
-        // > BOTTOM --- Contains load, reset, and hint buttons
+        // > BOTTOM --- Contains back, load, reset, and hint buttons
         HBox bottBox = new HBox();
+        HBox spaceBox = new HBox();
+        BorderPane bottMenu = new BorderPane();
+        bottBox.setAlignment(Pos.CENTER);
+
         loadBtn = new Button("Load");
         resetBtn = new Button("Reset");
         hintBtn = new Button("Hint");
+        Button backBtn = new Button("Back");
         loadBtn.setTextAlignment(TextAlignment.CENTER);
         resetBtn.setTextAlignment(TextAlignment.CENTER);
         hintBtn.setTextAlignment(TextAlignment.CENTER);
+        HBox leftBox = new HBox(backBtn);
         bottBox.getChildren().addAll(loadBtn, resetBtn, hintBtn);
-        bottBox.setAlignment(Pos.CENTER);
-        mainPane.setBottom(bottBox);
+
+        bottMenu.setLeft(leftBox);
+        bottMenu.setCenter(bottBox);
+        bottMenu.setRight(spaceBox);
+        spaceBox.prefWidthProperty().bind(leftBox.widthProperty());
+        mainPane.setBottom(bottMenu);
 
 
         // ******************* THE CONTROLLER ***************************
