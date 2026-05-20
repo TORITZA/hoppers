@@ -190,6 +190,11 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         // ******************* THE CONTROLLER ***************************
 
+        backBtn.setOnAction(e -> {
+            model.reset();
+            titleScreen();
+                });
+
         loadBtn.setOnAction(e -> chooseFile(stage));
 
         resetBtn.setOnAction(e -> model.reset());
