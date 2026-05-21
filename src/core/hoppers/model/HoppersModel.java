@@ -391,7 +391,7 @@ public class HoppersModel {
         saveCount(customCount);
 
         String subFolder = "custom";
-        String fileName = "hopped-" + customCount + ".txt";
+        String fileName = "hoppersU-" + customCount + ".txt";
         String content = creationConfig.getRow() + " " + creationConfig.getCol();
         content += "\n" + creationConfig.toString();
 

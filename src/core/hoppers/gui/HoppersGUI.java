@@ -42,11 +42,13 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     private Stage stage;
     private BorderPane mainPane;
     private VBox titlePane;
+    private BorderPane createPane;
     private GridPane grid;
     private Label displayLabel;
     private Button loadBtn;
     private Button resetBtn;
     private Button hintBtn;
+    private Button createBtn;
 
     /** VISUAL ASSETS */
     private Image lilyPad = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"lily_pad.png"));
@@ -108,6 +110,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Button creditBtn = new Button("Credits");
         Button quitBtn = new Button("Quit");
 
+            // animated Politoed asset on title screen!
         ImageView poliDancer = new ImageView(politoed);
         poliDancer.setFitHeight(160);
         poliDancer.setFitWidth(160);
@@ -128,6 +131,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         titlePane.getChildren().addAll(title, playBtn, helpBtn, creditBtn, quitBtn, imageBox);
         titlePane.setPrefSize(376.0, 419.2);
 
+        // Initialize the Stage
         stage.setTitle("Hoppers GUI");
         stage.setScene(scene);
         stage.setResizable(false);
@@ -174,12 +178,14 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         loadBtn = new Button("Load");
         resetBtn = new Button("Reset");
         hintBtn = new Button("Hint");
+        createBtn = new Button("Create");
         Button backBtn = new Button("Back");
         loadBtn.setTextAlignment(TextAlignment.CENTER);
         resetBtn.setTextAlignment(TextAlignment.CENTER);
         hintBtn.setTextAlignment(TextAlignment.CENTER);
+        createBtn.setTextAlignment(TextAlignment.CENTER);
         HBox leftBox = new HBox(backBtn);
-        bottBox.getChildren().addAll(loadBtn, resetBtn, hintBtn);
+        bottBox.getChildren().addAll(loadBtn, resetBtn, hintBtn, createBtn);
 
         bottMenu.setLeft(leftBox);
         bottMenu.setCenter(bottBox);
@@ -255,6 +261,61 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     }
 
     /**
+     * Displays the screen for Creation Mode, where users can produce their own
+     * Hoppers puzzles.
+     */
+    public void createMode() {
+        model.toggleCreationMode();
+        createPane = new BorderPane();
+        Scene scene = new Scene(createPane);
+
+        // > TOP --- Displaying game data to user
+        HBox topBox = new HBox();
+        displayLabel = new Label();
+        displayLabel.setTextAlignment(TextAlignment.CENTER);
+        topBox.getChildren().add(displayLabel);
+        topBox.setAlignment(Pos.CENTER);
+        createPane.setTop(topBox);
+
+
+
+        // > LEFT --- State of creation board & Hoppers pieces
+        VBox redFrogs = new VBox(); // text & maxText
+        VBox greenFrogs = new VBox();
+        HBox frogCounters = new HBox();
+
+        VBox puzzlePieces = new VBox(); // instruction text + buttons for red & green frogs
+
+        VBox leftBox = new VBox();
+        leftBox.getChildren().addAll(frogCounters);
+
+
+
+        // set grid Center
+
+
+
+        // > BOTTOM --- Contains exit and save buttons
+        BorderPane bottMenu = new BorderPane();
+        Button exitBtn = new Button("Exit");
+        HBox leftContent = new HBox(exitBtn);
+        Button saveBtn = new Button("Save");
+        HBox bottBox = new HBox(saveBtn);
+        HBox spaceBox = new HBox();
+
+        bottMenu.setLeft(leftContent);
+        bottMenu.setCenter(bottBox);
+        bottMenu.setRight(spaceBox);
+        spaceBox.prefWidthProperty().bind(leftContent.widthProperty());
+        createPane.setBottom(bottMenu);
+
+
+
+
+
+    }
+
+    /**
      * Called by the HoppersModel whenever there is a state change
      * that needs to be updated by the GUI.
      *
@@ -278,6 +339,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         } else {
             displayLabel.setText(msg);
         }
+        // if (model.creationMode) ...... else:
         updateGrid();
         stage.sizeToScene();
     }
