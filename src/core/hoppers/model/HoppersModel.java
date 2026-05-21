@@ -461,6 +461,14 @@ public class HoppersModel {
     public int getGreenFrogCount() { return greenFrogCount; }
 
     /**
+     * A getter for the maximum number of Green Frogs allowed on the creation
+     * board.
+     *
+     * @return the model's maxGreenFrogs
+     */
+    public int getMaxGreenFrogs() { return maxGreenFrogs; }
+
+    /**
      * A setter for toggling the model's tag indicating if Creation Mode is
      * currently ongoing or not.
      */

@@ -281,6 +281,10 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         // > LEFT --- State of creation board & Hoppers pieces
         VBox redFrogs = new VBox(); // text & maxText
+        Label redCount = new Label("Red: " + model.getRedFrogCount());
+        //Label maxRedCount = new Label("Max: " + model.());
+        //redFrogs.getChildren().addAll(redCount, maxRedCount);
+
         VBox greenFrogs = new VBox();
         HBox frogCounters = new HBox();
 
@@ -310,8 +314,16 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         createPane.setBottom(bottMenu);
 
 
+        // ******************* THE CONTROLLER ***************************
 
 
+
+        // **************************************************************
+
+
+
+
+        // Initialize the Stage
 
     }
 
