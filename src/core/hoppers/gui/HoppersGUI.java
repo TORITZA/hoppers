@@ -278,21 +278,32 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         createPane.setTop(topBox);
 
 
-
         // > LEFT --- State of creation board & Hoppers pieces
-        VBox redFrogs = new VBox(); // text & maxText
+        VBox redFrogs = new VBox();
         Label redCount = new Label("Red: " + model.getRedFrogCount());
-        //Label maxRedCount = new Label("Max: " + model.());
-        //redFrogs.getChildren().addAll(redCount, maxRedCount);
+        Label maxRedCount = new Label("Max: 1");
+        redFrogs.getChildren().addAll(redCount, maxRedCount);
 
         VBox greenFrogs = new VBox();
+        Label greenCount = new Label("Green: " + model.getGreenFrogCount());
+        Label maxGreenCount = new Label("Max: " + model.getMaxGreenFrogs());
+        greenFrogs.getChildren().addAll(greenCount, maxGreenCount);
         HBox frogCounters = new HBox();
+        frogCounters.getChildren().addAll(redFrogs, greenFrogs);
 
         VBox puzzlePieces = new VBox(); // instruction text + buttons for red & green frogs
+        Label instructions = new Label("Click or drag each piece to place it onto an empty lilypad!");
+        Button greenFrog = new Button();
+        Button redFrog = new Button();
+        HBox delete = new HBox();
+        Label deleteLbl = new Label("Delete: ");
+        Button deleteBtn = new Button(); // X
+        delete.getChildren().addAll(deleteLbl, deleteBtn);
+        puzzlePieces.getChildren().addAll(instructions, redFrog, greenFrog, delete);
 
         VBox leftBox = new VBox();
         leftBox.getChildren().addAll(frogCounters);
-
+        createPane.setLeft(leftBox);
 
 
         // set grid Center
