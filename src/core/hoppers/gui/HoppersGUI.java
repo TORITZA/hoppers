@@ -191,6 +191,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         // ******************* THE CONTROLLER ***************************
 
         backBtn.setOnAction(e -> {
+            model.load("data/hoppers/hoppers-4.txt");
             model.reset();
             titleScreen();
                 });
