@@ -60,7 +60,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     private Image poliPad = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"lily_padPolitoed.png"));
     private Image politoed = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"politoed.png"));
     // > A Pokeball represents the Red Frog
-    private Image pokeball = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"lily_padSmallBall.png"));
+    private Image pokePad = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"lily_padSmallBall.png"));
+    private Image pokeball = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"pokeball.png"));
 
     /**
      * Runs before start() & before the GUI is constructed.
@@ -301,20 +302,33 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         VBox puzzlePieces = new VBox(); // instruction text + buttons for red & green frogs
         Label instructions = new Label("Click or drag each piece to place it onto an empty lilypad!");
+
         Button greenFrog = new Button();
+        ImageView greenFrogGraphic = new ImageView(politoed);
+        greenFrogGraphic.setPreserveRatio(true);
+        greenFrogGraphic.setFitHeight(95);
+        greenFrogGraphic.setFitWidth(95);
+        greenFrog.setGraphic(greenFrogGraphic);
+
         Button redFrog = new Button();
+        ImageView redFrogGraphic = new ImageView(pokeball);
+        redFrogGraphic.setFitHeight(50);
+        redFrogGraphic.setFitWidth(50);
+        redFrog.setGraphic(redFrogGraphic);
+
         HBox delete = new HBox();
         Label deleteLbl = new Label("Delete: ");
-        Button deleteBtn = new Button(); // X
+        Button deleteBtn = new Button("X"); // X
         delete.getChildren().addAll(deleteLbl, deleteBtn);
+
         puzzlePieces.getChildren().addAll(instructions, redFrog, greenFrog, delete);
 
         VBox leftBox = new VBox();
-        leftBox.getChildren().addAll(frogCounters);
+        leftBox.getChildren().addAll(frogCounters, puzzlePieces);
         createPane.setLeft(leftBox);
 
 
-        // set grid Center
+        // > CENTER --- Houses custom board
 
 
 
@@ -400,7 +414,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             Image graphic;
             graphic = switch (modelBoard.getCell(r, c)) {
                 case HoppersConfig.GREEN_FROG -> poliPad;
-                case HoppersConfig.RED_FROG -> pokeball;
+                case HoppersConfig.RED_FROG -> pokePad;
                 case HoppersConfig.EMPTY_SPACE -> lilyPad;
                 case HoppersConfig.INVALID_SPACE -> water;
                 default -> throw new RuntimeException("Invalid cell value!");
