@@ -1,5 +1,6 @@
 package core.hoppers.gui;
 
+import core.hoppers.solver.Hoppers;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -374,7 +375,6 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         } else {
             displayLabel.setText(msg);
         }
-        // if (model.creationMode) ...... else:
         updateGrid();
         stage.sizeToScene();
     }
@@ -384,13 +384,21 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      * updates it according to the grid state stored in the HoppersModel.
      */
     public void updateGrid() {
-        for (Node node : grid.getChildren()) {
+        GridPane currentBoard = model.getCreationStatus() ? customBoard : grid;
+        HoppersConfig modelBoard;
+        if (currentBoard == customBoard) {
+            modelBoard = model.getCreationConfig();
+        } else {
+            modelBoard = model.getBoard();
+        }
+
+        for (Node node : currentBoard.getChildren()) {
             int r = GridPane.getRowIndex(node);
             int c = GridPane.getColumnIndex(node);
             Button btn = (Button) node;
 
             Image graphic;
-            graphic = switch (model.getBoard().getCell(r, c)) {
+            graphic = switch (modelBoard.getCell(r, c)) {
                 case HoppersConfig.GREEN_FROG -> poliPad;
                 case HoppersConfig.RED_FROG -> pokeball;
                 case HoppersConfig.EMPTY_SPACE -> lilyPad;
