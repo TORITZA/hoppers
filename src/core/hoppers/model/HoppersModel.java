@@ -469,6 +469,13 @@ public class HoppersModel {
     public int getMaxGreenFrogs() { return maxGreenFrogs; }
 
     /**
+     * Indicates whether model is currently in creation mode or not.
+     *
+     * @return true or false, depending on model's creationMode
+     */
+    public boolean getCreationStatus() { return creationMode; }
+
+    /**
      * A setter for toggling the model's tag indicating if Creation Mode is
      * currently ongoing or not.
      */

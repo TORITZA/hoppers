@@ -44,6 +44,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     private VBox titlePane;
     private BorderPane createPane;
     private GridPane grid;
+    private GridPane customBoard;
     private Label displayLabel;
     private Button loadBtn;
     private Button resetBtn;
@@ -208,6 +209,12 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         hintBtn.setOnAction(e -> model.hint());
 
+        createBtn.setOnAction(e -> {
+            model.load("data/hoppers/hoppers-4.txt");
+            model.reset();
+            createMode();
+        });
+
         // **************************************************************
 
 
@@ -332,10 +339,15 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         // **************************************************************
 
 
-
+        createPane.setPrefSize(376.0, 419.2);
 
         // Initialize the Stage
-
+        stage.setTitle("Hoppers GUI");
+        stage.setResizable(true);
+        stage.setScene(scene);
+        stage.sizeToScene();
+        stage.setResizable(false);
+        stage.show();
     }
 
     /**
