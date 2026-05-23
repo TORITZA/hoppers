@@ -261,7 +261,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                 btn.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 GridPane.setHgrow(btn, Priority.ALWAYS);
                 GridPane.setVgrow(btn, Priority.ALWAYS);
-                customBoard.add(btn, col, row);
+                currentBoard.add(btn, col, row);
 
             }
         }
