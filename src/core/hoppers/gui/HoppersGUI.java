@@ -6,8 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -23,6 +22,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * A graphical UI for the Hoppers puzzle game, replicating a pond
@@ -211,11 +212,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         hintBtn.setOnAction(e -> model.hint());
 
-        createBtn.setOnAction(e -> {
-            model.load("data/hoppers/hoppers-4.txt");
-            model.reset();
-            createMode();
-        });
+        createBtn.setOnAction(e -> dialogPrompter());
 
         // **************************************************************
 
@@ -280,6 +277,51 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     }
 
     /**
+     * Prompts to user for the dimensions of the board they wish to create. Then, creates
+     * the custom puzzle with the values provided, instantiated in HoppersModel.
+     */
+    public void dialogPrompter() {
+        Dialog<String[]> dialog = new Dialog<>();
+        dialog.setTitle("Custom Board Size");
+        dialog.setHeaderText("Please enter the dimensions of the puzzle you wish to create!");
+
+        // set button types
+        ButtonType continueButtonType = new ButtonType("Continue", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(continueButtonType, ButtonType.CANCEL);
+
+        // configure text fields
+        TextField row = new TextField();
+        TextField col = new TextField();
+
+        GridPane diaLayout = new GridPane();
+        diaLayout.setHgap(10);
+        diaLayout.setVgap(10);
+        diaLayout.add(new Label("Row(s):"), 0, 0);
+        diaLayout.add(row, 1, 0);
+        diaLayout.add(new Label("Column(s):"), 0, 1);
+        diaLayout.add(col, 1, 1);
+
+        dialog.getDialogPane().setContent(diaLayout);
+
+        // convert results to list
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == continueButtonType) {
+                return new String[]{row.getText(), col.getText()};
+            }
+            return null;
+        });
+
+        Optional<String[]> results = dialog.showAndWait();
+        results.ifPresent(args -> {
+            model.create(args[0], args[1]);
+            createMode();
+            model.load("data/hoppers/hoppers-4.txt");
+            model.reset();
+        });
+
+    }
+
+    /**
      * Displays the screen for Creation Mode, where users can produce their own
      * Hoppers puzzles.
      */
@@ -339,6 +381,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
 
         // > CENTER --- Houses custom board
+        //
 
 
 
