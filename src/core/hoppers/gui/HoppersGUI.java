@@ -234,16 +234,24 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      * board according to the data stored in the model.
      */
     public void initializeGrid() {
-        // Clear old state (if any)
-        grid.getChildren().clear();
-        grid.getColumnConstraints().clear();
-        grid.getRowConstraints().clear();
-        grid.setHgap(0);
-        grid.setVgap(0);
-        grid.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        GridPane currentBoard = model.getCreationStatus() ? customBoard : grid;
+        HoppersConfig modelBoard;
+        if (currentBoard == customBoard) {
+            modelBoard = model.getCreationConfig();
+        } else {
+            modelBoard = model.getBoard();
+        }
 
-        for (int col = 0; col < model.getBoard().getCol(); col++) {
-            for (int row = 0; row < model.getBoard().getRow(); row++) {
+        // Clear old state (if any)
+        currentBoard.getChildren().clear();
+        currentBoard.getColumnConstraints().clear();
+        currentBoard.getRowConstraints().clear();
+        currentBoard.setHgap(0);
+        currentBoard.setVgap(0);
+        currentBoard.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
+        for (int col = 0; col < modelBoard.getCol(); col++) {
+            for (int row = 0; row < modelBoard.getRow(); row++) {
                 Button btn = new Button();
                 // obscure button's visual state when pressed/hovered over
                 btn.setStyle("-fx-background-color: transparent; -fx-padding: 0; -fx-background-insets: 0");
@@ -253,20 +261,22 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                 btn.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 GridPane.setHgrow(btn, Priority.ALWAYS);
                 GridPane.setVgrow(btn, Priority.ALWAYS);
-                grid.add(btn, col, row);
+                customBoard.add(btn, col, row);
 
             }
         }
-        grid.setAlignment(Pos.CENTER);
+        currentBoard.setAlignment(Pos.CENTER);
         stage.sizeToScene();
-        // ***** Controller initialization *****
-        for (Node child : grid.getChildren()) {
-            String r = String.valueOf(GridPane.getRowIndex(child));
-            String c = String.valueOf(GridPane.getColumnIndex(child));
-            Button btn = (Button) child;
-            btn.setOnAction(e -> model.select(r, c));
-        }
 
+        if (currentBoard == grid) {
+            // ***** Controller initialization for main play mode *****
+            for (Node child : grid.getChildren()) {
+                String r = String.valueOf(GridPane.getRowIndex(child));
+                String c = String.valueOf(GridPane.getColumnIndex(child));
+                Button btn = (Button) child;
+                btn.setOnAction(e -> model.select(r, c));
+            }
+        }
     }
 
     /**
