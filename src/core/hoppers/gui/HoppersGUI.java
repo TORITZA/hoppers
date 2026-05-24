@@ -316,7 +316,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         results.ifPresent(args -> {
             model.create(args[0], args[1]);
             createMode();
-            displayLabel.setText("Entered Creation Mode!");
+            displayLabel.setText("Welcome to Creation Mode!");
         });
 
     }
@@ -343,23 +343,30 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         VBox redFrogs = new VBox();
         Label redCount = new Label("Red: " + model.getRedFrogCount());
         Label maxRedCount = new Label("Max: 1");
+        redCount.setTextAlignment(TextAlignment.CENTER);
+        maxRedCount.setTextAlignment(TextAlignment.CENTER);
+        redFrogs.setAlignment(Pos.CENTER);
         redFrogs.getChildren().addAll(redCount, maxRedCount);
 
         VBox greenFrogs = new VBox();
         Label greenCount = new Label("Green: " + model.getGreenFrogCount());
         Label maxGreenCount = new Label("Max: " + model.getMaxGreenFrogs());
+        greenCount.setTextAlignment(TextAlignment.CENTER);
+        maxGreenCount.setTextAlignment(TextAlignment.CENTER);
+        greenFrogs.setAlignment(Pos.CENTER);
         greenFrogs.getChildren().addAll(greenCount, maxGreenCount);
         HBox frogCounters = new HBox();
+        frogCounters.setAlignment(Pos.CENTER);
         frogCounters.getChildren().addAll(redFrogs, greenFrogs);
 
         VBox puzzlePieces = new VBox(); // instruction text + buttons for red & green frogs
-        Label instructions = new Label("Click or drag each piece to place it onto an empty lilypad!");
+        Label instructions = new Label("Click or drag each piece to \nplace it onto an empty lilypad!");
 
         Button greenFrog = new Button();
         ImageView greenFrogGraphic = new ImageView(politoed);
         greenFrogGraphic.setPreserveRatio(true);
-        greenFrogGraphic.setFitHeight(85);
-        greenFrogGraphic.setFitWidth(85);
+        greenFrogGraphic.setFitHeight(90);
+        greenFrogGraphic.setFitWidth(90);
         greenFrog.setGraphic(greenFrogGraphic);
 
         Button redFrog = new Button();
@@ -370,9 +377,11 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         HBox delete = new HBox();
         Label deleteLbl = new Label("Delete: ");
-        Button deleteBtn = new Button("X"); // X
+        Button deleteBtn = new Button("x"); // X
+        delete.setAlignment(Pos.CENTER);
         delete.getChildren().addAll(deleteLbl, deleteBtn);
 
+        puzzlePieces.setAlignment(Pos.CENTER);
         puzzlePieces.getChildren().addAll(instructions, redFrog, greenFrog, delete);
 
         VBox leftBox = new VBox();
@@ -384,6 +393,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         customBoard = new GridPane();
         initializeGrid(customBoard);
         updateGrid(customBoard);
+        customBoard.setMaxSize(90, 90);
         createPane.setCenter(customBoard);
 
 
@@ -393,6 +403,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         HBox leftContent = new HBox(exitBtn);
         Button saveBtn = new Button("Save");
         HBox bottBox = new HBox(saveBtn);
+        bottBox.setAlignment(Pos.CENTER);
         HBox spaceBox = new HBox();
 
         bottMenu.setLeft(leftContent);
