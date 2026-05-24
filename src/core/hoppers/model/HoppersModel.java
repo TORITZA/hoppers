@@ -243,7 +243,6 @@ public class HoppersModel {
      * for user-driven frog placement.
      */
     public void create(String row, String col) {
-        String createMsg = "Creating new Hoppers puzzle...";
         creationConfig = new HoppersConfig(Integer.parseInt(row),
                 Integer.parseInt(col));
         redFrogCount = 0;
@@ -252,8 +251,6 @@ public class HoppersModel {
         maxGreenFrogs = creationConfig.getValidSpaces() - 1;
         customCount = loadCount();
         creationMode = true;
-
-        alertObservers(createMsg);
     }
 
     /**

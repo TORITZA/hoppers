@@ -315,8 +315,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         results.ifPresent(args -> {
             model.create(args[0], args[1]);
             createMode();
-            model.load("data/hoppers/hoppers-4.txt");
-            model.reset();
+            displayLabel.setText("Entered Creation Mode!");
         });
 
     }
@@ -402,7 +401,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         // ******************* THE CONTROLLER ***************************
 
-
+        //exitBtn -> model.reset(), mainScreen()
 
         // **************************************************************
 
