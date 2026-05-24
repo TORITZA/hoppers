@@ -230,7 +230,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      * A factory method that initializes the grid representing the Hoppers game
      * board according to the data stored in the model.
      *
-     * @param currentBoard _________
+     * @param currentBoard depending on the model's state, this is the GridPane
+     *                      that is to be initialized
      */
     public void initializeGrid(GridPane currentBoard) {
         HoppersConfig modelBoard;
@@ -454,6 +455,9 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     /**
      * Helper function that iterates over each cell in the GUI's GridPane and
      * updates it according to the grid state stored in the HoppersModel.
+     *
+     * @param currentBoard depending on the model's state, this is the GridPane
+     *                     that is to be updated
      */
     public void updateGrid(GridPane currentBoard) {
         HoppersConfig modelBoard;
