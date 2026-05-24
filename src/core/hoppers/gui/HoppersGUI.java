@@ -169,8 +169,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         // > CENTER (stretches to LEFT & RIGHT) --- Handles creation of Hoppers board
         grid = new GridPane();
-        initializeGrid();
-        updateGrid();
+        initializeGrid(grid);
+        updateGrid(grid);
         mainPane.setCenter(grid);
 
         // > BOTTOM --- Contains back, load, reset, and hint buttons
@@ -229,9 +229,10 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     /**
      * A factory method that initializes the grid representing the Hoppers game
      * board according to the data stored in the model.
+     *
+     * @param currentBoard _________
      */
-    public void initializeGrid() {
-        GridPane currentBoard = model.getCreationStatus() ? customBoard : grid;
+    public void initializeGrid(GridPane currentBoard) {
         HoppersConfig modelBoard;
         if (currentBoard == customBoard) {
             modelBoard = model.getCreationConfig();
@@ -263,7 +264,6 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             }
         }
         currentBoard.setAlignment(Pos.CENTER);
-        stage.sizeToScene();
 
         if (currentBoard == grid) {
             // ***** Controller initialization for main play mode *****
@@ -357,8 +357,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Button greenFrog = new Button();
         ImageView greenFrogGraphic = new ImageView(politoed);
         greenFrogGraphic.setPreserveRatio(true);
-        greenFrogGraphic.setFitHeight(95);
-        greenFrogGraphic.setFitWidth(95);
+        greenFrogGraphic.setFitHeight(85);
+        greenFrogGraphic.setFitWidth(85);
         greenFrog.setGraphic(greenFrogGraphic);
 
         Button redFrog = new Button();
@@ -380,8 +380,10 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
 
         // > CENTER --- Houses custom board
-        //
-
+        customBoard = new GridPane();
+        initializeGrid(customBoard);
+        updateGrid(customBoard);
+        createPane.setCenter(customBoard);
 
 
         // > BOTTOM --- Contains exit and save buttons
@@ -401,7 +403,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         // ******************* THE CONTROLLER ***************************
 
-        //exitBtn -> model.reset(), mainScreen()
+        //exitBtn -> model.reset(), mainScreen(), toggleCreationMode()
 
         // **************************************************************
 
@@ -434,14 +436,18 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             File file = new File(filePath);
             displayLabel.setText("Loaded: " + file.getName());
 
-            initializeGrid();
+            initializeGrid(grid);
             // refresh borderPane's center & resize dimensions
             mainPane.setCenter(null);
             mainPane.setCenter(grid);
         } else {
             displayLabel.setText(msg);
         }
-        updateGrid();
+        if (model.getCreationStatus()) {
+            updateGrid(customBoard);
+        } else {
+            updateGrid(grid);
+        }
         stage.sizeToScene();
     }
 
@@ -449,8 +455,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      * Helper function that iterates over each cell in the GUI's GridPane and
      * updates it according to the grid state stored in the HoppersModel.
      */
-    public void updateGrid() {
-        GridPane currentBoard = model.getCreationStatus() ? customBoard : grid;
+    public void updateGrid(GridPane currentBoard) {
         HoppersConfig modelBoard;
         if (currentBoard == customBoard) {
             modelBoard = model.getCreationConfig();
@@ -461,6 +466,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         for (Node node : currentBoard.getChildren()) {
             int r = GridPane.getRowIndex(node);
             int c = GridPane.getColumnIndex(node);
+
             Button btn = (Button) node;
 
             Image graphic;

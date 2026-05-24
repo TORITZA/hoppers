@@ -245,6 +245,13 @@ public class HoppersModel {
     public void create(String row, String col) {
         creationConfig = new HoppersConfig(Integer.parseInt(row),
                 Integer.parseInt(col));
+
+//        for (int r = 0; r < creationConfig.getRow(); r++) {
+//            if (r % 2 == 0) {
+//                for (int c = 0; )
+//            }
+//        }
+
         redFrogCount = 0;
         greenFrogCount = 0;
         maxRedFrog = 1;
