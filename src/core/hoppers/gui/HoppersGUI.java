@@ -357,10 +357,12 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         greenFrogs.getChildren().addAll(greenCount, maxGreenCount);
         HBox frogCounters = new HBox();
         frogCounters.setAlignment(Pos.CENTER);
+        frogCounters.setSpacing(12);
         frogCounters.getChildren().addAll(redFrogs, greenFrogs);
 
         VBox puzzlePieces = new VBox(); // instruction text + buttons for red & green frogs
         Label instructions = new Label("Click or drag each piece to \nplace it onto an empty lilypad!");
+        instructions.setPadding(new Insets(0, 0, -8, 0));
 
         Button greenFrog = new Button();
         ImageView greenFrogGraphic = new ImageView(politoed);
@@ -379,13 +381,17 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Label deleteLbl = new Label("Delete: ");
         Button deleteBtn = new Button("x"); // X
         delete.setAlignment(Pos.CENTER);
+        delete.setSpacing(2);
         delete.getChildren().addAll(deleteLbl, deleteBtn);
 
         puzzlePieces.setAlignment(Pos.CENTER);
+        puzzlePieces.setSpacing(24);
+        puzzlePieces.setPadding(new Insets(12, 0, 0, 0));
         puzzlePieces.getChildren().addAll(instructions, redFrog, greenFrog, delete);
 
         VBox leftBox = new VBox();
         leftBox.getChildren().addAll(frogCounters, puzzlePieces);
+        leftBox.setPadding(new Insets(8));
         createPane.setLeft(leftBox);
 
 
@@ -394,6 +400,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         initializeGrid(customBoard);
         updateGrid(customBoard);
         customBoard.setMaxSize(90, 90);
+        customBoard.setPadding(new Insets(0, 20, 0, 12));
         createPane.setCenter(customBoard);
 
 
