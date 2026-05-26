@@ -50,7 +50,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     private Button resetBtn;
     private Button hintBtn;
     private Button createBtn;
-    //private String[] placed;
+    private String[] placed;
 
     boolean placing = false;
 
@@ -275,20 +275,18 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                 Button btn = (Button) child;
                 btn.setOnAction(e -> model.select(r, c));
             }
-//        } else {
-//            for (Node child : customBoard.getChildren()) {
-//                String r = String.valueOf(GridPane.getRowIndex(child));
-//                String c = String.valueOf(GridPane.getColumnIndex(child));
-//                Button btn = (Button) child;
-//                btn.setOnAction(e -> {
-//                    if (placing) {
-//                        placing = false;
-//                        placed = new String[]{r, c};
-//
-//                    }
-//                });
-//            }
-        }
+            } else {
+                for (Node child : customBoard.getChildren()) {
+                    String r = String.valueOf(GridPane.getRowIndex(child));
+                    String c = String.valueOf(GridPane.getColumnIndex(child));
+                    Button btn = (Button) child;
+                    btn.setOnAction(e -> {
+                        if (placing) {
+                            placed = new String[]{r, c};
+                        }
+                    });
+                }
+            }
     }
 
     /**
@@ -457,14 +455,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         customBoard.setOnMouseClicked(e -> {
             if (placing) {
-                Node clickedCell = e.getPickResult().getIntersectedNode();
-
-                // check if a specific cell is clicked, not just the board in general
-                if (clickedCell != customBoard) {
-                    String r = String.valueOf(GridPane.getRowIndex(clickedCell));
-                    String c = String.valueOf(GridPane.getColumnIndex(clickedCell));
-
-                    model.place(r, c, frogType.get());
+                    model.place(placed[0], placed[1], frogType.get());
                     redFrog.setDisable(false);
                     greenFrog.setDisable(false);
                     saveBtn.setVisible(true);
@@ -475,12 +466,6 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
 
                 }
-
-            }
-
-
-
-
         });
 
         // **************************************************************
