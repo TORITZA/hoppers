@@ -1,9 +1,7 @@
 package core.hoppers.gui;
 
-import core.hoppers.solver.Hoppers;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -22,8 +20,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * A graphical UI for the Hoppers puzzle game, replicating a pond
@@ -52,6 +50,9 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     private Button resetBtn;
     private Button hintBtn;
     private Button createBtn;
+    //private String[] placed;
+
+    boolean placing = false;
 
     /** VISUAL ASSETS */
     private Image lilyPad = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"lily_pad.png"));
@@ -274,6 +275,19 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                 Button btn = (Button) child;
                 btn.setOnAction(e -> model.select(r, c));
             }
+//        } else {
+//            for (Node child : customBoard.getChildren()) {
+//                String r = String.valueOf(GridPane.getRowIndex(child));
+//                String c = String.valueOf(GridPane.getColumnIndex(child));
+//                Button btn = (Button) child;
+//                btn.setOnAction(e -> {
+//                    if (placing) {
+//                        placing = false;
+//                        placed = new String[]{r, c};
+//
+//                    }
+//                });
+//            }
         }
     }
 
@@ -358,6 +372,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         HBox frogCounters = new HBox();
         frogCounters.setAlignment(Pos.CENTER);
         frogCounters.setSpacing(12);
+        frogCounters.setPadding(new Insets(4, 0, 8, 0));
         frogCounters.getChildren().addAll(redFrogs, greenFrogs);
 
         VBox puzzlePieces = new VBox(); // instruction text + buttons for red & green frogs
@@ -419,10 +434,54 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         spaceBox.prefWidthProperty().bind(leftContent.widthProperty());
         createPane.setBottom(bottMenu);
 
+        Button cancelBtn = new Button("Cancel");
+
 
         // ******************* THE CONTROLLER ***************************
 
         //exitBtn -> model.reset(), mainScreen(), toggleCreationMode()
+
+        AtomicReference<String> frogType = new AtomicReference<>("");
+
+        redFrog.setOnAction(e -> {
+            placing = true;
+            frogType.set("R");
+
+            redFrog.setDisable(true);
+            greenFrog.setDisable(true);
+            saveBtn.setVisible(false);
+            saveBtn.setDisable(true);
+            bottMenu.getChildren().set(0, cancelBtn);
+            displayLabel.setText("Choose a space!");
+        });
+
+        customBoard.setOnMouseClicked(e -> {
+            if (placing) {
+                Node clickedCell = e.getPickResult().getIntersectedNode();
+
+                // check if a specific cell is clicked, not just the board in general
+                if (clickedCell != customBoard) {
+                    String r = String.valueOf(GridPane.getRowIndex(clickedCell));
+                    String c = String.valueOf(GridPane.getColumnIndex(clickedCell));
+
+                    model.place(r, c, frogType.get());
+                    redFrog.setDisable(false);
+                    greenFrog.setDisable(false);
+                    saveBtn.setVisible(true);
+                    saveBtn.setDisable(false);
+                    bottMenu.getChildren().set(0, exitBtn);
+
+                    placing = false;
+
+
+                }
+
+            }
+
+
+
+
+        });
 
         // **************************************************************
 
@@ -469,6 +528,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         }
         stage.sizeToScene();
     }
+
 
     /**
      * Helper function that iterates over each cell in the GUI's GridPane and
