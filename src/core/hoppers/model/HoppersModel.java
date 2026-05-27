@@ -251,6 +251,8 @@ public class HoppersModel {
         maxGreenFrogs = creationConfig.getValidSpaces() - 1;
         customCount = loadCount();
         creationMode = true;
+
+        alertObservers("Successfully created custom board");
     }
 
     /**
@@ -290,7 +292,6 @@ public class HoppersModel {
                     }
                     default -> "ERROR!";
                 };
-                placeMsg += "\nR(ed Frog): " + getRedFrogCount() + " | G(reen Frog(s)): " + getGreenFrogCount();
             } else {
                 placeMsg = "Invalid frog type!";
             }

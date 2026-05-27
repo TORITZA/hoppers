@@ -124,6 +124,8 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
                             if (words2[0].startsWith("p")) {
                                 try {
                                     model.place(words2[1], words2[2], words2[3]);
+                                    System.out.println("R(ed Frog): " + model.getRedFrogCount() + " | G(reen Frog(s)): "
+                                            + model.getGreenFrogCount());
                                 } catch (ArrayIndexOutOfBoundsException e) {
                                     System.out.println("ERROR: Please provide all proper arguments.");
                                 }
