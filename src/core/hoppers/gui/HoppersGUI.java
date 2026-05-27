@@ -57,6 +57,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     private GridPane customBoard;
     private Button redFrog;
     private Button greenFrog;
+    private AtomicReference<String> frogType;
     private Button deleteBtn;
     private BorderPane bottMenu;
     private Button saveBtn;
@@ -289,11 +290,12 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                     String r = String.valueOf(GridPane.getRowIndex(child));
                     String c = String.valueOf(GridPane.getColumnIndex(child));
                     Button btn = (Button) child;
+
                     btn.setOnAction(e -> {
-                        if (placing) {
-                            placed = new String[]{r, c};
-                        }
-                    });
+                            model.place(r, c, frogType.get());
+                            placementLock(false);
+                            placing = false;
+                        });
                 }
             }
     }
@@ -427,7 +429,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
 
         // > BOTTOM --- Contains exit and save buttons
-        BorderPane bottMenu = new BorderPane();
+        bottMenu = new BorderPane();
         exitBtn = new Button("Exit");
         HBox leftContent = new HBox(exitBtn);
         saveBtn = new Button("Save");
@@ -448,18 +450,18 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         //exitBtn -> model.reset(), mainScreen(), toggleCreationMode()
 
-        AtomicReference<String> frogType = new AtomicReference<>("");
+        frogType = new AtomicReference<>("");
 
         redFrog.setOnAction(e -> {
             placing = true;
             frogType.set("R");
+            placementLock(true);
+        });
 
-            redFrog.setDisable(true);
-            greenFrog.setDisable(true);
-            saveBtn.setVisible(false);
-            saveBtn.setDisable(true);
-            bottMenu.getChildren().set(0, cancelBtn);
-            displayLabel.setText("Choose a space!");
+        greenFrog.setOnAction(e -> {
+            placing = true;
+            frogType.set("G");
+            placementLock(true);
         });
 
         // **************************************************************
