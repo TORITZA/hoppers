@@ -477,6 +477,32 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     }
 
     /**
+     * If the user is currently placing a frog on the creation board, lock all other
+     * functionality on creation screen; if not, display each view component as normal.
+     *
+     * @param entered has the user entered a state in which they're placing pieces
+     *                onto the creation board?
+     */
+    public void placementLock(boolean entered) {
+        if (entered) {
+            redFrog.setDisable(true);
+            greenFrog.setDisable(true);
+            saveBtn.setVisible(false);
+            saveBtn.setDisable(true);
+            deleteBtn.setDisable(true);
+            bottMenu.getChildren().set(0, cancelBtn);
+            displayLabel.setText("Choose a space!");
+        } else {
+            redFrog.setDisable(false);
+            greenFrog.setDisable(false);
+            saveBtn.setVisible(true);
+            saveBtn.setDisable(false);
+            deleteBtn.setDisable(false);
+            bottMenu.getChildren().set(0, exitBtn);
+        }
+    }
+
+    /**
      * Called by the HoppersModel whenever there is a state change
      * that needs to be updated by the GUI.
      *
