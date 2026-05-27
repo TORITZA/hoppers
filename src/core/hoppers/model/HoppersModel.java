@@ -252,7 +252,6 @@ public class HoppersModel {
         customCount = loadCount();
         creationMode = true;
 
-        alertObservers("Successfully created custom board");
     }
 
     /**

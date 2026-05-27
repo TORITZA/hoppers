@@ -109,6 +109,7 @@ public class HoppersPTUI implements Observer<HoppersModel, String> {
                         System.out.println("Entering **CREATION MODE**!");
                         try {
                             model.create(words[1], words[2]);
+                            System.out.println(model);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             System.out.println("ERROR: Please provide the dimensions of the board.");
                         }
