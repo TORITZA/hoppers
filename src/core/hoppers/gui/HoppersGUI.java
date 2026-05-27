@@ -38,21 +38,30 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     /** resources directory that is located directly underneath the GUI package */
     private final static String RESOURCES_DIR = "resources/";
 
+    /** is the user currently placing something on the creation board? */
+    boolean placing = false;
+
     /** PRIMARY VIEW COMPONENTS */
     private Stage stage;
     private BorderPane mainPane;
     private VBox titlePane;
-    private BorderPane createPane;
     private GridPane grid;
-    private GridPane customBoard;
     private Label displayLabel;
     private Button loadBtn;
     private Button resetBtn;
     private Button hintBtn;
     private Button createBtn;
-    private String[] placed;
 
-    boolean placing = false;
+    /** CREATION MODE VIEW COMPONENTS **/
+    private BorderPane createPane;
+    private GridPane customBoard;
+    private Button redFrog;
+    private Button greenFrog;
+    private Button deleteBtn;
+    private BorderPane bottMenu;
+    private Button saveBtn;
+    private Button exitBtn;
+    private Button cancelBtn;
 
     /** VISUAL ASSETS */
     private Image lilyPad = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"lily_pad.png"));
@@ -377,14 +386,14 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Label instructions = new Label("Click or drag each piece to \nplace it onto an empty lilypad!");
         instructions.setPadding(new Insets(0, 0, -8, 0));
 
-        Button greenFrog = new Button();
+       greenFrog = new Button();
         ImageView greenFrogGraphic = new ImageView(politoed);
         greenFrogGraphic.setPreserveRatio(true);
         greenFrogGraphic.setFitHeight(90);
         greenFrogGraphic.setFitWidth(90);
         greenFrog.setGraphic(greenFrogGraphic);
 
-        Button redFrog = new Button();
+        redFrog = new Button();
         ImageView redFrogGraphic = new ImageView(pokeball);
         redFrogGraphic.setFitHeight(50);
         redFrogGraphic.setFitWidth(50);
@@ -392,7 +401,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         HBox delete = new HBox();
         Label deleteLbl = new Label("Delete: ");
-        Button deleteBtn = new Button("x"); // X
+        deleteBtn = new Button("x"); // X
         delete.setAlignment(Pos.CENTER);
         delete.setSpacing(2);
         delete.getChildren().addAll(deleteLbl, deleteBtn);
@@ -419,9 +428,9 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         // > BOTTOM --- Contains exit and save buttons
         BorderPane bottMenu = new BorderPane();
-        Button exitBtn = new Button("Exit");
+        exitBtn = new Button("Exit");
         HBox leftContent = new HBox(exitBtn);
-        Button saveBtn = new Button("Save");
+        saveBtn = new Button("Save");
         HBox bottBox = new HBox(saveBtn);
         bottBox.setAlignment(Pos.CENTER);
         HBox spaceBox = new HBox();
@@ -432,7 +441,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         spaceBox.prefWidthProperty().bind(leftContent.widthProperty());
         createPane.setBottom(bottMenu);
 
-        Button cancelBtn = new Button("Cancel");
+        cancelBtn = new Button("Cancel");
 
 
         // ******************* THE CONTROLLER ***************************
@@ -451,21 +460,6 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             saveBtn.setDisable(true);
             bottMenu.getChildren().set(0, cancelBtn);
             displayLabel.setText("Choose a space!");
-        });
-
-        customBoard.setOnMouseClicked(e -> {
-            if (placing) {
-                    model.place(placed[0], placed[1], frogType.get());
-                    redFrog.setDisable(false);
-                    greenFrog.setDisable(false);
-                    saveBtn.setVisible(true);
-                    saveBtn.setDisable(false);
-                    bottMenu.getChildren().set(0, exitBtn);
-
-                    placing = false;
-
-
-                }
         });
 
         // **************************************************************
