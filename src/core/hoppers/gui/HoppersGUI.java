@@ -59,7 +59,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     private Button greenFrog;
     private AtomicReference<String> frogType;
     private Button deleteBtn;
-    private BorderPane bottMenu;
+    private HBox leftContent;
     private Button saveBtn;
     private Button exitBtn;
     private Button cancelBtn;
@@ -292,9 +292,13 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                     Button btn = (Button) child;
 
                     btn.setOnAction(e -> {
+                        if (placing) {
                             model.place(r, c, frogType.get());
                             placementLock(false);
                             placing = false;
+                        } else {
+                            displayLabel.setText("First select a game piece to place it onto the board!");
+                        }
                         });
                 }
             }
@@ -429,9 +433,9 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
 
         // > BOTTOM --- Contains exit and save buttons
-        bottMenu = new BorderPane();
+        BorderPane bottMenu = new BorderPane();
         exitBtn = new Button("Exit");
-        HBox leftContent = new HBox(exitBtn);
+        leftContent = new HBox(exitBtn);
         saveBtn = new Button("Save");
         HBox bottBox = new HBox(saveBtn);
         bottBox.setAlignment(Pos.CENTER);
@@ -492,7 +496,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             saveBtn.setVisible(false);
             saveBtn.setDisable(true);
             deleteBtn.setDisable(true);
-            bottMenu.getChildren().set(0, cancelBtn);
+            leftContent.getChildren().set(0, cancelBtn);
             displayLabel.setText("Choose a space!");
         } else {
             redFrog.setDisable(false);
@@ -500,7 +504,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             saveBtn.setVisible(true);
             saveBtn.setDisable(false);
             deleteBtn.setDisable(false);
-            bottMenu.getChildren().set(0, exitBtn);
+            leftContent.getChildren().set(0, exitBtn);
         }
     }
 
