@@ -294,6 +294,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                     btn.setOnAction(e -> {
                         if (placing) {
                             model.place(r, c, frogType.get());
+                            updateGrid(customBoard);
                             placementLock(false);
                             placing = false;
                         } else {
