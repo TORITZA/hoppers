@@ -469,6 +469,13 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             placementLock(true);
         });
 
+        exitBtn.setOnAction(e -> {
+            mainScreen();
+            model.toggleCreationMode();
+        });
+
+
+
         // **************************************************************
 
 
