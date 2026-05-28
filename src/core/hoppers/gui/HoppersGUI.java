@@ -229,12 +229,19 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
 
         // Initialize the Stage
-        stage.setTitle("Hoppers GUI");
-        stage.setResizable(true);
         stage.setScene(scene);
-        stage.sizeToScene();
-        stage.setResizable(false);
-        stage.show();
+        if (model.getCreationStatus()) {
+            scene.getRoot().layout();
+            stage.setResizable(true);
+            stage.sizeToScene();
+            stage.setResizable(false);
+        } else {
+            stage.setTitle("Hoppers GUI");
+            stage.setResizable(true);
+            stage.sizeToScene();
+            stage.setResizable(false);
+            stage.show();
+        }
     }
 
     /**
