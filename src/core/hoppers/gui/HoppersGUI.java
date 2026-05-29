@@ -225,7 +225,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         hintBtn.setOnAction(e -> model.hint());
 
-        createBtn.setOnAction(e -> dialogPrompter());
+        createBtn.setOnAction(e -> dimPrompter());
 
         // **************************************************************
 
@@ -319,7 +319,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      * Prompts to user for the dimensions of the board they wish to create. Then, creates
      * the custom puzzle with the values provided, instantiated in HoppersModel.
      */
-    public void dialogPrompter() {
+    public void dimPrompter() {
         Dialog<String[]> dialog = new Dialog<>();
         dialog.setTitle("Custom Board Size");
         dialog.setHeaderText("Please enter the dimensions of the puzzle you wish to create!");
@@ -358,6 +358,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         });
 
     }
+
+
 
     /**
      * Displays the screen for Creation Mode, where users can produce their own
@@ -468,19 +470,25 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         redFrog.setOnAction(e -> {
             placing = true;
             frogType.set("R");
-            placementLock(true);
+            placementLock(placing);
         });
 
         greenFrog.setOnAction(e -> {
             placing = true;
             frogType.set("G");
-            placementLock(true);
+            placementLock(placing);
         });
 
         exitBtn.setOnAction(e -> {
             model.reset();
             mainScreen();
             model.toggleCreationMode();
+        });
+
+        cancelBtn.setOnAction(e -> {
+            placing = false;
+            placementLock(false);
+            displayLabel.setText("Placement canceled");
         });
 
 
