@@ -1,5 +1,6 @@
 package core.hoppers.gui;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -184,6 +185,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         updateGrid(grid);
         mainPane.setCenter(grid);
 
+
         // > BOTTOM --- Contains back, load, reset, and hint buttons
         HBox bottBox = new HBox();
         HBox spaceBox = new HBox();
@@ -231,10 +233,11 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         // Initialize the Stage
         stage.setScene(scene);
         if (model.getCreationStatus()) {
-            scene.getRoot().layout();
-            stage.setResizable(true);
-            stage.sizeToScene();
-            stage.setResizable(false);
+            Platform.runLater(() -> {
+                stage.setResizable(true);
+                stage.sizeToScene();
+                stage.setResizable(false);
+            });
         } else {
             stage.setTitle("Hoppers GUI");
             stage.setResizable(true);
@@ -460,8 +463,6 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         // ******************* THE CONTROLLER ***************************
 
-        //exitBtn -> model.reset(), mainScreen(), toggleCreationMode()
-
         frogType = new AtomicReference<>("");
 
         redFrog.setOnAction(e -> {
@@ -477,6 +478,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         });
 
         exitBtn.setOnAction(e -> {
+            model.reset();
             mainScreen();
             model.toggleCreationMode();
         });
@@ -586,7 +588,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                 default -> throw new RuntimeException("Invalid cell value!");
             };
             ImageView img = new ImageView(graphic);
-            img.setPreserveRatio(false);
+            img.setPreserveRatio(true);
+            img.setSmooth(true);
             // binds image to the button's size
             img.fitWidthProperty().bind(btn.widthProperty());
             img.fitHeightProperty().bind(btn.heightProperty());
