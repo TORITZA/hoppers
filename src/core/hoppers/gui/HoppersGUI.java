@@ -179,6 +179,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         topBox.setAlignment(Pos.CENTER);
         mainPane.setTop(topBox);
 
+
         // > CENTER (stretches to LEFT & RIGHT) --- Handles creation of Hoppers board
         grid = new GridPane();
         initializeGrid(grid);
@@ -359,7 +360,31 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
     }
 
+    /**
+     * Prompts the user for confirmation given that they wish to exit Creation Mode
+     * and return to the main screen. If yes, displays the main puzzle screen to
+     * the user.
+     */
+    public void exitDialog() {
+        Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDialog.setTitle(null);
+        confirmDialog.setHeaderText("Exiting Creation Mode will result in losing the progress you've made so far.");
+        confirmDialog.setContentText("Are you certain you wish to leave?");
+            // update l8tr?!
+        confirmDialog.setGraphic(null);
 
+        // replace default alert btns
+        confirmDialog.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+
+        Optional<ButtonType> result = confirmDialog.showAndWait();
+            // user confirms & clicks Yes
+        if (result.isPresent() && result.get() == ButtonType.YES) {
+            model.reset();
+            mainScreen();
+            model.toggleCreationMode();
+        }
+            // user clicks No/exits out of prompter -> Do nothing
+    }
 
     /**
      * Displays the screen for Creation Mode, where users can produce their own
@@ -441,7 +466,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         initializeGrid(customBoard);
         updateGrid(customBoard);
         customBoard.setMaxSize(90, 90);
-        customBoard.setPadding(new Insets(0, 20, 0, 12));
+        customBoard.setPadding(new Insets(20, 20, 20, 12));
         createPane.setCenter(customBoard);
 
 
@@ -479,11 +504,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             placementLock(placing);
         });
 
-        exitBtn.setOnAction(e -> {
-            model.reset();
-            mainScreen();
-            model.toggleCreationMode();
-        });
+        exitBtn.setOnAction(e -> exitDialog());
 
         cancelBtn.setOnAction(e -> {
             placing = false;
