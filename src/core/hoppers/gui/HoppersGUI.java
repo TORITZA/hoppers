@@ -215,7 +215,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         // ******************* THE CONTROLLER ***************************
 
         backBtn.setOnAction(e -> {
-            model.load("data/hoppers/hoppers-4.txt");
+            model.load("data/default/hoppers-4.txt");
             model.reset();
             titleScreen();
                 });
@@ -374,7 +374,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             model.reset();
             stage.hide();
             mainScreen();
-            model.load("data/hoppers/hoppers-4.txt");
+            model.load("data/default/hoppers-4.txt");
             displayLabel.setText("Welcome back!");
             stage.show();
             model.toggleCreationMode();
@@ -508,7 +508,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             displayLabel.setText("Placement canceled");
         });
 
-
+        saveBtn.setOnAction(e -> model.save());
 
         // **************************************************************
 
@@ -630,7 +630,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     public void chooseFile(Stage stage) {
         FileChooser chooser = new FileChooser();
         String currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
-        currentPath += File.separator + "data" + File.separator + "hoppers";
+        currentPath += File.separator + "data";
         chooser.setInitialDirectory(new File(currentPath));
 
         chooser.setTitle("Select Hoppers File");
