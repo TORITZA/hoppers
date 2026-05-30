@@ -586,7 +586,6 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         stage.sizeToScene();
     }
 
-
     /**
      * Helper function that iterates over each cell in the GUI's GridPane and
      * updates it according to the grid state stored in the HoppersModel.
