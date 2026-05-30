@@ -233,19 +233,11 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         // Initialize the Stage
         stage.setScene(scene);
-        if (model.getCreationStatus()) {
-            Platform.runLater(() -> {
-                stage.setResizable(true);
-                stage.sizeToScene();
-                stage.setResizable(false);
-            });
-        } else {
-            stage.setTitle("Hoppers GUI");
-            stage.setResizable(true);
-            stage.sizeToScene();
-            stage.setResizable(false);
-            stage.show();
-        }
+        stage.setTitle("Hoppers GUI");
+        stage.setResizable(true);
+        stage.sizeToScene();
+        stage.setResizable(false);
+        stage.show();
     }
 
     /**
@@ -380,7 +372,11 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             // user confirms & clicks Yes
         if (result.isPresent() && result.get() == ButtonType.YES) {
             model.reset();
+            stage.hide();
             mainScreen();
+            model.load("data/hoppers/hoppers-4.txt");
+            displayLabel.setText("Welcome back!");
+            stage.show();
             model.toggleCreationMode();
         }
             // user clicks No/exits out of prompter -> Do nothing
