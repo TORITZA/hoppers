@@ -1,6 +1,7 @@
 package core.hoppers.gui;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -345,13 +346,33 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             return null;
         });
 
+        // convert continue type to button & check bounds of text fields
+        Button continueButton = (Button) dialog.getDialogPane().lookupButton(continueButtonType);
+        continueButton.addEventFilter(ActionEvent.ACTION, e -> {
+            // check if entries are valid
+            try {
+                int r = Integer.parseInt(row.getText().trim());
+                int c = Integer.parseInt(col.getText().trim());
+
+                if (r <= 0 || c <= 0) {
+                    dialog.setHeaderText("Both fields must be greater than zero.");
+                    e.consume();
+                } else if (r * c > 144) {
+                    dialog.setHeaderText("Too large! Please ensure the board has less than 145 tiles.");
+                    e.consume();
+                }
+            } catch (NumberFormatException n) {
+                dialog.setHeaderText("Please enter valid, whole numbers.");
+                e.consume();
+            }
+        });
+
         Optional<String[]> results = dialog.showAndWait();
         results.ifPresent(args -> {
             model.create(args[0], args[1]);
             createMode();
             displayLabel.setText("Welcome to Creation Mode!");
         });
-
     }
 
     /**
