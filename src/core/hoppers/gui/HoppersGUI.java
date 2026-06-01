@@ -406,6 +406,14 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     }
 
     /**
+     *
+     */
+    public void backDialog() {
+
+    }
+
+
+    /**
      * Displays the screen for Creation Mode, where users can produce their own
      * Hoppers puzzles.
      */
