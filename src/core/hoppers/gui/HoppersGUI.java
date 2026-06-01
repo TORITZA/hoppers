@@ -215,13 +215,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         // ******************* THE CONTROLLER ***************************
 
-        backBtn.setOnAction(e -> {
-            model.load("data/default/hoppers-4.txt");
-            model.reset();
-            stage.hide();
-            titleScreen();
-            stage.show();
-                });
+        backBtn.setOnAction(e -> backDialog());
 
         loadBtn.setOnAction(e -> chooseFile(stage));
 
@@ -406,12 +400,31 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     }
 
     /**
-     *
+     * Creates an alert box that waits on the user for confirmation if they wish to return
+     * to the Hoppers title screen, resetting the main puzzle in the process.
      */
     public void backDialog() {
+        Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDialog.setTitle(null);
+        confirmDialog.setHeaderText("Returning to the title screen will result in losing " +
+                "the progress you've made so far.");
+        confirmDialog.setContentText("Are you sure you want to return?");
+            // update l8tr!
+        confirmDialog.setGraphic(null);
 
+        // replace default alert btns
+        confirmDialog.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+
+        Optional<ButtonType> result = confirmDialog.showAndWait();
+            // user clicks & confirms YES
+        if (result.isPresent() && result.get() == ButtonType.YES) {
+            model.reset();
+            stage.hide();
+            titleScreen();
+            model.load("data/default/hoppers-4.txt");
+            stage.show();
+        }
     }
-
 
     /**
      * Displays the screen for Creation Mode, where users can produce their own
