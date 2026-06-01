@@ -269,7 +269,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                 btn.setPrefSize(75,75);
                 // allows expansion if there is any empty space in the cell
                 btn.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                GridPane.setHgrow(btn, Priority.ALWAYS);
+                GridPane.setHgrow(btn, Priority.NEVER);
                 GridPane.setVgrow(btn, Priority.ALWAYS);
                 currentBoard.add(btn, col, row);
 
