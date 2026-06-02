@@ -42,6 +42,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
     /** is the user currently placing something on the creation board? */
     boolean placing = false;
+    /** is the user currently deleting something on the creation board? */
+    boolean deleting = false;
 
     /** PRIMARY VIEW COMPONENTS */
     private Stage stage;
@@ -300,6 +302,12 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                         } else {
                             displayLabel.setText("First select a game piece to place it onto the board!");
                         }
+
+                        if (deleting) {
+                            model.delete(r, c);
+                            updateGrid(customBoard);
+
+                        }
                         });
                 }
             }
@@ -553,6 +561,10 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         });
 
         saveBtn.setOnAction(e -> model.save());
+
+        deleteBtn.setOnAction(e -> {
+            deleting = true;
+        });
 
         // **************************************************************
 
