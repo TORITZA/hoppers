@@ -306,7 +306,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                         if (deleting) {
                             model.delete(r, c);
                             updateGrid(customBoard);
-
+                            deleting = false;
                         }
                         });
                 }
@@ -398,6 +398,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         if (result.isPresent() && result.get() == ButtonType.YES) {
             model.reset();
             stage.hide();
+            deleting = false;
             mainScreen();
             model.load("data/default/hoppers-4.txt");
             displayLabel.setText("Welcome back!");
@@ -563,6 +564,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         saveBtn.setOnAction(e -> model.save());
 
         deleteBtn.setOnAction(e -> {
+            displayLabel.setText("Select a piece to delete off the board");
             deleting = true;
         });
 
@@ -630,11 +632,20 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         } else {
             displayLabel.setText(msg);
         }
+
         if (model.getCreationStatus()) {
             updateGrid(customBoard);
         } else {
             updateGrid(grid);
         }
+
+        if (model.getRedFrogCount() == 0 && model.getGreenFrogCount() == 0) {
+            deleteBtn.setDisable(true);
+        } else {
+            deleteBtn.setDisable(false);
+        }
+
+
         stage.sizeToScene();
     }
 
