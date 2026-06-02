@@ -495,6 +495,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         HBox delete = new HBox();
         Label deleteLbl = new Label("Delete: ");
         deleteBtn = new Button("x"); // X
+        deleteBtn.setDisable(true);
         delete.setAlignment(Pos.CENTER);
         delete.setSpacing(2);
         delete.getChildren().addAll(deleteLbl, deleteBtn);
