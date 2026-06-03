@@ -59,6 +59,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     /** CREATION MODE VIEW COMPONENTS **/
     private BorderPane createPane;
     private GridPane customBoard;
+    private Label redCount;
+    private Label greenCount;
     private Button redFrog;
     private Button greenFrog;
     private AtomicReference<String> frogType;
@@ -455,7 +457,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         // > LEFT --- State of creation board & Hoppers pieces
         VBox redFrogs = new VBox();
-        Label redCount = new Label("Red: " + model.getRedFrogCount());
+        redCount = new Label("Red: 0");
         Label maxRedCount = new Label("Max: 1");
         redCount.setTextAlignment(TextAlignment.CENTER);
         maxRedCount.setTextAlignment(TextAlignment.CENTER);
@@ -463,7 +465,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         redFrogs.getChildren().addAll(redCount, maxRedCount);
 
         VBox greenFrogs = new VBox();
-        Label greenCount = new Label("Green: " + model.getGreenFrogCount());
+        greenCount = new Label("Green: 0");
         Label maxGreenCount = new Label("Max: " + model.getMaxGreenFrogs());
         greenCount.setTextAlignment(TextAlignment.CENTER);
         maxGreenCount.setTextAlignment(TextAlignment.CENTER);
@@ -479,7 +481,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Label instructions = new Label("Click or drag each piece to \nplace it onto an empty lilypad!");
         instructions.setPadding(new Insets(0, 0, -8, 0));
 
-       greenFrog = new Button();
+        greenFrog = new Button();
         ImageView greenFrogGraphic = new ImageView(politoed);
         greenFrogGraphic.setPreserveRatio(true);
         greenFrogGraphic.setFitHeight(90);
@@ -633,6 +635,9 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         } else {
             displayLabel.setText(msg);
         }
+
+        redCount.setText("Red: " + model.getRedFrogCount());
+        greenCount.setText("Green: " + model.getGreenFrogCount());
 
         if (model.getCreationStatus()) {
             updateGrid(customBoard);
