@@ -9,6 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
@@ -554,6 +557,18 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             placing = true;
             frogType.set("G");
             placementLock(placing);
+        });
+        greenFrog.setOnDragDetected(e -> {
+            Dragboard db2 = greenFrog.startDragAndDrop(TransferMode.MOVE);
+
+            // preview img under cursor while dragging
+            Image greenDrag = new Image(RESOURCES_DIR+"politoed.png", 90, 90, true, true);
+            db2.setDragView(greenDrag); // !!
+
+            ClipboardContent content = new ClipboardContent();
+            content.putString("G");
+            db2.setContent(content);
+            e.consume();
         });
 
         exitBtn.setOnAction(e -> exitDialog());
