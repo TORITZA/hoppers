@@ -562,7 +562,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             Dragboard db2 = greenFrog.startDragAndDrop(TransferMode.MOVE);
 
             // preview img under cursor while dragging
-            Image greenDrag = new Image(RESOURCES_DIR+"politoed.png", 90, 90, true, true);
+            Image greenDrag = new Image(RESOURCES_DIR+"politoed.png", 90, 90,
+                    true, true, false);
             db2.setDragView(greenDrag); // !!
 
             ClipboardContent content = new ClipboardContent();
