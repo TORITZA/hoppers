@@ -6,13 +6,16 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import core.common.Observer;
@@ -562,9 +565,12 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             Dragboard db2 = greenFrog.startDragAndDrop(TransferMode.MOVE);
 
             // preview img under cursor while dragging
-            Image greenDrag = new Image(RESOURCES_DIR+"politoed.png", 90, 90,
-                    true, true, false);
-            db2.setDragView(greenDrag); // !!
+            ImageView btnIcon = (ImageView) greenFrog.getGraphic();
+            if (btnIcon != null) {
+                SnapshotParameters params = new SnapshotParameters();
+                params.setFill(Color.TRANSPARENT);
+                db2.setDragView(btnIcon.snapshot(params,null));
+            }
 
             ClipboardContent content = new ClipboardContent();
             content.putString("G");
