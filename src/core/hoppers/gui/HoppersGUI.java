@@ -555,6 +555,22 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             frogType.set("R");
             placementLock(placing);
         });
+        redFrog.setOnDragDetected(e -> {
+            Dragboard db1 = redFrog.startDragAndDrop(TransferMode.MOVE);
+
+            // preview img under cursor while dragging
+            ImageView btnIcon = (ImageView) redFrog.getGraphic();
+            if (btnIcon != null) {
+                SnapshotParameters params = new SnapshotParameters();
+                params.setFill(Color.TRANSPARENT);
+                db1.setDragView(btnIcon.snapshot(params, null));
+            }
+
+            ClipboardContent content = new ClipboardContent();
+            content.putString("R");
+            db1.setContent(content);
+            e.consume();
+        });
 
         greenFrog.setOnAction(e -> {
             placing = true;
