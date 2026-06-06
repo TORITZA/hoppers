@@ -356,7 +356,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                     });
 
                     btn.setOnDragDropped(e -> {
-                        //
+                        // g
                     });
                 }
             }
