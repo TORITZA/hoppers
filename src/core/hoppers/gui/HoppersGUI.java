@@ -301,6 +301,9 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                     String c = String.valueOf(GridPane.getColumnIndex(child));
                     Button btn = (Button) child;
 
+
+                    //------------------------ON CLICK------------------------
+
                     btn.setOnAction(e -> {
                         if (placing) {
                             model.place(r, c, frogType.get());
@@ -318,9 +321,42 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                         }
                         });
 
+
+                    // -------------------------ON DRAG--------------------------
+
                     btn.setOnDragOver(e -> {
                         e.acceptTransferModes(TransferMode.MOVE);
-                        e.consume(); //
+                        e.consume();
+                    });
+
+                    // visualization on hover
+                    btn.setOnDragEntered(e -> {
+                        ImageView baseLayer = new ImageView(lilyPad);
+                        baseLayer.fitWidthProperty().bind(btn.widthProperty());
+                        baseLayer.fitHeightProperty().bind(btn.heightProperty());
+
+                        ImageView overlay = switch (e.getDragboard().getString()) {
+                            case "G" -> new ImageView(politoed);
+                            case "R" -> new ImageView(pokeball);
+                            default -> {
+                                try {
+                                    throw new Exception();
+                                } catch (Exception ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            }
+                        };
+
+                        overlay.fitWidthProperty().bind(btn.widthProperty());
+                        overlay.fitHeightProperty().bind(btn.heightProperty());
+                        overlay.setOpacity(.4); // 40% solid
+
+                        StackPane stackedImg = new StackPane(baseLayer, overlay);
+                        btn.setGraphic(stackedImg);
+                    });
+
+                    btn.setOnDragDropped(e -> {
+                        //
                     });
                 }
             }
