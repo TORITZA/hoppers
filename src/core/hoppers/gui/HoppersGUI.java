@@ -318,7 +318,10 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                         }
                         });
 
-                    //btn. !!!!
+                    btn.setOnDragOver(e -> {
+                        e.acceptTransferModes(TransferMode.MOVE);
+                        e.consume();
+                    });
                 }
             }
     }
