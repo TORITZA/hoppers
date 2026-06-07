@@ -391,6 +391,13 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                     });
 
                     btn.setOnDragDropped(e -> {
+                        Dragboard db = e.getDragboard();
+
+                        String frogType = db.getString();
+                        model.place(r, c, frogType);
+
+                        e.setDropCompleted(true);
+                        e.consume();
 
                     });
                 }
