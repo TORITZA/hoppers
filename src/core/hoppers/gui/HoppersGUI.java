@@ -331,7 +331,18 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
                     // visualization on hover
                     btn.setOnDragEntered(e -> {
-                        ImageView baseLayer = new ImageView(lilyPad);
+                        ImageView baseLayer = switch (model.getCreationConfig().
+                                getCell(Integer.parseInt(r), Integer.parseInt(c))) {
+                            case HoppersConfig.EMPTY_SPACE -> new ImageView(lilyPad);
+                            case HoppersConfig.INVALID_SPACE -> new ImageView(water);
+                            default -> {
+                                try {
+                                    throw new Exception();
+                                } catch (Exception ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                                }
+                        };
                         baseLayer.fitWidthProperty().bind(btn.widthProperty());
                         baseLayer.fitHeightProperty().bind(btn.heightProperty());
 
@@ -347,16 +358,40 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                             }
                         };
 
-                        overlay.fitWidthProperty().bind(btn.widthProperty());
-                        overlay.fitHeightProperty().bind(btn.heightProperty());
+                        overlay.setSmooth(true);
+                        overlay.setPreserveRatio(true);
+                        if (e.getDragboard().getString().equals("G")) {
+                            overlay.fitWidthProperty().bind(btn.widthProperty());
+                            overlay.fitHeightProperty().bind(btn.widthProperty());
+                        } else {
+                            overlay.setFitHeight(45);
+                            overlay.setFitWidth(45);
+                        }
                         overlay.setOpacity(.4); // 40% solid
 
                         StackPane stackedImg = new StackPane(baseLayer, overlay);
                         btn.setGraphic(stackedImg);
+                        e.consume();
+                    });
+
+                    btn.setOnDragExited(e -> {
+                        ImageView base = switch (model.getCreationConfig().
+                                getCell(Integer.parseInt(r), Integer.parseInt(c))) {
+                            case HoppersConfig.EMPTY_SPACE -> new ImageView(lilyPad);
+                            case HoppersConfig.INVALID_SPACE -> new ImageView(water);
+                            case HoppersConfig.RED_FROG -> new ImageView(pokePad);
+                            case HoppersConfig.GREEN_FROG -> new ImageView(poliPad);
+                            default -> throw new IllegalStateException("Unexpected value: " + model.getCreationConfig().
+                                getCell(Integer.parseInt(r), Integer.parseInt(c)));
+                        };
+                        base.fitWidthProperty().bind(btn.widthProperty());
+                        base.fitHeightProperty().bind(btn.heightProperty());
+                        btn.setGraphic(base);
+                        e.consume();
                     });
 
                     btn.setOnDragDropped(e -> {
-                        // g
+
                     });
                 }
             }
