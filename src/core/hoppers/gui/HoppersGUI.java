@@ -70,7 +70,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     private Button redFrog;
     private Button greenFrog;
     private AtomicReference<String> frogType;
-    private Button deleteBtn;
+    private Button deleteBtn = new Button();
     private HBox leftContent;
     private Button saveBtn;
     private Button exitBtn;
@@ -335,13 +335,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                                 getCell(Integer.parseInt(r), Integer.parseInt(c))) {
                             case HoppersConfig.EMPTY_SPACE -> new ImageView(lilyPad);
                             case HoppersConfig.INVALID_SPACE -> new ImageView(water);
-                            default -> {
-                                try {
-                                    throw new Exception();
-                                } catch (Exception ex) {
-                                    throw new RuntimeException(ex);
-                                }
-                                }
+                            default -> new ImageView(water);
                         };
                         baseLayer.fitWidthProperty().bind(btn.widthProperty());
                         baseLayer.fitHeightProperty().bind(btn.heightProperty());
@@ -395,6 +389,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
                         String frogType = db.getString();
                         model.place(r, c, frogType);
+                        updateGrid(customBoard);
 
                         e.setDropCompleted(true);
                         e.consume();
@@ -518,11 +513,10 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Optional<ButtonType> result = confirmDialog.showAndWait();
             // user clicks & confirms YES
         if (result.isPresent() && result.get() == ButtonType.YES) {
-            model.reset();
             stage.hide();
+            model.reset();
             titleScreen();
             model.load("data/default/hoppers-4.txt");
-            stage.show();
         }
     }
 
@@ -757,21 +751,11 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             displayLabel.setText(msg);
         }
 
-        redCount.setText("Red: " + model.getRedFrogCount());
-        greenCount.setText("Green: " + model.getGreenFrogCount());
-
         if (model.getCreationStatus()) {
             updateGrid(customBoard);
         } else {
             updateGrid(grid);
         }
-
-        if (model.getRedFrogCount() == 0 && model.getGreenFrogCount() == 0) {
-            deleteBtn.setDisable(true);
-        } else {
-            deleteBtn.setDisable(false);
-        }
-
 
         stage.sizeToScene();
     }
@@ -786,6 +770,13 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     public void updateGrid(GridPane currentBoard) {
         HoppersConfig modelBoard;
         if (currentBoard == customBoard) {
+            redCount.setText("Red: " + model.getRedFrogCount());
+            greenCount.setText("Green: " + model.getGreenFrogCount());
+            if (model.getRedFrogCount() == 0 && model.getGreenFrogCount() == 0) {
+                deleteBtn.setDisable(true);
+            } else {
+                deleteBtn.setDisable(false);
+            }
             modelBoard = model.getCreationConfig();
         } else {
             modelBoard = model.getBoard();
