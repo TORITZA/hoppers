@@ -170,12 +170,28 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     }
 
     /**
+     *
+     * @param img
+     */
+    private void titleAnimation(ImageView img) {
+
+    }
+
+    /**
      * WIP
      */
     public void helpMenu() {
         // WIP
-        // How to Play
-        // Report Bug
+        // > How to Play
+        // > Report Bug
+    }
+
+    /**
+     * WIP
+     */
+    public void creditsScreen() {
+        // Contributions: @rotten_ichor for alert dialog asset, pokeball png source, attribute Politoed
+        // asset & usage of IP to Pokémon
     }
 
     /**
@@ -258,7 +274,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      * @param currentBoard depending on the model's state, this is the GridPane
      *                      that is to be initialized
      */
-    public void initializeGrid(GridPane currentBoard) {
+    private void initializeGrid(GridPane currentBoard) {
         HoppersConfig modelBoard;
         if (currentBoard == customBoard) {
             modelBoard = model.getCreationConfig();
@@ -407,7 +423,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      * Prompts to user for the dimensions of the board they wish to create. Then, creates
      * the custom puzzle with the values provided, instantiated in HoppersModel.
      */
-    public void dimPrompter() {
+    private void dimPrompter() {
         Dialog<String[]> dialog = new Dialog<>();
         dialog.setTitle("Custom Board Size");
         dialog.setHeaderText("Please enter the dimensions of the puzzle you wish to create!");
@@ -472,7 +488,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      * and return to the main screen. If yes, displays the main puzzle screen to
      * the user.
      */
-    public void exitDialog() {
+    private void exitDialog() {
         Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
         confirmDialog.setTitle(null);
         confirmDialog.setHeaderText("Exiting Creation Mode will result in losing the progress you've made so far.");
@@ -501,7 +517,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      * Creates an alert box that waits on the user for confirmation if they wish to return
      * to the Hoppers title screen, resetting the main puzzle in the process.
      */
-    public void backDialog() {
+    private void backDialog() {
         Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
         confirmDialog.setTitle(null);
         confirmDialog.setHeaderText("Returning to the title screen will result in losing " +
@@ -710,7 +726,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      * @param entered has the user entered a state in which they're placing pieces
      *                onto the creation board?
      */
-    public void placementLock(boolean entered) {
+    private void placementLock(boolean entered) {
         if (entered) {
             redFrog.setDisable(true);
             greenFrog.setDisable(true);
@@ -770,7 +786,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      * @param currentBoard depending on the model's state, this is the GridPane
      *                     that is to be updated
      */
-    public void updateGrid(GridPane currentBoard) {
+    private void updateGrid(GridPane currentBoard) {
         HoppersConfig modelBoard;
         if (currentBoard == customBoard) {
             redCount.setText("Red: " + model.getRedFrogCount());
@@ -815,7 +831,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      * to be used in the creation of a Hoppers puzzle.
      * @param stage the GUI's primary stage
      */
-    public void chooseFile(Stage stage) {
+    private void chooseFile(Stage stage) {
         FileChooser chooser = new FileChooser();
         String currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
         currentPath += File.separator + "data";
