@@ -185,8 +185,19 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      */
     public void helpMenu() {
         // WIP
-        // > How to Play
-        // > Report Bug
+        Button howToPlay = new Button("How to Play");
+        howToPlay.setTextAlignment(TextAlignment.CENTER);
+        Button reportBug = new Button("Report Bug");
+        reportBug.setTextAlignment(TextAlignment.CENTER);
+        VBox menu = new VBox(howToPlay, reportBug);
+        Scene scene = new Scene(menu);
+
+        menu.setAlignment(Pos.CENTER);
+        menu.setSpacing(8);
+
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
 
     /**
