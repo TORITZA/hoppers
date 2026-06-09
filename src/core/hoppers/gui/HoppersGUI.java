@@ -80,10 +80,14 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     private Image lilyPad = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"lily_pad.png"));
     private Image water = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"water.png"));
     // Pokémon assets!
-    // > Politoed represents a Green Frog
+        // > Politoed represents a Green Frog
     private Image poliPad = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"lily_padPolitoed.png"));
     private Image politoed = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"politoed.png"));
-    // > A Pokeball represents the Red Frog
+        // > For alert dialogs; made by @rotten_ichor
+    private Image poliQuestion = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"poliQuestion.png"),
+            105, 105, true, true);
+    private ImageView poliPrompter = new ImageView(poliQuestion);
+        // > A Pokeball represents the Red Frog
     private Image pokePad = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"lily_padSmallBall.png"));
     private Image pokeball = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"pokeball.png"));
 
@@ -473,8 +477,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         confirmDialog.setTitle(null);
         confirmDialog.setHeaderText("Exiting Creation Mode will result in losing the progress you've made so far.");
         confirmDialog.setContentText("Are you certain you wish to leave?");
-            // update l8tr?!
-        confirmDialog.setGraphic(null);
+        confirmDialog.setGraphic(poliPrompter);
 
         // replace default alert btns
         confirmDialog.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
@@ -505,7 +508,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                 "the progress you've made so far.");
         confirmDialog.setContentText("Are you sure you want to return?");
             // update l8tr!
-        confirmDialog.setGraphic(null);
+        confirmDialog.setGraphic(poliPrompter);
 
         // replace default alert btns
         confirmDialog.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
