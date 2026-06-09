@@ -1,5 +1,6 @@
 package core.hoppers.gui;
 
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -24,6 +25,7 @@ import core.hoppers.model.HoppersModel;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
@@ -174,7 +176,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      * @param img
      */
     private void titleAnimation(ImageView img) {
-
+        // vertical bounce/jump
+        TranslateTransition bounce = new TranslateTransition(Duration.millis(600), img);
     }
 
     /**
