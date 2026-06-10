@@ -139,9 +139,13 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         title.setTextAlignment(TextAlignment.CENTER);
 
         Button playBtn = new Button("Play");
+        playBtn.setFocusTraversable(false);
         Button helpBtn = new Button("Help");
+        helpBtn.setFocusTraversable(false);
         Button creditBtn = new Button("Credits");
+        creditBtn.setFocusTraversable(false);
         Button quitBtn = new Button("Quit");
+        quitBtn.setFocusTraversable(false);
 
             // animated Politoed asset on title screen!
         ImageView poliDancer = new ImageView(politoed);
