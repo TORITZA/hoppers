@@ -157,6 +157,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         playBtn.setOnAction(e -> mainScreen());
 
+        helpBtn.setOnAction(e -> helpMenu());
+
         // **************************************************************
 
 
@@ -184,16 +186,34 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      * WIP
      */
     public void helpMenu() {
-        // WIP
+        BorderPane help = new BorderPane();
+        help.setPrefSize(376.0, 419.2);
+        Scene scene = new Scene(help);
+
         Button howToPlay = new Button("How to Play");
+        howToPlay.setFocusTraversable(false);
         howToPlay.setTextAlignment(TextAlignment.CENTER);
         Button reportBug = new Button("Report Bug");
         reportBug.setTextAlignment(TextAlignment.CENTER);
+        reportBug.setFocusTraversable(false);
         VBox menu = new VBox(howToPlay, reportBug);
-        Scene scene = new Scene(menu);
-
         menu.setAlignment(Pos.CENTER);
-        menu.setSpacing(8);
+        menu.setSpacing(14);
+
+        Button backBtn = new Button("Back");
+        backBtn.setFocusTraversable(false);
+        HBox back = new HBox(backBtn);
+        back.setAlignment(Pos.CENTER);
+        back.setPadding(new Insets(0, 0, 12, 0));
+
+        help.setCenter(menu);
+        help.setBottom(back);
+
+        // ******************** CONTROLLER ********************
+
+        backBtn.setOnAction(e -> titleScreen());
+
+        // ***************************************************
 
         stage.setScene(scene);
         stage.setResizable(false);
