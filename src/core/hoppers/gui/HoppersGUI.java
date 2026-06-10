@@ -189,7 +189,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     }
 
     /**
-     * WIP
+     * Showcases the screen with various "help" options that a user may seek
+     * assistance with.
      */
     public void helpMenu() {
         BorderPane help = new BorderPane();
@@ -217,6 +218,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         // ******************** CONTROLLER ********************
 
+        // howToPlay
+
         backBtn.setOnAction(e -> titleScreen());
 
         // ***************************************************
@@ -225,6 +228,15 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         stage.setResizable(false);
         stage.show();
     }
+
+
+    /**
+     *
+     */
+    public void howToPlayScreen() {
+
+    }
+
 
     /**
      * WIP
