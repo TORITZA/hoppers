@@ -163,6 +163,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         helpBtn.setOnAction(e -> helpMenu());
 
+        quitBtn.setOnAction(e -> Platform.exit());
+
         // **************************************************************
 
 
