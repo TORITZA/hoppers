@@ -200,13 +200,16 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Button howToPlay = new Button("How to Play");
         howToPlay.setFocusTraversable(false);
         howToPlay.setTextAlignment(TextAlignment.CENTER);
+        Button controls = new Button("Controls");
+        controls.setFocusTraversable(false);
+        controls.setTextAlignment(TextAlignment.CENTER);
         Button whatIs = new Button("What is Creation Mode");
         whatIs.setFocusTraversable(false);
         whatIs.setTextAlignment(TextAlignment.CENTER);
         Button reportBug = new Button("Report Bug");
         reportBug.setTextAlignment(TextAlignment.CENTER);
         reportBug.setFocusTraversable(false);
-        VBox menu = new VBox(howToPlay, whatIs, reportBug);
+        VBox menu = new VBox(howToPlay, controls, whatIs, reportBug);
         menu.setAlignment(Pos.CENTER);
         menu.setSpacing(14);
 
