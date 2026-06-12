@@ -17,7 +17,9 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import core.common.Observer;
 import core.hoppers.model.HoppersConfig;
@@ -240,9 +242,57 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      *
      */
     public void howToPlayScreen() {
+        BorderPane howToPane = new BorderPane();
 
+        Label quote = new Label("Survey the pond, then jump frogs until only \n" +
+                "ONE is left standing...Start simple and grow your \n" +
+                "skills with each level. In no time at all you’ll be \n" +
+                "the smartest frog in the pond!\n" +
+                "                       -- Official Hoppers Manual ");
+        quote.setOpacity(70);
+        VBox quoteBox = new VBox(quote);
+        quoteBox.setAlignment(Pos.BASELINE_LEFT);
+        quoteBox.setStyle("-fx-border-width: 1px; -fx-border-color: #D3D3D3");
+
+        Text intro1 = new Text("Hoppers is a logic puzzle—to be more specific, " +
+                "a single-player peg-solitaire game—produced by the popular toy and board game company ThinkFun " +
+                "but invented by Nob Yoshigahara. However, in this iteration, you'll notice that the frog leaping " +
+                "isn't your typical amphibian——it's Politoed, the Frog ");
+        Text italicIntro = new Text("Pokémon");
+        italicIntro.setStyle("-fx-font-style: italic");
+        Text intro2 = new Text("!");
+        TextFlow completeIntro = new TextFlow(intro1, italicIntro, intro2);
+        Label intro = new Label();
+        intro.setGraphic(completeIntro);
+
+        Label preface = new Label("The rules nevertheless remain the same:");
+
+        Label bulletItem1 = new Label("\t• Politoeds, which stand-in for the original's Green frogs, and " +
+                "the Pokéball, representing the Red frog, may only jump from lily pad to lily pad cardinally and " +
+                "intercardinally——that is, North, East, South, West and the diagonals.");
+
+        Label bulletItem2 = new Label("\t• Additionally, in order for either frog type to move, another Politoed " +
+                "must rest adjacently to as well as in-between them and the space they wish to hop to. If executed" +
+                " successfully, it will \"capture\" and remove that Politoed off the board!");
+
+        Label bulletItem3 = new Label();
+        Text bulletStart3 = new Text("\t• Neither a Politoed nor a Pokéball can leap into water, over an " +
+                "empty lily pad, onto another Politoed, or over two at once. Furthermore, as the game's win " +
+                "condition, the Pokéball is special in the sense that it cannot be captured; it ");
+        Text italic3 = new Text("must");
+        Text bulletEnd3 = new Text(" remain on the board, and no other Politoed can hop over and remove it.");
+        italic3.setStyle("-fx-font-style: italic");
+        TextFlow bulletFlow3 = new TextFlow(bulletStart3, italic3, bulletEnd3);
+        bulletItem3.setGraphic(bulletFlow3);
+
+        Label bulletItem4 = new Label("\t• The trainer (that's you!) wins when the Pokéball is the lone piece" +
+                " on the board, indicating that all Politoed once present have been caught.");
+
+        VBox content = new VBox(quoteBox);
+
+        Button backBtn = new Button("Back");
+        howToPane.setBottom(backBtn);
     }
-
 
     /**
      * WIP
