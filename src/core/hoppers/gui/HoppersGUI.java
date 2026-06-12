@@ -288,6 +288,13 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Label bulletItem4 = new Label("\t• The trainer (that's you!) wins when the Pokéball is the lone piece" +
                 " on the board, indicating that all Politoed once present have been caught.");
 
+        Label explanation = new Label("Initially, a 5x5 Hoppers puzzle is loaded in. Although not all the" +
+                " default puzzles provided are solvable, a good chunk of them are. It's up to you to determine" +
+                " how to approach each and ensure your Pokéball is the last piece standing.\n");
+
+        Label encouragement = new Label("Now, go catch 'em all, and become the best Politoed wrangler" +
+                " there ever was!");
+
         VBox content = new VBox(quoteBox);
 
         Button backBtn = new Button("Back");
