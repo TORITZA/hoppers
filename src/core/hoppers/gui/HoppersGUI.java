@@ -243,37 +243,42 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      */
     public void howToPlayScreen() {
         BorderPane howToPane = new BorderPane();
+        Scene scene = new Scene(howToPane);
 
         Label quote = new Label("Survey the pond, then jump frogs until only \n" +
                 "ONE is left standing...Start simple and grow your \n" +
                 "skills with each level. In no time at all you’ll be \n" +
                 "the smartest frog in the pond!\n" +
                 "                       -- Official Hoppers Manual ");
-        quote.setOpacity(70);
+        quote.setOpacity(20);
+        quote.setWrapText(true);
+        quote.setTextAlignment(TextAlignment.CENTER);
         VBox quoteBox = new VBox(quote);
-        quoteBox.setAlignment(Pos.BASELINE_LEFT);
         quoteBox.setStyle("-fx-border-width: 1px; -fx-border-color: #D3D3D3");
 
         Text intro1 = new Text("Hoppers is a logic puzzle—to be more specific, " +
                 "a single-player peg-solitaire game—produced by the popular toy and board game company ThinkFun " +
                 "but invented by Nob Yoshigahara. However, in this iteration, you'll notice that the frog leaping " +
-                "isn't your typical amphibian——it's Politoed, the Frog ");
+                "isn't your typical amphibian—it's Politoed, the Frog ");
         Text italicIntro = new Text("Pokémon");
         italicIntro.setStyle("-fx-font-style: italic");
         Text intro2 = new Text("!");
         TextFlow completeIntro = new TextFlow(intro1, italicIntro, intro2);
         Label intro = new Label();
         intro.setGraphic(completeIntro);
+        intro.setWrapText(true);
 
         Label preface = new Label("The rules nevertheless remain the same:");
 
         Label bulletItem1 = new Label("\t• Politoeds, which stand-in for the original's Green frogs, and " +
                 "the Pokéball, representing the Red frog, may only jump from lily pad to lily pad cardinally and " +
-                "intercardinally——that is, North, East, South, West and the diagonals.");
+                "intercardinally—that is, North, East, South, West and the diagonals.");
+        bulletItem1.setWrapText(true);
 
         Label bulletItem2 = new Label("\t• Additionally, in order for either frog type to move, another Politoed " +
                 "must rest adjacently to as well as in-between them and the space they wish to hop to. If executed" +
                 " successfully, it will \"capture\" and remove that Politoed off the board!");
+        bulletItem2.setWrapText(true);
 
         Label bulletItem3 = new Label();
         Text bulletStart3 = new Text("\t• Neither a Politoed nor a Pokéball can leap into water, over an " +
@@ -284,21 +289,54 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         italic3.setStyle("-fx-font-style: italic");
         TextFlow bulletFlow3 = new TextFlow(bulletStart3, italic3, bulletEnd3);
         bulletItem3.setGraphic(bulletFlow3);
+        bulletItem3.setWrapText(true);
 
         Label bulletItem4 = new Label("\t• The trainer (that's you!) wins when the Pokéball is the lone piece" +
                 " on the board, indicating that all Politoed once present have been caught.");
+        bulletItem4.setWrapText(true);
 
         Label explanation = new Label("Initially, a 5x5 Hoppers puzzle is loaded in. Although not all the" +
                 " default puzzles provided are solvable, a good chunk of them are. It's up to you to determine" +
                 " how to approach each and ensure your Pokéball is the last piece standing.\n");
+        explanation.setWrapText(true);
 
         Label encouragement = new Label("Now, go catch 'em all, and become the best Politoed wrangler" +
                 " there ever was!");
+        encouragement.setWrapText(true);
 
-        VBox content = new VBox(quoteBox);
+
+        VBox content = new VBox(intro, preface, bulletItem1, bulletItem2, bulletItem3, bulletItem4,
+                explanation, encouragement);
+
+        ScrollPane scrollBox = new ScrollPane();
+        scrollBox.setPannable(true);
+        scrollBox.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollBox.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollBox.setFitToWidth(true);
+        quoteBox.setAlignment(Pos.CENTER);
+        content.setFillWidth(false);
+        content.setAlignment(Pos.TOP_LEFT);
+        VBox all = new VBox(quoteBox, content);
+        scrollBox.setContent(all);
+        howToPane.setCenter(scrollBox);
 
         Button backBtn = new Button("Back");
-        howToPane.setBottom(backBtn);
+        HBox bottMenu = new HBox(backBtn);
+        bottMenu.setAlignment(Pos.CENTER);
+        quoteBox.setAlignment(Pos.CENTER);
+        howToPane.setBottom(bottMenu);
+
+        // ********************* CONTROLLER *************************
+
+        backBtn.setOnAction(e -> titleScreen());
+
+        // **********************************************************
+
+        howToPane.setPrefSize(376.0, 419.2);
+
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
 
     /**
