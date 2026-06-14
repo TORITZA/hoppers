@@ -321,7 +321,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         content.setPadding(new Insets(10));
         VBox all = new VBox(quoteBox, content);
         scrollBox.setContent(all);
-        howToPane.setCenter(scrollBox); //
+        howToPane.setCenter(scrollBox); 
 
         Button backBtn = new Button("Back");
         backBtn.setFocusTraversable(false);
