@@ -345,6 +345,14 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     }
 
     /**
+     *
+     */
+    public void controlsScreen() {
+
+
+    }
+
+    /**
      * WIP
      */
     public void creditsScreen() {
