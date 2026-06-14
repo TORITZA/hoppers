@@ -254,7 +254,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         quote.setWrapText(true);
         quote.setTextAlignment(TextAlignment.CENTER);
         VBox quoteBox = new VBox(quote);
-        quoteBox.setStyle("-fx-border-width: 1px; -fx-border-color: #D3D3D3");
+        quote.setStyle("-fx-border-width: 1px; -fx-border-color: #D3D3D3");
 
         Text intro1 = new Text("Hoppers is a logic puzzle—to be more specific, " +
                 "a single-player peg-solitaire game—produced by the popular toy and board game company ThinkFun " +
@@ -268,7 +268,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         intro.setGraphic(completeIntro);
         intro.setWrapText(true);
 
-        Label preface = new Label("The rules nevertheless remain the same:");
+        Label preface = new Label("\nThe rules nevertheless remain the same:");
 
         Label bulletItem1 = new Label("\t• Politoeds, which stand-in for the original's Green frogs, and " +
                 "the Pokéball, representing the Red frog, may only jump from lily pad to lily pad cardinally and " +
@@ -295,12 +295,12 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                 " on the board, indicating that all Politoed once present have been caught.");
         bulletItem4.setWrapText(true);
 
-        Label explanation = new Label("Initially, a 5x5 Hoppers puzzle is loaded in. Although not all the" +
+        Label explanation = new Label("\nInitially, a 5x5 Hoppers puzzle is loaded in. Although not all the" +
                 " default puzzles provided are solvable, a good chunk of them are. It's up to you to determine" +
                 " how to approach each and ensure your Pokéball is the last piece standing.\n");
         explanation.setWrapText(true);
 
-        Label encouragement = new Label("Now, go catch 'em all, and become the best Politoed wrangler" +
+        Label encouragement = new Label("\nNow, go catch 'em all, and become the best Politoed wrangler" +
                 " there ever was!");
         encouragement.setWrapText(true);
 
@@ -314,15 +314,20 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         scrollBox.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollBox.setFitToWidth(true);
         quoteBox.setAlignment(Pos.CENTER);
+        quoteBox.setPadding(new Insets(8,8,0,8));
+        quote.setPadding(new Insets(6));
         content.setFillWidth(false);
         content.setAlignment(Pos.TOP_LEFT);
+        content.setPadding(new Insets(10));
         VBox all = new VBox(quoteBox, content);
         scrollBox.setContent(all);
         howToPane.setCenter(scrollBox);
 
         Button backBtn = new Button("Back");
+        backBtn.setFocusTraversable(false);
         HBox bottMenu = new HBox(backBtn);
         bottMenu.setAlignment(Pos.CENTER);
+        bottMenu.setPadding(new Insets(8, 0, 8, 0));
         quoteBox.setAlignment(Pos.CENTER);
         howToPane.setBottom(bottMenu);
 
