@@ -239,7 +239,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
 
     /**
-     *
+     * Displays
      */
     public void howToPlayScreen() {
         BorderPane howToPane = new BorderPane();
@@ -348,7 +348,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      *
      */
     public void controlsScreen() {
-
+        Label intro = new Label();
 
     }
 
