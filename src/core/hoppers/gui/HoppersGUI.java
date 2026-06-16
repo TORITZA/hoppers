@@ -239,7 +239,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
 
     /**
-     * Displays
+     * Displays information on the rules of the Hoppers game.
      */
     public void howToPlayScreen() {
         BorderPane howToPane = new BorderPane();
@@ -348,7 +348,52 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      *
      */
     public void controlsScreen() {
+        BorderPane controlsPane = new BorderPane();
+        Scene scene = new Scene(controlsPane);
+
         Label intro = new Label();
+        Text intro1 = new Text("Upon clicking the ");
+        Text boldIntro = new Text("Play");
+        boldIntro.setStyle("-fx-font-style: bold");
+        Text intro2 = new Text(" button, you'll notice that the main screen houses six key controls you can " +
+                "use to navigate the puzzle in front of you (or even create another!).");
+        TextFlow completeIntro = new TextFlow(intro1, boldIntro, intro2);
+        intro.setGraphic(completeIntro);
+        intro.setWrapText(true);
+
+        Label moveControls = new Label();
+        Text move1 = new Text("Firstly, to move a piece on the board, begin by using your cursor to select the" +
+                " one you wish to position and clicking on its destination. Don't worry about memorizing any of" +
+                " the constraints imposed on you by the game itself; should you want to read up on and be cognizant" +
+                " of the rules, there is always the ");
+        Text boldMove = new Text("How To Play");
+        boldMove.setStyle("-fx-font-style: bold");
+        Text move2 = new Text("tab, but the app also notifies you ");
+        Text moveItalic1 = new Text("if");
+        moveItalic1.setStyle("-fx-font-style: italic");
+        Text move3 = new Text(" and ");
+        Text moveItalic2 = new Text("why");
+        moveItalic2.setStyle("-fx-font-style: italic");
+        Text move4 = new Text(" a move you made is invalid. It even provides feedback confirming a move is " +
+                "successful!");
+        TextFlow moveComplete = new TextFlow(move1, boldMove, move2, moveItalic1, move3, moveItalic2, move4);
+        moveControls.setGraphic(moveComplete);
+        moveControls.setWrapText(true);
+
+        Label buttonIntro = new Label("The functions of the other aforementioned controls are teased through " +
+                "their titles:");
+
+        Label loadButton = new Label();
+        Text load1 = new Text("The ");
+        Text boldLoad1 = new Text("Load");
+        boldLoad1.setStyle("-fx-font-style: bold");
+        Text load2 = new Text(" button opens a dialog box, prompting you to choose a file from either the ");
+        Text loadItalic1 = new Text("default");
+        loadItalic1.setStyle("-fx-font-style: italic");
+        Text load3 = new Text(" or ");
+        Text loadItalic2 = new Text("custom");
+        loadItalic2.setStyle("-fx-font-style: italic");
+
 
     }
 
