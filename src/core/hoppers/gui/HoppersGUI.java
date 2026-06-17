@@ -393,6 +393,27 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Text load3 = new Text(" or ");
         Text loadItalic2 = new Text("custom");
         loadItalic2.setStyle("-fx-font-style: italic");
+        Text load4 = new Text(" folder. The former holds standard, ready-made Hoppers puzzles, while the latter " +
+                "carries any puzzles you might've configured in ");
+        Text boldLoad2 = new Text("Creation Mode");
+        boldLoad2.setStyle("-fx-font-style: bold");
+        Text load5 = new Text(". The app then proceeds to load your selection onto the main screen, priming it " +
+                "for your play.");
+        TextFlow loadComplete = new TextFlow(load1, boldLoad1, load2, loadItalic1, load3, loadItalic2, load4,
+                boldLoad2, load5);
+        loadButton.setGraphic(loadComplete);
+        loadButton.setWrapText(true);
+
+        Label resetButton = new Label();
+        Text reset1 = new Text("The ");
+        Text resetBold = new Text("Reset");
+        resetBold.setStyle("-fx-font-style: bold");
+        Text reset2 = new Text(" button positions the puzzle to how it first appeared. That is to say, it resets " +
+                "the puzzle to its starting configuration, before you moved any pieces. Use this button to bail " +
+                "you out of dead-end board states!");
+        TextFlow resetComplete = new TextFlow(reset1, resetBold, reset2);
+        resetButton.setGraphic(resetComplete);
+        resetButton.setWrapText(true);
 
 
     }
