@@ -426,6 +426,19 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         hintButton.setGraphic(hintComplete);
         hintButton.setWrapText(true);
 
+        Label createButton = new Label();
+        Text create1 = new Text("The ");
+        Text createBold1 = new Text("Create");
+        createBold1.setStyle("-fx-font-style: bold");
+        Text create2 = new Text(" button enters you into the app's ");
+        Text createBold2 = new Text("Creation Mode");
+        createBold2.setStyle("-fx-font-style: bold");
+        Text create3 = new Text(", which has its own dedicated section within the Help menu—one that also " +
+                "details its own control scheme!");
+        TextFlow createComplete = new TextFlow(create1, createBold1, create2, createBold2, create3);
+        createButton.setGraphic(createComplete);
+        createButton.setWrapText(true);
+
 
     }
 
