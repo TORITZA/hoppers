@@ -415,6 +415,17 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         resetButton.setGraphic(resetComplete);
         resetButton.setWrapText(true);
 
+        Label hintButton = new Label();
+        Text hint1 = new Text("Should you press the ");
+        Text hintBold = new Text("Hint");
+        hintBold.setStyle("-fx-font-style: bold");
+        Text hint2 = new Text(" button, the Hoppers board will automatically orient itself as if the next best " +
+                "possible move was made. If the puzzle can no longer be solved given the location of each " +
+                "remaining piece on the board, it will output that the puzzle, in its current state, is insoluble.");
+        TextFlow hintComplete = new TextFlow(hint1, hintBold, hint2);
+        hintButton.setGraphic(hintComplete);
+        hintButton.setWrapText(true);
+
 
     }
 
