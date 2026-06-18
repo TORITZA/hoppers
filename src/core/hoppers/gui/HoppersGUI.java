@@ -228,6 +228,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         howToPlay.setOnAction(e -> howToPlayScreen());
 
+        controls.setOnAction(e -> controlsScreen());
+
         backBtn.setOnAction(e -> titleScreen());
 
         // ***************************************************
@@ -354,9 +356,9 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Label intro = new Label();
         Text intro1 = new Text("Upon clicking the ");
         Text boldIntro = new Text("Play");
-        boldIntro.setStyle("-fx-font-style: bold");
+        boldIntro.setStyle("-fx-font-weight: bold");
         Text intro2 = new Text(" button, you'll notice that the main screen houses six key controls you can " +
-                "use to navigate the puzzle in front of you (or even create another!).");
+                "use to navigate the puzzle in front of you (or even create another!).\n");
         TextFlow completeIntro = new TextFlow(intro1, boldIntro, intro2);
         intro.setGraphic(completeIntro);
         intro.setWrapText(true);
@@ -367,26 +369,27 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                 " the constraints imposed on you by the game itself; should you want to read up on and be cognizant" +
                 " of the rules, there is always the ");
         Text boldMove = new Text("How To Play");
-        boldMove.setStyle("-fx-font-style: bold");
-        Text move2 = new Text("tab, but the app also notifies you ");
+        boldMove.setStyle("-fx-font-weight: bold");
+        Text move2 = new Text(" tab, but the app also notifies you ");
         Text moveItalic1 = new Text("if");
         moveItalic1.setStyle("-fx-font-style: italic");
         Text move3 = new Text(" and ");
         Text moveItalic2 = new Text("why");
         moveItalic2.setStyle("-fx-font-style: italic");
         Text move4 = new Text(" a move you made is invalid. It even provides feedback confirming a move is " +
-                "successful!");
+                "successful!\n");
         TextFlow moveComplete = new TextFlow(move1, boldMove, move2, moveItalic1, move3, moveItalic2, move4);
         moveControls.setGraphic(moveComplete);
         moveControls.setWrapText(true);
 
-        Label buttonIntro = new Label("The functions of the other aforementioned controls are teased through " +
+        Label buttonIntro = new Label("\nThe functions of the other aforementioned controls are teased through " +
                 "their titles:");
+        buttonIntro.setWrapText(true);
 
         Label loadButton = new Label();
-        Text load1 = new Text("The ");
+        Text load1 = new Text("\nThe ");
         Text boldLoad1 = new Text("Load");
-        boldLoad1.setStyle("-fx-font-style: bold");
+        boldLoad1.setStyle("-fx-font-weight: bold");
         Text load2 = new Text(" button opens a dialog box, prompting you to choose a file from either the ");
         Text loadItalic1 = new Text("default");
         loadItalic1.setStyle("-fx-font-style: italic");
@@ -396,9 +399,9 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Text load4 = new Text(" folder. The former holds standard, ready-made Hoppers puzzles, while the latter " +
                 "carries any puzzles you might've configured in ");
         Text boldLoad2 = new Text("Creation Mode");
-        boldLoad2.setStyle("-fx-font-style: bold");
+        boldLoad2.setStyle("-fx-font-weight: bold");
         Text load5 = new Text(". The app then proceeds to load your selection onto the main screen, priming it " +
-                "for your play.");
+                "for your play.\n");
         TextFlow loadComplete = new TextFlow(load1, boldLoad1, load2, loadItalic1, load3, loadItalic2, load4,
                 boldLoad2, load5);
         loadButton.setGraphic(loadComplete);
@@ -407,10 +410,10 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Label resetButton = new Label();
         Text reset1 = new Text("The ");
         Text resetBold = new Text("Reset");
-        resetBold.setStyle("-fx-font-style: bold");
+        resetBold.setStyle("-fx-font-weight: bold");
         Text reset2 = new Text(" button positions the puzzle to how it first appeared. That is to say, it resets " +
                 "the puzzle to its starting configuration, before you moved any pieces. Use this button to bail " +
-                "you out of dead-end board states!");
+                "you out of dead-end board states!\n");
         TextFlow resetComplete = new TextFlow(reset1, resetBold, reset2);
         resetButton.setGraphic(resetComplete);
         resetButton.setWrapText(true);
@@ -418,10 +421,11 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Label hintButton = new Label();
         Text hint1 = new Text("Should you press the ");
         Text hintBold = new Text("Hint");
-        hintBold.setStyle("-fx-font-style: bold");
+        hintBold.setStyle("-fx-font-weight: bold");
         Text hint2 = new Text(" button, the Hoppers board will automatically orient itself as if the next best " +
                 "possible move was made. If the puzzle can no longer be solved given the location of each " +
-                "remaining piece on the board, it will output that the puzzle, in its current state, is insoluble.");
+                "remaining piece on the board, it will output that the puzzle, in its current state, is insoluble." +
+                "\n");
         TextFlow hintComplete = new TextFlow(hint1, hintBold, hint2);
         hintButton.setGraphic(hintComplete);
         hintButton.setWrapText(true);
@@ -429,17 +433,60 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Label createButton = new Label();
         Text create1 = new Text("The ");
         Text createBold1 = new Text("Create");
-        createBold1.setStyle("-fx-font-style: bold");
+        createBold1.setStyle("-fx-font-weight: bold");
         Text create2 = new Text(" button enters you into the app's ");
         Text createBold2 = new Text("Creation Mode");
-        createBold2.setStyle("-fx-font-style: bold");
+        createBold2.setStyle("-fx-font-weight: bold");
         Text create3 = new Text(", which has its own dedicated section within the Help menu—one that also " +
-                "details its own control scheme!");
+                "details its own control scheme!\n");
         TextFlow createComplete = new TextFlow(create1, createBold1, create2, createBold2, create3);
         createButton.setGraphic(createComplete);
         createButton.setWrapText(true);
 
+        Label backButton = new Label();
+        Text back1 = new Text("Lastly, the ");
+        Text backBold = new Text("Back");
+        backBold.setStyle("-fx-font-weight: bold");
+        Text back2 = new Text(" button does precisely what it suggests: take you back to the title screen!" +
+                " However, doing so will reset your progress on the current Hoppers puzzle and load in the" +
+                " default one, should you decide to play again. This reminder will be reiterated through an" +
+                " alert box, asking for your confirmation to exit back to the title screen.");
+        TextFlow backComplete = new TextFlow(back1, backBold, back2);
+        backButton.setGraphic(backComplete);
+        backButton.setWrapText(true);
 
+        VBox content = new VBox(intro, moveControls, buttonIntro, loadButton, resetButton, hintButton,
+                backButton);
+        ScrollPane scrollBox = new ScrollPane();
+        scrollBox.setPannable(true);
+        scrollBox.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollBox.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollBox.setFitToWidth(true);
+        content.setFillWidth(false);
+        content.setAlignment(Pos.TOP_LEFT);
+        content.setPadding(new Insets(10));
+        content.setStyle("-fx-text-fill: #393939");
+        scrollBox.setContent(content);
+        controlsPane.setCenter(scrollBox);
+
+        Button backBtn = new Button("Back");
+        backBtn.setFocusTraversable(false);
+        HBox bottMenu = new HBox(backBtn);
+        bottMenu.setAlignment(Pos.CENTER);
+        bottMenu.setPadding(new Insets(8, 0, 8, 0));
+        controlsPane.setBottom(bottMenu);
+
+        // ********************* CONTROLLER *************************
+
+        backBtn.setOnAction(e -> titleScreen());
+
+        // **********************************************************
+
+        controlsPane.setPrefSize(376.0, 419.2);
+
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
 
     /**
