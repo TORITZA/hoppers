@@ -335,7 +335,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         // ********************* CONTROLLER *************************
 
-        backBtn.setOnAction(e -> titleScreen());
+        backBtn.setOnAction(e -> helpMenu());
 
         // **********************************************************
 
@@ -478,7 +478,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         // ********************* CONTROLLER *************************
 
-        backBtn.setOnAction(e -> titleScreen());
+        backBtn.setOnAction(e -> helpMenu());
 
         // **********************************************************
 
