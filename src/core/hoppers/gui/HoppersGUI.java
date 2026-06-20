@@ -230,6 +230,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         controls.setOnAction(e -> controlsScreen());
 
+        whatIs.setOnAction(e -> whatIsScreen());
+
         backBtn.setOnAction(e -> titleScreen());
 
         // ***************************************************
@@ -493,7 +495,97 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      *
      */
     public void whatIsScreen() {
+        BorderPane whatIsPane = new BorderPane();
+        Scene scene = new Scene(whatIsPane);
 
+        Label preamble = new Label("Puzzles cannot be played if no more are made; therefore, " +
+                "Creation Mode is designed for players to explore new board setups and create their own, unique " +
+                "puzzles!\n\tBelow are the instructions and additional information on how to do so:\n");
+        preamble.setWrapText(true);
+
+        Label firstPart = new Label();
+        Text first1 = new Text("\n\tUpon pressing the ");
+        Text firstBold = new Text("Create");
+        firstBold.setStyle("-fx-font-weight: bold");
+        Text first2 = new Text(" button and entering Creation Mode, the user will be prompted on the dimensions of " +
+                "their Hoppers board. Should the board qualify as small enough (being less than 145 tiles), then " +
+                "they will be carried to the creation screen and met with an unpopulated Hoppers pond on its " +
+                "right-hand side, containing only lily pad and water tiles.");
+        TextFlow firstComplete = new TextFlow(first1, firstBold, first2);
+        firstPart.setGraphic(firstComplete);
+        firstPart.setWrapText(true);
+
+        Label secondPart = new Label("\tOn the left-hand side of the screen are the board pieces as well as " +
+                "text reminding the user of the puzzle's constraint—that is, the number of red, Pokéball pieces " +
+                "allowed, and the number of green, Politoed pieces allowed. If this amount is exceeded, the screen" +
+                " will lock down any further placement of that specific frog type.");
+        secondPart.setWrapText(true);
+
+        Label thirdPart = new Label();
+        Text third1 = new Text("\tThe only way to unlock and backtrack from this screen state is to delete a piece " +
+                "of that frog type off the board using the ");
+        Text thirdBold = new Text("Delete");
+        thirdBold.setStyle("-fx-font-weight: bold");
+        Text third2 = new Text(" button. Moreover, the program will also prevent you from placing frogs in water!");
+        TextFlow thirdComplete = new TextFlow(third1, thirdBold, third2);
+        thirdPart.setGraphic(thirdComplete);
+        thirdPart.setWrapText(true);
+
+        Label fourthPart = new Label();
+        Text fourth1 = new Text("\tTo download the puzzle you created and save it later for active play, press " +
+                "the ");
+        Text fourthBold = new Text("Save");
+        fourthBold.setStyle("-fx-font-weight: bold");
+        Text fourth2 = new Text(" button when you've configured the creation board to your liking. This " +
+                "will save the puzzle to the ");
+        Text fourthItalic = new Text("custom");
+        fourthItalic.setStyle("-fx-font-style: italic");
+        Text fourth3 = new Text(" subdirectory, which is accesible upon loading in a Hoppers puzzle to play.");
+        TextFlow fourthComplete = new TextFlow(fourth1, fourthBold, fourth2, fourthItalic, fourth3);
+        fourthPart.setGraphic(fourthComplete);
+        fourthPart.setWrapText(true);
+
+        Label fifthPart = new Label();
+        Text fifth1 = new Text("\tUsing the ");
+        Text fifthBold = new Text("Back");
+        fifthBold.setStyle("-fx-font-weight: bold");
+        Text fifth2 = new Text(" button will first caution you about your current progress being lost" +
+                " before taking you back to the main screen.");
+        TextFlow fifthComplete = new TextFlow(fifth1, fifthBold, fifth2);
+        fifthPart.setGraphic(fifthComplete);
+        fifthPart.setWrapText(true);
+
+        VBox content = new VBox(preamble, firstPart, secondPart, thirdPart, fourthPart, fifthPart);
+        ScrollPane scrollBox = new ScrollPane();
+        scrollBox.setPannable(true);
+        scrollBox.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollBox.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollBox.setFitToWidth(true);
+        content.setFillWidth(false);
+        content.setAlignment(Pos.TOP_LEFT);
+        content.setPadding(new Insets(10));
+        content.setStyle("-fx-text-fill: #393939");
+        scrollBox.setContent(content);
+        whatIsPane.setCenter(scrollBox);
+
+        Button backBtn = new Button("Back");
+        backBtn.setFocusTraversable(false);
+        HBox bottMenu = new HBox(backBtn);
+        bottMenu.setAlignment(Pos.CENTER);
+        bottMenu.setPadding(new Insets(8, 0, 8, 0));
+        whatIsPane.setBottom(bottMenu);
+
+        // ********************* CONTROLLER *************************
+
+        backBtn.setOnAction(e -> helpMenu());
+
+        // **********************************************************
+
+        whatIsPane.setPrefSize(376.0, 419.2);
+
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
 
     /**
