@@ -965,8 +965,47 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      */
     public void bugDialog(Stage currentStage) {
         Dialog<ButtonType> dialog = new Dialog<>();
-        // link dialog to main application window; prevents orphan windows
         dialog.initOwner(currentStage);
+        dialog.setTitle("Report a Bug");
+        dialog.setHeaderText("Please describe the issue you encountered.");
+
+        ButtonType submitBtn = new ButtonType("Sumbit", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(submitBtn, ButtonType.CANCEL);
+
+
+        // user-end response space
+        GridPane forTyping = new GridPane();
+        forTyping.setHgap(10);
+        forTyping.setVgap(10);
+        forTyping.setPadding(new Insets(5));
+
+        TextField titleField = new TextField();
+        titleField.setPromptText("e.g., Unresponsive controls, broken layouts, etc.");
+        TextArea stepsField = new TextArea();
+        stepsField.setPromptText("Steps to reproduce the bug...");
+
+        forTyping.add(new Label("Type of Bug:"), 0, 0);
+        forTyping.add(titleField, 1, 0);
+        forTyping.add(new Label("Description:"), 0, 1);
+        forTyping.add(stepsField, 1, 1);
+        dialog.getDialogPane().setContent(forTyping);
+
+        dialog.showAndWait().ifPresent(response -> {
+            if (response == submitBtn) {
+                // deliverToDiscord(textfield.getText(), stepsField.getText());
+            }
+        });
+
+    }
+
+    /**
+     * WIP
+     *
+     * @param title
+     * @param desc
+     */
+    public void deliverToDiscord(String title, String desc) {
+
     }
 
     // ---------------------------------------------------------------------------------------------
