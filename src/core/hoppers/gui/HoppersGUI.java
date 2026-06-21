@@ -365,6 +365,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         intro.setGraphic(completeIntro);
         intro.setWrapText(true);
 
+        // How to move pieces on the Hoppers board
         Label moveControls = new Label();
         Text move1 = new Text("Firstly, to move a piece on the board, begin by using your cursor to select the" +
                 " one you wish to position and clicking on its destination. Don't worry about memorizing any of" +
@@ -388,6 +389,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                 "their titles:");
         buttonIntro.setWrapText(true);
 
+        // the Load button
         Label loadButton = new Label();
         Text load1 = new Text("\nThe ");
         Text boldLoad1 = new Text("Load");
@@ -409,6 +411,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         loadButton.setGraphic(loadComplete);
         loadButton.setWrapText(true);
 
+        // the Reset button
         Label resetButton = new Label();
         Text reset1 = new Text("The ");
         Text resetBold = new Text("Reset");
@@ -420,6 +423,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         resetButton.setGraphic(resetComplete);
         resetButton.setWrapText(true);
 
+        // the Hint button
         Label hintButton = new Label();
         Text hint1 = new Text("Should you press the ");
         Text hintBold = new Text("Hint");
@@ -432,6 +436,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         hintButton.setGraphic(hintComplete);
         hintButton.setWrapText(true);
 
+        // the Create button
         Label createButton = new Label();
         Text create1 = new Text("The ");
         Text createBold1 = new Text("Create");
@@ -445,6 +450,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         createButton.setGraphic(createComplete);
         createButton.setWrapText(true);
 
+        // the Back button
         Label backButton = new Label();
         Text back1 = new Text("Lastly, the ");
         Text backBold = new Text("Back");
@@ -456,6 +462,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         TextFlow backComplete = new TextFlow(back1, backBold, back2);
         backButton.setGraphic(backComplete);
         backButton.setWrapText(true);
+
 
         VBox content = new VBox(intro, moveControls, buttonIntro, loadButton, resetButton, hintButton,
                 backButton);
