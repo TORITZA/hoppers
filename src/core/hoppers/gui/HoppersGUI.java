@@ -127,6 +127,9 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         titleScreen();
     }
 
+
+    // ----------------------------------SCREENS----------------------------------------
+
     /**
      * Displays the initial title screen upon program start-up.
      */
@@ -654,7 +657,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         // ******************* THE CONTROLLER ***************************
 
-        backBtn.setOnAction(e -> backDialog());
+        backBtn.setOnAction(e -> backDialog(stage));
 
         loadBtn.setOnAction(e -> chooseFile(stage));
 
@@ -662,7 +665,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         hintBtn.setOnAction(e -> model.hint());
 
-        createBtn.setOnAction(e -> dimPrompter());
+        createBtn.setOnAction(e -> dimPrompter(stage));
 
         // **************************************************************
 
@@ -675,6 +678,9 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         stage.setResizable(false);
         stage.show();
     }
+
+    // ---------------------------------------------------------------------------------------------
+
 
     /**
      * A factory method that initializes the grid representing the Hoppers game
@@ -828,12 +834,16 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             }
     }
 
+
+    // ----------------------------------DIALOGS----------------------------------------
+
     /**
      * Prompts to user for the dimensions of the board they wish to create. Then, creates
      * the custom puzzle with the values provided, instantiated in HoppersModel.
      */
-    private void dimPrompter() {
+    private void dimPrompter(Stage currentStage) {
         Dialog<String[]> dialog = new Dialog<>();
+        dialog.initOwner(currentStage);
         dialog.setTitle("Custom Board Size");
         dialog.setHeaderText("Please enter the dimensions of the puzzle you wish to create!");
 
@@ -897,9 +907,10 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      * and return to the main screen. If yes, displays the main puzzle screen to
      * the user.
      */
-    private void exitDialog() {
+    private void exitDialog(Stage currentStage) {
         Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmDialog.setTitle(null);
+        confirmDialog.initOwner(currentStage);
+        confirmDialog.setTitle("Confirmation Prompt");
         confirmDialog.setHeaderText("Exiting Creation Mode will result in losing the progress you've made so far.");
         confirmDialog.setContentText("Are you certain you wish to leave?");
         confirmDialog.setGraphic(poliPrompter);
@@ -926,9 +937,10 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      * Creates an alert box that waits on the user for confirmation if they wish to return
      * to the Hoppers title screen, resetting the main puzzle in the process.
      */
-    private void backDialog() {
+    private void backDialog(Stage currentStage) {
         Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmDialog.setTitle(null);
+        confirmDialog.initOwner(currentStage);
+        confirmDialog.setTitle("Confirmation Prompt");
         confirmDialog.setHeaderText("Returning to the title screen will result in losing " +
                 "the progress you've made so far.");
         confirmDialog.setContentText("Are you sure you want to return?");
@@ -947,6 +959,18 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             model.load("data/default/hoppers-4.txt");
         }
     }
+
+    /**
+     * WIP
+     */
+    public void bugDialog(Stage currentStage) {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        // link dialog to main application window; prevents orphan windows
+        dialog.initOwner(currentStage);
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
 
     /**
      * Displays the screen for Creation Mode, where users can produce their own
@@ -1099,7 +1123,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
             e.consume();
         });
 
-        exitBtn.setOnAction(e -> exitDialog());
+        exitBtn.setOnAction(e -> exitDialog(stage));
 
         cancelBtn.setOnAction(e -> {
             placing = false;
