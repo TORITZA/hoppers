@@ -49,6 +49,10 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
     /** resources directory that is located directly underneath the GUI package */
     private final static String RESOURCES_DIR = "resources/";
+    /** location where bug reports are delivered */
+    private final static String WEBHOOK_URL = """
+            https://discord.com/api/webhooks/1518212381472456714/jlog48TE2lvrE_-lyuvJDrnRM9frtBYVOb25eN_SA5cQ49gR5aafrVG0vbq1twOdlsgF
+            """;
 
     /** is the user currently placing something on the creation board? */
     boolean placing = false;
