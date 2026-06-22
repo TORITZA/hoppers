@@ -31,6 +31,11 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
@@ -1009,7 +1014,62 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
      * @param desc
      */
     public void deliverToDiscord(String title, String desc) {
+        // metadata, possible pattern observation
+        String os = System.getProperty("os.name") + " (" + System.getProperty("os.version") + ")";
+        String javaVersion = System.getProperty("java.version");
+        String javaFXVersion = System.getProperty("javafx.version");
 
+        // escape JSON text to preclude malformed formatting
+        String checkedTitle = checkInput(title);
+        String checkedDesc = checkInput(desc);
+
+        // structured Markdown layout using Discord's own JSON payload formatting
+        String jsonPayload = """
+        {
+          "embeds": [{
+            "title": "👾 New Bug Report: %s",
+            "color": 15158332,
+            "fields": [
+              { "name": "Description", "value": "%s", "inline": false },
+              { "name": "Operating System", "value": "%s", "inline": true },
+              { "name": "Java Version", "value": "%s", "inline": true },
+              { "name": "JavaFX Version", "value": "%s", "inline": true }
+            ]
+          }]
+        }
+        """.formatted(checkedTitle, checkedDesc, os, javaVersion, javaFXVersion);
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(WEBHOOK_URL))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload, StandardCharsets.UTF_8))
+                .build();
+
+        client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+                //.thenAccept();
+
+
+
+    }
+
+    /**
+     * Precludes any formatting issues or malicious content that arises from
+     * the user's input when reporting any bugs. Ensures JSON payload is delivered
+     * correctly to the connected Discord channel.
+     *
+     * @param input
+     * @return
+     */
+    private String checkInput(String input) {
+        if (input == null) { return ""; }
+        return input.replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\b", "\\b")
+                .replace("\f", "\\f")
+                .replace("\n", "\\n")
+                .replace("\r", "\\r")
+                .replace("\t", "\\t");
     }
 
     // ---------------------------------------------------------------------------------------------
