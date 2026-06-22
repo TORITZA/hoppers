@@ -1046,8 +1046,12 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                 .POST(HttpRequest.BodyPublishers.ofString(jsonPayload, StandardCharsets.UTF_8))
                 .build();
 
-        client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
-                //.thenAccept();
+        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenAccept(response -> {
+                    if (response.statusCode() == 204) {
+                        //
+                    }
+                });
 
 
 
