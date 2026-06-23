@@ -55,9 +55,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     /** resources directory that is located directly underneath the GUI package */
     private final static String RESOURCES_DIR = "resources/";
     /** location where bug reports are delivered */
-    private final static String WEBHOOK_URL = """
-            https://discord.com/api/webhooks/1518212381472456714/jlog48TE2lvrE_-lyuvJDrnRM9frtBYVOb25eN_SA5cQ49gR5aafrVG0vbq1twOdlsgF
-            """;
+    private final static String WEBHOOK_URL = "https://discord.com/api/webhooks/1518212381472456714/jlog48TE2lvrE_-lyuvJDrnRM9frtBYVOb25eN_SA5cQ49gR5aafrVG0vbq1twOdlsgF";
 
     /** is the user currently placing something on the creation board? */
     boolean placing = false;
@@ -74,6 +72,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     private Button resetBtn;
     private Button hintBtn;
     private Button createBtn;
+    private Label bugNotif;
 
     /** CREATION MODE VIEW COMPONENTS **/
     private BorderPane createPane;
@@ -148,6 +147,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         titlePane.setAlignment(Pos.CENTER);
         Scene scene = new Scene(titlePane);
 
+        bugNotif = new Label();
+
         Label title = new Label("Hoppers");
         title.setStyle("-fx-font-size: 48px; -fx-padding: 8px;");
         title.setTextAlignment(TextAlignment.CENTER);
@@ -211,6 +212,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         help.setPrefSize(376.0, 419.2);
         Scene scene = new Scene(help);
 
+        bugNotif.setText("");
+
         Button howToPlay = new Button("How to Play");
         howToPlay.setFocusTraversable(false);
         howToPlay.setTextAlignment(TextAlignment.CENTER);
@@ -223,7 +226,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         Button reportBug = new Button("Report Bug");
         reportBug.setTextAlignment(TextAlignment.CENTER);
         reportBug.setFocusTraversable(false);
-        VBox menu = new VBox(howToPlay, controls, whatIs, reportBug);
+        VBox menu = new VBox(howToPlay, controls, whatIs, reportBug, bugNotif);
         menu.setAlignment(Pos.CENTER);
         menu.setSpacing(14);
 
@@ -232,6 +235,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         HBox back = new HBox(backBtn);
         back.setAlignment(Pos.CENTER);
         back.setPadding(new Insets(0, 0, 12, 0));
+
 
         help.setCenter(menu);
         help.setBottom(back);
@@ -1051,6 +1055,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenAccept(response -> {
                     if (response.statusCode() == 204) {
+                        bugNotif.setText("Report received! ✓");
                         System.out.println("Bug reported successfully!");
                     } else {
                         System.out.println("Failed to send report. Status code: " + response.statusCode());
