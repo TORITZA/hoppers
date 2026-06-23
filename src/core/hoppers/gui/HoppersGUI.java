@@ -244,6 +244,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         whatIs.setOnAction(e -> whatIsScreen());
 
+        reportBug.setOnAction(e -> bugDialog(stage));
+
         backBtn.setOnAction(e -> titleScreen());
 
         // ***************************************************
@@ -978,7 +980,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         dialog.setTitle("Report a Bug");
         dialog.setHeaderText("Please describe the issue you encountered.");
 
-        ButtonType submitBtn = new ButtonType("Sumbit", ButtonBar.ButtonData.OK_DONE);
+        ButtonType submitBtn = new ButtonType("Submit", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(submitBtn, ButtonType.CANCEL);
 
 
@@ -991,7 +993,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         TextField titleField = new TextField();
         titleField.setPromptText("e.g., Unresponsive controls, broken layouts, etc.");
         TextArea stepsField = new TextArea();
-        stepsField.setPromptText("Steps to reproduce the bug...");
+        stepsField.setPromptText("Any steps that may reproduce the bug?");
 
         forTyping.add(new Label("Type of Bug:"), 0, 0);
         forTyping.add(titleField, 1, 0);
@@ -1001,7 +1003,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         dialog.showAndWait().ifPresent(response -> {
             if (response == submitBtn) {
-                // deliverToDiscord(textfield.getText(), stepsField.getText());
+                deliverToDiscord(titleField.getText(), stepsField.getText());
             }
         });
 
@@ -1049,12 +1051,15 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenAccept(response -> {
                     if (response.statusCode() == 204) {
-                        //
+                        System.out.println("Bug reported successfully!");
+                    } else {
+                        System.out.println("Failed to send report. Status code: " + response.statusCode());
                     }
+                })
+                .exceptionally(ex -> {
+                    ex.printStackTrace();
+                    return null;
                 });
-
-
-
     }
 
     /**
