@@ -959,7 +959,6 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         confirmDialog.setHeaderText("Returning to the title screen will result in losing " +
                 "the progress you've made so far.");
         confirmDialog.setContentText("Are you sure you want to return?");
-            // update l8tr!
         confirmDialog.setGraphic(poliPrompter);
 
         // replace default alert btns
@@ -997,13 +996,24 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         TextField titleField = new TextField();
         titleField.setPromptText("e.g., Unresponsive controls, broken layouts, etc.");
         TextArea stepsField = new TextArea();
-        stepsField.setPromptText("Any steps that may reproduce the bug?");
+        stepsField.setPromptText("Steps to take in reproducing the bug...");
 
         forTyping.add(new Label("Type of Bug:"), 0, 0);
         forTyping.add(titleField, 1, 0);
         forTyping.add(new Label("Description:"), 0, 1);
         forTyping.add(stepsField, 1, 1);
         dialog.getDialogPane().setContent(forTyping);
+
+        // add Submit button event filter
+        Button filterSubButton = (Button) dialog.getDialogPane().lookupButton(submitBtn);
+        filterSubButton.addEventFilter(ActionEvent.ACTION, e -> {
+            if (titleField.getText().trim().isEmpty() || stepsField.getText().trim().isEmpty()) {
+                e.consume();
+
+                // notify user of the submission requirements
+                dialog.setHeaderText("Please ensure that neither field is blank!");
+            }
+        });
 
         dialog.showAndWait().ifPresent(response -> {
             if (response == submitBtn) {
@@ -1030,6 +1040,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         String checkedDesc = checkInput(desc);
 
         // structured Markdown layout using Discord's own JSON payload formatting
+        // sends a card with the above info through the connected webhook
         String jsonPayload = """
         {
           "embeds": [{
