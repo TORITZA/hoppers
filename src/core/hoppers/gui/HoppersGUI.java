@@ -1055,8 +1055,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenAccept(response -> {
                     if (response.statusCode() == 204) {
-                        bugNotif.setText("Report received! ✓");
                         System.out.println("Bug reported successfully!");
+                        Platform.runLater(() -> bugNotif.setText("Report received! ✓"));
                     } else {
                         System.out.println("Failed to send report. Status code: " + response.statusCode());
                     }
