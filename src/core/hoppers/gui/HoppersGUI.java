@@ -614,11 +614,11 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     }
 
     /**
-     * WIP
+     * Diplays the screen citing credit for the assets & IP used in this project.
      */
     public void creditsScreen() {
-        // Contributions: @rotten_ichor for alert dialog asset, pokeball png source, attribute Politoed
-        // asset & usage of IP to Pokémon
+        BorderPane creditPane = new BorderPane();
+        Scene scene = new Scene(creditPane);
     }
 
     /**
