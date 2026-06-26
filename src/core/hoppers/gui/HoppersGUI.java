@@ -20,6 +20,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import core.common.Observer;
 import core.hoppers.model.HoppersConfig;
@@ -177,6 +179,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         playBtn.setOnAction(e -> mainScreen());
 
         helpBtn.setOnAction(e -> helpMenu());
+
+        creditBtn.setOnAction(e -> creditsScreen());
 
         quitBtn.setOnAction(e -> Platform.exit());
 
@@ -614,11 +618,91 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     }
 
     /**
-     * Diplays the screen citing credit for the assets & IP used in this project.
+     * Displays the screen citing credit for the assets & IP used in this project.
      */
     public void creditsScreen() {
         BorderPane creditPane = new BorderPane();
         Scene scene = new Scene(creditPane);
+
+        Text intro1 = new Text("Originally, this project was created for an assignment capping off the conclusion of " +
+                "my freshman year of college. Since then, I've added a slew of new features—changes that have been" +
+                " documented on this app's ");
+        Hyperlink gitLink = new Hyperlink("GitHub readMe");
+        Text intro2 = new Text("!");
+        TextFlow introComplete = new TextFlow(intro1, gitLink, intro2);
+        introComplete.setTextAlignment(TextAlignment.CENTER);
+
+        Text RITcred = new Text("Regardless, none of this would have been been possible without the instruction " +
+                "and tutelage of RIT's CS department. While it is my own, they really propelled this project " +
+                "into motion, even providing the assets for the water and lily pad board tiles.");
+        RITcred.setTextAlignment(TextAlignment.CENTER);
+        HBox rit = new HBox(new ImageView(water), RITcred, new ImageView(lilyPad));
+        rit.setAlignment(Pos.CENTER);
+
+        Text auggie1 = new Text("Another huge thanks to my friend, Rotten; otherwise, the alert box " +
+                "Politoed would've never come to fruition! You can find him and a lot of his other art");
+        Hyperlink tumblr = new Hyperlink("here");
+        Text auggie2 = new Text(", @mof-rot on Tumblr.");
+        TextFlow auggieComplete = new TextFlow(auggie1, tumblr, auggie2);
+        auggieComplete.setTextAlignment(TextAlignment.CENTER);
+        HBox auggie = new HBox(new ImageView(poliQuestion), auggieComplete);
+        auggie.setAlignment(Pos.CENTER);
+
+        Text frogs1 = new Text("In terms of the assets from actual play, the Pokéball that stands-in " +
+                "for the Red Frog game piece was found on ");
+        Hyperlink freeImg = new Hyperlink("freeiconspng.com");
+        Text frogs2 = new Text(", while the Politoed representing the Green Frog is a graphic from the game ");
+        Text italicize = new Text("Pokémon Smile");
+        italicize.setStyle("-fx-font-style: italic");
+        Text frogs3 = new Text(".");
+        TextFlow frogsComplete = new TextFlow(frogs1, freeImg, frogs2, italicize, frogs3);
+        frogsComplete.setTextAlignment(TextAlignment.CENTER);
+        HBox frogs = new HBox(new ImageView(pokeball), frogsComplete, new ImageView(politoed));
+        frogs.setAlignment(Pos.CENTER);
+
+        Text disclaimer = new Text("\nPokémon is a trademark of Nintendo, Creatures Inc., and Game Freak. This is a" +
+                " non-commercial, fan-made project. No copyright infringement is intended, and all assets along " +
+                "with imagery, whether official or affiliated, belong to their respective owners.");
+        disclaimer.setTextAlignment(TextAlignment.CENTER);
+
+        Button backBtn = new Button("Back");
+        backBtn.setFocusTraversable(false);
+        HBox back = new HBox(backBtn);
+        back.setAlignment(Pos.CENTER);
+        back.setPadding(new Insets(0, 0, 12, 0));
+
+        VBox content = new VBox(introComplete, rit, auggie, frogs, disclaimer);
+        ScrollPane scrollBox = new ScrollPane();
+        scrollBox.setPannable(true);
+        scrollBox.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollBox.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollBox.setFitToWidth(true);
+        content.setFillWidth(false);
+        content.setAlignment(Pos.TOP_LEFT);
+        content.setSpacing(8);
+        content.setPadding(new Insets(10));
+        scrollBox.setContent(content);
+
+        creditPane.setCenter(scrollBox);
+        creditPane.setBottom(back);
+
+        // ********************* CONTROLLER *************************
+
+        gitLink.setOnAction(e -> getHostServices().showDocument("https://github.com/TORITZA/hoppers"));
+
+        // tumblr.setOnAction
+
+        // freeImg.setOnAction
+
+        backBtn.setOnAction(e -> titleScreen());
+
+        // **********************************************************
+
+        creditPane.setPrefSize(376.0, 419.2);
+
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
 
     /**
