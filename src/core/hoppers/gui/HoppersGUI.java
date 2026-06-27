@@ -628,6 +628,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                 "my freshman year of college. Since then, I've added a slew of new features—changes that have been" +
                 " documented on this app's ");
         Hyperlink gitLink = new Hyperlink("GitHub readMe");
+        gitLink.setFocusTraversable(false);
+        gitLink.setStyle("-fx-padding: 0");
         Text intro2 = new Text("!");
         TextFlow introComplete = new TextFlow(intro1, gitLink, intro2);
         introComplete.setTextAlignment(TextAlignment.CENTER);
@@ -636,34 +638,65 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                 "and tutelage of RIT's CS department. While it is my own, they really propelled this project " +
                 "into motion, even providing the assets for the water and lily pad board tiles.");
         RITcred.setTextAlignment(TextAlignment.CENTER);
-        HBox rit = new HBox(new ImageView(water), RITcred, new ImageView(lilyPad));
+        RITcred.setWrappingWidth(215);
+        ImageView waterTile = new ImageView(water);
+        waterTile.setSmooth(true);
+        waterTile.setFitWidth(50);
+        waterTile.setFitHeight(50);
+        ImageView lilyTile = new ImageView(lilyPad);
+        lilyTile.setSmooth(true);
+        lilyTile.setFitWidth(50);
+        lilyTile.setFitHeight(50);
+        HBox rit = new HBox(waterTile, RITcred, lilyTile);
+        rit.setSpacing(10);
         rit.setAlignment(Pos.CENTER);
+
 
         Text auggie1 = new Text("Another huge thanks to my friend, Rotten; otherwise, the alert box " +
                 "Politoed would've never come to fruition! You can find him and a lot of his other art");
         Hyperlink tumblr = new Hyperlink("here");
+        tumblr.setFocusTraversable(false);
+
         Text auggie2 = new Text(", @mof-rot on Tumblr.");
         TextFlow auggieComplete = new TextFlow(auggie1, tumblr, auggie2);
         auggieComplete.setTextAlignment(TextAlignment.CENTER);
-        HBox auggie = new HBox(new ImageView(poliQuestion), auggieComplete);
+        ImageView auggieAsset = new ImageView(poliQuestion);
+        auggieAsset.setSmooth(true);
+        auggieAsset.setFitHeight(90);
+        auggieAsset.setFitWidth(90);
+        HBox auggie = new HBox(auggieAsset, auggieComplete);
+        auggie.setSpacing(2);
         auggie.setAlignment(Pos.CENTER);
 
         Text frogs1 = new Text("In terms of the assets from actual play, the Pokéball that stands-in " +
                 "for the Red Frog game piece was found on ");
         Hyperlink freeImg = new Hyperlink("freeiconspng.com");
+        freeImg.setFocusTraversable(false);
+
         Text frogs2 = new Text(", while the Politoed representing the Green Frog is a graphic from the game ");
         Text italicize = new Text("Pokémon Smile");
         italicize.setStyle("-fx-font-style: italic");
         Text frogs3 = new Text(".");
         TextFlow frogsComplete = new TextFlow(frogs1, freeImg, frogs2, italicize, frogs3);
         frogsComplete.setTextAlignment(TextAlignment.CENTER);
-        HBox frogs = new HBox(new ImageView(pokeball), frogsComplete, new ImageView(politoed));
+        ImageView ballAsset = new ImageView(pokeball);
+        ballAsset.setSmooth(true);
+        ballAsset.setFitHeight(50);
+        ballAsset.setFitWidth(50);
+        ImageView poliAsset = new ImageView(politoed);
+        poliAsset.setSmooth(true);
+        poliAsset.setPreserveRatio(true);
+        poliAsset.setFitWidth(85);
+        poliAsset.setFitHeight(85);
+        HBox frogs = new HBox(ballAsset, frogsComplete, poliAsset);
+        frogs.setSpacing(4);
         frogs.setAlignment(Pos.CENTER);
 
-        Text disclaimer = new Text("\nPokémon is a trademark of Nintendo, Creatures Inc., and Game Freak. This is a" +
+        Label disclaimer = new Label("\nPokémon is a trademark of Nintendo, Creatures Inc., and Game Freak. This is a" +
                 " non-commercial, fan-made project. No copyright infringement is intended, and all assets along " +
                 "with imagery, whether official or affiliated, belong to their respective owners.");
         disclaimer.setTextAlignment(TextAlignment.CENTER);
+        disclaimer.setWrapText(true);
 
         Button backBtn = new Button("Back");
         backBtn.setFocusTraversable(false);
@@ -673,15 +706,17 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         VBox content = new VBox(introComplete, rit, auggie, frogs, disclaimer);
         ScrollPane scrollBox = new ScrollPane();
+        //scrollBox.setMaxWidth(376.0);
         scrollBox.setPannable(true);
         scrollBox.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollBox.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollBox.setFitToWidth(true);
+        scrollBox.setFocusTraversable(false);
         content.setFillWidth(false);
-        content.setAlignment(Pos.TOP_LEFT);
-        content.setSpacing(8);
+        content.setSpacing(20);
         content.setPadding(new Insets(10));
         scrollBox.setContent(content);
+
 
         creditPane.setCenter(scrollBox);
         creditPane.setBottom(back);
