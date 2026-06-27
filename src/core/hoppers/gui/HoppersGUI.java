@@ -706,7 +706,6 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         VBox content = new VBox(introComplete, rit, auggie, frogs, disclaimer);
         ScrollPane scrollBox = new ScrollPane();
-        //scrollBox.setMaxWidth(376.0);
         scrollBox.setPannable(true);
         scrollBox.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollBox.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -725,9 +724,9 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         gitLink.setOnAction(e -> getHostServices().showDocument("https://github.com/TORITZA/hoppers"));
 
-        // tumblr.setOnAction
+        tumblr.setOnAction(e -> getHostServices().showDocument("https://www.tumblr.com/mof-rot"));
 
-        // freeImg.setOnAction
+        freeImg.setOnAction(e -> getHostServices().showDocument("https://www.freeiconspng.com/img/45338"));
 
         backBtn.setOnAction(e -> titleScreen());
 
