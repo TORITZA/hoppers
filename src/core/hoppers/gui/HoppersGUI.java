@@ -653,10 +653,10 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
 
         Text auggie1 = new Text("Another huge thanks to my friend, Rotten; otherwise, the alert box " +
-                "Politoed would've never come to fruition! You can find him and a lot of his other art");
+                "Politoed would've never come to fruition! You can find him and a lot of his other art ");
         Hyperlink tumblr = new Hyperlink("here");
         tumblr.setFocusTraversable(false);
-
+        tumblr.setStyle("-fx-padding: 0");
         Text auggie2 = new Text(", @mof-rot on Tumblr.");
         TextFlow auggieComplete = new TextFlow(auggie1, tumblr, auggie2);
         auggieComplete.setTextAlignment(TextAlignment.CENTER);
@@ -672,7 +672,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                 "for the Red Frog game piece was found on ");
         Hyperlink freeImg = new Hyperlink("freeiconspng.com");
         freeImg.setFocusTraversable(false);
-
+        freeImg.setStyle("-fx-padding: 0");
         Text frogs2 = new Text(", while the Politoed representing the Green Frog is a graphic from the game ");
         Text italicize = new Text("Pokémon Smile");
         italicize.setStyle("-fx-font-style: italic");
@@ -702,7 +702,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         backBtn.setFocusTraversable(false);
         HBox back = new HBox(backBtn);
         back.setAlignment(Pos.CENTER);
-        back.setPadding(new Insets(0, 0, 12, 0));
+        back.setPadding(new Insets(8, 0, 12, 0));
 
         VBox content = new VBox(introComplete, rit, auggie, frogs, disclaimer);
         ScrollPane scrollBox = new ScrollPane();
