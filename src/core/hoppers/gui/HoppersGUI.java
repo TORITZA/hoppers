@@ -101,6 +101,10 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     private Image poliQuestion = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"poliQuestion.png"),
             105, 105, true, true);
     private ImageView poliPrompter = new ImageView(poliQuestion);
+        // > app icons
+    private Image icon16x16 = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"polIcon16x16.png"));
+    private Image icon32x32 = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"polIcon32x32.png"));
+    private Image icon64x64 = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"polIcon64x64.png"));
         // > A Pokeball represents the Red Frog
     private Image pokePad = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"lily_padSmallBall.png"));
     private Image pokeball = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"pokeball.png"));
@@ -133,10 +137,6 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     @Override
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
-
-        Image icon16x16 = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"polIcon16x16.png"));
-        Image icon32x32 = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"polIcon32x32.png"));
-        Image icon64x64 = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"polIcon64x64.png"));
 
         stage.getIcons().addAll(icon16x16, icon32x32, icon64x64);
 
@@ -680,10 +680,14 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         freeImg.setFocusTraversable(false);
         freeImg.setStyle("-fx-padding: 0");
         Text frogs2 = new Text(", while the Politoed representing the Green Frog is a graphic from the game ");
-        Text italicize = new Text("Pokémon Smile");
-        italicize.setStyle("-fx-font-style: italic");
-        Text frogs3 = new Text(".");
-        TextFlow frogsComplete = new TextFlow(frogs1, freeImg, frogs2, italicize, frogs3);
+        Text italicize1 = new Text("Pokémon Smile");
+        italicize1.setStyle("-fx-font-style: italic");
+        Text endFrogs2 = new Text(".");
+        Text frogs3 = new Text("Moreover, the application icon is an image from the game ");
+        Text italicize2 = new Text("Pokémon Battle Trozei");
+        italicize2.setStyle("-fx-font-style: italic");
+        Text frogs4 = new Text(".");
+        TextFlow frogsComplete = new TextFlow(frogs1, freeImg, frogs2, italicize1, endFrogs2);
         frogsComplete.setTextAlignment(TextAlignment.CENTER);
         ImageView ballAsset = new ImageView(pokeball);
         ballAsset.setSmooth(true);
@@ -694,13 +698,17 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         poliAsset.setPreserveRatio(true);
         poliAsset.setFitWidth(85);
         poliAsset.setFitHeight(85);
-        HBox frogs = new HBox(ballAsset, frogsComplete, poliAsset);
+        HBox frogsH = new HBox(ballAsset, frogsComplete, poliAsset);
+        TextFlow frogsVComplete = new TextFlow(frogs3, italicize2, frogs4);
+        frogsVComplete.setTextAlignment(TextAlignment.CENTER);
+        VBox frogs = new VBox(frogsH, frogsVComplete, new ImageView(icon64x64));
         frogs.setSpacing(4);
         frogs.setAlignment(Pos.CENTER);
 
         Label disclaimer = new Label("\nPokémon is a trademark of Nintendo, Creatures Inc., and Game Freak. This is a" +
-                " non-commercial, fan-made project. No copyright infringement is intended, and all assets along " +
-                "with imagery, whether official or affiliated, belong to their respective owners.");
+                " non-commercial, fan-made project; as such, fair use should be substantiated. No copyright infringement " +
+                "is intended, and all assets along with imagery, whether official or affiliated, belong " +
+                "to their respective owners.");
         disclaimer.setTextAlignment(TextAlignment.CENTER);
         disclaimer.setWrapText(true);
 
