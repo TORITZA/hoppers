@@ -134,6 +134,12 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
 
+        Image icon16x16 = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"polIcon16x16.png"));
+        Image icon32x32 = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"polIcon32x32.png"));
+        Image icon64x64 = new Image(getClass().getResourceAsStream(RESOURCES_DIR+"polIcon64x64.png"));
+
+        stage.getIcons().addAll(icon16x16, icon32x32, icon64x64);
+
         titleScreen();
     }
 
