@@ -206,7 +206,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     }
 
     /**
-     * WORK IN PROGRESS.
+     * WORK IN PROGRESS. (to be pursued in tandem w/ CSS sheets)
      *
      * @param img the graphic that is to be animated
      */
