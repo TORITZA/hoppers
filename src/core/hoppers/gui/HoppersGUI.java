@@ -138,6 +138,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
 
+        // instate app icons
         stage.getIcons().addAll(icon16x16, icon32x32, icon64x64);
 
         titleScreen();
@@ -205,8 +206,9 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     }
 
     /**
+     * WORK IN PROGRESS.
      *
-     * @param img
+     * @param img the graphic that is to be animated
      */
     private void titleAnimation(ImageView img) {
         // vertical bounce/jump
@@ -245,7 +247,6 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         HBox back = new HBox(backBtn);
         back.setAlignment(Pos.CENTER);
         back.setPadding(new Insets(0, 0, 12, 0));
-
 
         help.setCenter(menu);
         help.setBottom(back);
@@ -377,7 +378,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     }
 
     /**
-     *
+     * Displays explanations on how to navigate the app and control the game.
      */
     public void controlsScreen() {
         BorderPane controlsPane = new BorderPane();
@@ -527,7 +528,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     }
 
     /**
-     *
+     * Displays a screen that supplies more information about what is and how to use Creation Mode.
      */
     public void whatIsScreen() {
         BorderPane whatIsPane = new BorderPane();
@@ -538,6 +539,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                 "puzzles!\n\tBelow are the instructions and additional information on how to do so:\n");
         preamble.setWrapText(true);
 
+        // using Creation Mode
         Label firstPart = new Label();
         Text first1 = new Text("\n\tUpon pressing the ");
         Text firstBold = new Text("Create");
@@ -566,6 +568,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         thirdPart.setGraphic(thirdComplete);
         thirdPart.setWrapText(true);
 
+        // Saving puzzles
         Label fourthPart = new Label();
         Text fourth1 = new Text("\tTo download the puzzle you created and save it later for active play, press " +
                 "the ");
@@ -575,11 +578,12 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                 "will save the puzzle to the ");
         Text fourthItalic = new Text("custom");
         fourthItalic.setStyle("-fx-font-style: italic");
-        Text fourth3 = new Text(" subdirectory, which is accesible upon loading in a Hoppers puzzle to play.");
+        Text fourth3 = new Text(" subdirectory, which is accessible upon loading in a Hoppers puzzle to play.");
         TextFlow fourthComplete = new TextFlow(fourth1, fourthBold, fourth2, fourthItalic, fourth3);
         fourthPart.setGraphic(fourthComplete);
         fourthPart.setWrapText(true);
 
+        // Back button navigation
         Label fifthPart = new Label();
         Text fifth1 = new Text("\tUsing the ");
         Text fifthBold = new Text("Back");
@@ -624,7 +628,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     }
 
     /**
-     * Displays the screen citing credit for the assets & IP used in this project.
+     * Displays a screen that cites credit for the assets & IP used in this project.
      */
     public void creditsScreen() {
         BorderPane creditPane = new BorderPane();
@@ -640,6 +644,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         TextFlow introComplete = new TextFlow(intro1, gitLink, intro2);
         introComplete.setTextAlignment(TextAlignment.CENTER);
 
+        // RIT CS's contributions
         Text RITcred = new Text("Regardless, none of this would have been been possible without the instruction " +
                 "and tutelage of RIT's CS department. While it is my own, they really propelled this project " +
                 "into motion, even providing the assets for the water and lily pad board tiles.");
@@ -657,7 +662,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         rit.setSpacing(10);
         rit.setAlignment(Pos.CENTER);
 
-
+        // asset by @rotten_ichor
         Text auggie1 = new Text("Another huge thanks to my friend, Rotten; otherwise, the alert box " +
                 "Politoed would've never come to fruition! You can find him and a lot of his other art ");
         Hyperlink tumblr = new Hyperlink("here");
@@ -674,6 +679,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         auggie.setSpacing(2);
         auggie.setAlignment(Pos.CENTER);
 
+        // acknowledgement of official & affiliated Pokémon assets
         Text frogs1 = new Text("In terms of the assets from actual play, the Pokéball that stands-in " +
                 "for the Red Frog game piece was found on ");
         Hyperlink freeImg = new Hyperlink("freeiconspng.com");
@@ -705,6 +711,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         frogs.setSpacing(4);
         frogs.setAlignment(Pos.CENTER);
 
+        // Fair Use claim
         Label disclaimer = new Label("\nPokémon is a trademark of Nintendo, Creatures Inc., and Game Freak. This is a" +
                 " non-commercial, fan-made project; as such, fair use should be substantiated. No copyright infringement " +
                 "is intended, and all assets along with imagery, whether official or affiliated, belong " +
@@ -1082,7 +1089,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
     /**
      * Creates an alert box that waits on the user for confirmation if they wish to return
-     * to the Hoppers title screen, resetting the main puzzle in the process.
+     * to the previous Hoppers screen, resetting the main puzzle in the process.
      */
     private void backDialog(Stage currentStage) {
         Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
@@ -1107,7 +1114,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     }
 
     /**
-     * WIP
+     * A dialog box that gives the user space to describe any bugs they may have potentially
+     * encountered.
      */
     public void bugDialog(Stage currentStage) {
         Dialog<ButtonType> dialog = new Dialog<>();
@@ -1156,10 +1164,11 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
     }
 
     /**
-     * WIP
+     * A helper method that internalizes the user's bugDialog() response and sends it to a Discord channel,
+     * formatting the information into a presentable card through a JSON payload.
      *
-     * @param title
-     * @param desc
+     * @param title the name of the bug
+     * @param desc a longer typed description of the issue
      */
     public void deliverToDiscord(String title, String desc) {
         // metadata, possible pattern observation
@@ -1167,7 +1176,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
         String javaVersion = System.getProperty("java.version");
         String javaFXVersion = System.getProperty("javafx.version");
 
-        // escape JSON text to preclude malformed formatting
+        // escape JSON text where necessary to preclude malformed formatting
         String checkedTitle = checkInput(title);
         String checkedDesc = checkInput(desc);
 
@@ -1195,6 +1204,8 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
                 .POST(HttpRequest.BodyPublishers.ofString(jsonPayload, StandardCharsets.UTF_8))
                 .build();
 
+        // attempts to deliver the payload; should it be successful, acknowledges its delivery by updating a
+        // label on the user's end
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenAccept(response -> {
                     if (response.statusCode() == 204) {
