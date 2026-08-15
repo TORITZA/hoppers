@@ -10,8 +10,8 @@ the smartest frog in the pond!<br>
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- Official Hoppers Manual<br>
 </blockquote>  
 </div>
-
 <h3 align="center">You stumble upon a pond chock-full of Politoeds... Can you catch them all?</h2>
+[Hoppers](https://en.wikipedia.org/wiki/Hoppers_(game)) is a logic puzzle—to be more specific, a single-player peg-solitaire game—produced by the popular toy and board game company ThinkFun but invented by Nob Yoshigahara. However, in this iteration, you'll notice that the frog leaping isn't your typical amphibian—it's Politoed, the Frog <i>Pokémon</i>!
 
 ## Overview
 
