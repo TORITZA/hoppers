@@ -22,7 +22,7 @@ The primary components that build the backbone of this Java and JavaFX project a
   
 - `HoppersGUI`, encapsulating the graphical user interface, which replicates a pond populated with the Pokémon Politoed in lieu of the usual frogs!
 <div align="center">
-  <img width="920" height="487.6" alt="Hoppers MVC" src="https://github.com/user-attachments/assets/02d40458-7ce8-4371-9185-b317eab17186"/>
+  <img width="900" height="477" alt="Hoppers MVC" src="https://github.com/user-attachments/assets/02d40458-7ce8-4371-9185-b317eab17186"/>
 </div>
 
 Both of the aforementioned classes incorporate the model-view-controller architecture, relying on `HoppersModel` to store the internal logic of their respective games.
