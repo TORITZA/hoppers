@@ -27,7 +27,7 @@ The primary components that build the backbone of this Java and JavaFX project a
 
 Both of the aforementioned classes incorporate the model-view-controller architecture, relying on `HoppersModel` to store the internal logic of their respective games.
 
-<br>
+
 Further documentation is detailed in the source code for not only all the classes listed but also any providers or supplementary programs. 
 
 ## Features
