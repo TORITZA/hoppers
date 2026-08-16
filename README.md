@@ -25,6 +25,8 @@ The primary components that build the backbone of this Java and JavaFX project a
   <img width="900" height="477" alt="Hoppers MVC" src="https://github.com/user-attachments/assets/02d40458-7ce8-4371-9185-b317eab17186"/>
 </div>
 
+<div align="center"><sup>Left-hand diagram is of the interactions in MVC's Smalltalk-80 interpretation</sup></div>
+
 Both of the aforementioned classes incorporate the model-view-controller architecture, relying on `HoppersModel` to store the internal logic of their respective games.
 
 Default Hoppers puzzles are provided in the `data/default`. Included in this directory is also a subfolder ('data/custom`) that contains any custom puzzles the user may create. 
