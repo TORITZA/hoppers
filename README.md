@@ -33,18 +33,20 @@ Default Hoppers puzzles are provided in the `data/default`. Included in this dir
 Further documentation is detailed in the source code for not only all the classes listed but also any providers or supplementary programs. 
 
 ## Features
-This section aims to cover the core features included with either iteration of the Hoppers puzzle game: `HoppersPTUI` or `HoppersGUI`. 
+This section aims to cover the core features included with either iteration of the Hoppers puzzle game: `HoppersPTUI` or `HoppersGUI`.*
 
 - <b>Assist Mechanism</b>: Get stuck? The <i>Hint</i> command uses the `solver` algorithm to find the next best step forward given the current state of the Hoppers puzzle. Should the puzzle in its present configuration be insoluble, the app will output as such.
 - <b>File Importing & Parsing</b>: Aptly named, the <i>Load</i> action constructs a puzzle representation of the Hoppers data file provided.
 - <b>Issue Alert System</b>: Ran into a bug? Send in a trouble ticket straight from the menu!
 - <b>Creation Mode</b>: The pond is your oyster in <i>Creation Mode</i>! Create Hoppers puzzles uninhibited, whether to share with others or to solve yourself.
 
-While their implementations of these features are similar, both UIs interact and display the internal model in different ways.*
+While their implementations of these features are similar, both UIs interact and display the internal model in different ways.
+
+<sup>*Specific instructions on how to play Hoppers, how to operate the app's controls, and how to navigate Creation Mode can be found in `HoppersGUI`'s <b>Help</b> menu.</sup>
 
 
 
-<h4>HoppersPTUI</h4>
+<h3>HoppersPTUI</h3>
 For the interface to work properly, a Hoppers puzzle file must be inserted through the application's CLI arguments. The features enumerated above can then be accessed via the PTUI's starting menu:<br>
 <div>
   <img width="493" height="196" alt="PTUI menu view in dev console" src="https://github.com/user-attachments/assets/0716b91b-34a8-484d-a296-0ff53e30f4a8" />
@@ -58,10 +60,21 @@ Now, the user may navigate the app's primary features from the comfort of their 
 <sup>From the user's end, selecting the Red Frog located at (2,2) on the game board to then be moved</sup>
 
 
-<h4>HoppersGUI</h4>
-Similarly, the GUI also requires the insertion of a puzzle file upon start-up. 
+<h3>HoppersGUI</h3>
+Similarly, the GUI also requires the insertion of a puzzle file upon start-up. The user will then first be met with the app's title screen, prompting a button press to navigate to their desired screen.
+<div align="center">
+  <img width="1260" height="678" alt="Hoppers's app map" src="https://github.com/user-attachments/assets/0031debc-3df0-4ea7-a3ff-f49c5a94d585" />
+</div>
+<div align="center"><sup>A macro-level blueprint of the application structure</sup></div>
 
-<sub>*Specific instructions on how to play Hoppers, how to operate the app's controls, and how to navigate Creation Mode can be found in `HoppersGUI`'s <b>Help</b> menu.</sub>
+Among the windows in this hierarchy, those of particular note are:
+
+- <b>Main Screen</b>: Houses the game board and main control scheme while also being the entry point into <i>Creation Mode</i>.
+- <b>Help Menu</b>: Contains additional information on Hoppers, how the app controls, and Creation Mode. Also includes the dialog window to report a bug. 
+- <b>Creation Mode</b>: A separate though connected screen to the main one, this window supplements the saving and later distributing of custom Hoppers puzzles. 
+
+In this iteration of the game, the Pokémon Politoed stands in for the Green Frog game pieces, while a Pokéball replaces the Red one. 
+
 
 ## Version Changelog
 - `1.0.0` - 
