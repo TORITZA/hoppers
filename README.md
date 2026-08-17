@@ -79,7 +79,10 @@ In this iteration of the game, the Pokémon Politoed stands in for the Green Fro
 
 
 ## Version Changelog
-- `1.0.0` - 
-- `1.1.0` - 
+
+Originally, this project was created for an assignment capping off the conclusion of my freshman year of college. Since then, I've added a slew of new features—changes that have been documented here, on this app's README!
+
+- `1.0.0` - Original project version. 
+- `1.1.0` - Added hub-and-spoke menu with multiple navigation pathways (Help menu, Credits section). Implemented a new means of app interaction with <i>Creation Mode</i>, allowing for both the construction and distribution of custom puzzles. Built in a bug reporting feature, set to be routed to me, the programmer.  
 
 ## Credits & Licensing 
