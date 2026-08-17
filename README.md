@@ -89,4 +89,8 @@ Originally, this project was created for an assignment capping off the conclusio
 
 <sup>For specific asset attributions, visit `HoppersGUI`'s Credits screen.</sup>
 
-In its initial stage, this project would not have been possible without the instruction and tutelage of RIT's CS department.
+In its initial stage, this project would not have been possible without the instruction and tutelage of RIT's CS department. Another huge thanks to my friend, Rotten ([@mof-rot](https://www.tumblr.com/mof-rot
+) on Tumblr), as well as [freeiconspng.com](https://www.freeiconspng.com/img/45338) and the game *Pokémon Smile* for the additional graphics.
+
+<sub>Pokémon is a trademark of Nintendo, Creatures Inc., and Game Freak. This is a non-commercial, fan-made project; as such, it claims [fair use](https://en.wikipedia.org/wiki/Fair_use). No copyright infringement is intended, and all assets along with imagery, whether official or affiliated, belong to their respective owners.</sub>
+
