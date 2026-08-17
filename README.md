@@ -86,3 +86,7 @@ Originally, this project was created for an assignment capping off the conclusio
 - `1.1.0` - Added hub-and-spoke menu with multiple navigation pathways (Help menu, Credits section). Implemented a new means of app interaction with <i>Creation Mode</i>, allowing for both the construction and distribution of custom puzzles. Built in a bug reporting feature, set to be routed to me, the programmer.  
 
 ## Credits & Licensing 
+
+<sup>For specific asset attributions, visit `HoppersGUI`'s Credits screen.</sup>
+
+In its initial stage, this project would not have been possible without the instruction and tutelage of RIT's CS department.
