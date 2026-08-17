@@ -1,0 +1,175 @@
+package core.hoppers.ptui;
+
+import core.common.Observer;
+import core.hoppers.model.HoppersModel;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+/**
+ * The plain text for the Hoppers puzzle. This class encapsulates both
+ * the View and Controller portions of the MVC architecture.
+ *
+ * @author Tereza Lang (@TORITZA)
+ */
+public class HoppersPTUI implements Observer<HoppersModel, String> {
+    private HoppersModel model;
+
+    /**
+     * The View initialization, adding it as an observer of the Hoppers model.
+     *
+     * @param filename the file whose contents are to be configured into a
+     *      *                 Hoppers puzzle
+     * @throws IOException thrown when file cannot be found
+     */
+    public void init(String filename) throws IOException {
+        this.model = new HoppersModel(filename);
+        this.model.addObserver(this);
+        displayHelp();
+    }
+
+    /**
+     * Updates the PTUI by printing the current iteration of the game board
+     * and the operation in response to the user's command.
+     *
+     * @param model informs the view that the internal logic has changed
+     *              and the external display should reflect that
+     * @param data the message the model sends to this observer
+     *
+     */
+    @Override
+    public void update(HoppersModel model, String data) {
+        System.out.println(data);
+        System.out.println(model);
+    }
+
+    /**
+     * Displays in standard output the list of available commands.
+     */
+    private void displayHelp() {
+        System.out.println( "h(int)              -- hint next move" );
+        System.out.println( "l(oad) filename     -- load new puzzle file" );
+        System.out.println( "s(elect) r c        -- select cell at r, c" );
+        System.out.println( "c(reate) r c        -- enter creation mode" );
+        System.out.println( "q(uit)              -- quit the game" );
+        System.out.println( "r(eset)             -- reset the current game" );
+    }
+
+    /**
+     * Displays in standard output the list of available commands in Creation Mode.
+     */
+    private void displayCreationCommands() {
+        System.out.println( "p(lace) r c F       -- place frog (R or G) on board" );
+        System.out.println( "d(elete) r c        -- delete placed frog from board" );
+        System.out.println( "s(ave)              -- save puzzle as a text file" );
+        System.out.println( "q(uit)              -- quit creation mode" );
+    }
+
+    /*
+     **************************** THE CONTROLLER *********************************
+     */
+
+    /**
+     * A loop that prompts for user input and makes calls into the HoppersModel.
+     */
+    public void run() {
+        Scanner in = new Scanner( System.in );
+
+        mainLoop:
+        for ( ; ; ) {
+            System.out.print( "> " );
+            String line = in.nextLine();
+            String[] words = line.split( "\\s+" );
+            if (words.length > 0) {
+                if (words[0].startsWith("q")) {
+                    break;
+                } else if (words[0].startsWith("h")) {
+                    // display next config in solver's returned path
+                    model.hint();
+                } else if (words[0].startsWith("l")) {
+                    // call to model to load puzzle file
+                    try {
+                        model.load(words[1]);
+                    } catch (ArrayIndexOutOfBoundsException a) {
+                        System.out.println("ERROR: Please provide a file name.");
+                    }
+                } else if (words[0].startsWith("s")) {
+                    // have model select internal cell using other two arguments (words[1] & [2])
+                    // wait for next selection
+                    try {
+                        model.select(words[1], words[2]);
+                    } catch (ArrayIndexOutOfBoundsException a) {
+                        System.out.println("ERROR: Please provide a row and/or column.");
+                    }
+                } else if (words[0].startsWith("c")){
+                    if (Integer.parseInt(words[1]) * Integer.parseInt(words[2]) > 144) {
+                        System.out.println("ERROR: Please ensure the board has less than 145 tiles.");
+                    } else {
+                        // ---------------- enter creation mode ------------------
+                        System.out.println("Entering **CREATION MODE**!");
+                        try {
+                            model.create(words[1], words[2]);
+                            System.out.println(model);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println("ERROR: Please provide the dimensions of the board.");
+                        }
+                        displayCreationCommands();
+
+                            // initiate nested for-loop for creation mode sub-menu
+                        Scanner in2 = new Scanner(System.in);
+                        for ( ; ; ) {
+                            System.out.print("> ");
+                            String line2 = in2.nextLine();
+                            String[] words2 = line2.split("\\s+");
+
+                            if (words2[0].startsWith("p")) {
+                                try {
+                                    model.place(words2[1], words2[2], words2[3]);
+                                    System.out.println("R(ed Frog): " + model.getRedFrogCount() + " | G(reen Frog(s)): "
+                                            + model.getGreenFrogCount());
+                                } catch (ArrayIndexOutOfBoundsException e) {
+                                    System.out.println("ERROR: Please provide all proper arguments.");
+                                }
+                            } else if (words2[0].startsWith("d")) {
+                                try {
+                                    model.delete(words2[1], words2[2]);
+                                } catch (ArrayIndexOutOfBoundsException e) {
+                                    System.out.println("ERROR: Please provide a row and/or column.");
+                                }
+                            } else if (words2[0].startsWith("s")) {
+                                model.save();
+                            } else if (words2[0].startsWith("q")) {
+                                model.toggleCreationMode();
+                                displayHelp();
+                                continue mainLoop;
+                            } else {
+                                displayCreationCommands();
+                            }
+                        }
+
+                        // -------------------------------------------------------
+                    }
+                } else if (words[0].startsWith("r")) {
+                    model.reset();
+                } else {
+                    displayHelp();
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        if (args.length != 1) {
+            System.out.println("Usage: java HoppersPTUI filename");
+        } else {
+            try {
+                HoppersPTUI ptui = new HoppersPTUI();
+                ptui.init(args[0]);
+                ptui.run();
+            } catch (IOException ioe) {
+                System.out.println(ioe.getMessage());
+            }
+        }
+    }
+}
+
