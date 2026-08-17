@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# hoppers
-// update l8tr
-=======
 <img width="1280" height="400" alt="The Pokémon Politoed enjoying its time in the sun!" src="https://github.com/user-attachments/assets/82363f8f-7b68-42d6-b5c5-7671ee554a95" />
 <h1 align="center">Hoppers</h1>
 
@@ -33,7 +29,7 @@ The primary components that build the backbone of this Java and JavaFX project a
 
 Both of the aforementioned classes incorporate the model-view-controller architecture, relying on `HoppersModel` to store the internal logic of their respective games.
 
-Default Hoppers puzzles are provided in the `data/default`. Included in this directory is also a subfolder ('data/custom`) that contains any custom puzzles the user may create. 
+Default Hoppers puzzles are provided in the `data/default`. Included in this directory is also a subfolder (`data/custom`) that contains any custom puzzles the user may create. 
 
 
 Further documentation is detailed in the source code for not only all the classes listed but also any providers or supplementary programs. 
@@ -97,5 +93,3 @@ In its initial stage, this project would not have been possible without the inst
 ) on Tumblr), as well as [freeiconspng.com](https://www.freeiconspng.com/img/45338) and the game *Pokémon Smile* for the additional graphics.
 
 <sub>Pokémon is a trademark of Nintendo, Creatures Inc., and Game Freak. This is a non-commercial, fan-made project; as such, it claims [fair use](https://en.wikipedia.org/wiki/Fair_use). No copyright infringement is intended, and all assets along with imagery, whether official or affiliated, belong to their respective owners.</sub>
-
->>>>>>> 55ad4406c508db299623a9bb43527ac82df54f29
