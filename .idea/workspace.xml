@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cd30350-002b-4600-9081-86e723767c1c" name="Changes" comment="fixed typos in Credits screen" />
+    <list default="true" id="2cd30350-002b-4600-9081-86e723767c1c" name="Changes" comment="fixed typos in Credits screen">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/hoppers.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hoppers.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/hoppers/gui/resources/poliQuestion.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/hoppers/gui/resources/poliQuestion.png" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,7 +77,7 @@
         </map>
       </branch-storage>
     </excluded-from-favorite>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -77,12 +85,12 @@
     &quot;assignee&quot;: &quot;TORITZA&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/TORITZA/testDeploy.git&quot;,
-    &quot;accountId&quot;: &quot;242aa61b-0686-4bd6-a09b-e8038ce7a42a&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/TORITZA/hoppers.git",
+    "accountId": "242aa61b-0686-4bd6-a09b-e8038ce7a42a"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -90,28 +98,28 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.HoppersGUI hoppers4.txt.executor&quot;: &quot;Run&quot;,
-    &quot;Application.HoppersPTUI hoppers4.txt.executor&quot;: &quot;Run&quot;,
-    &quot;Application.HoppersPTUI.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.hoppers [init].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/TORIS/Downloads/personal projects/hoppers&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HoppersGUI hoppers4.txt.executor": "Run",
+    "Application.HoppersPTUI hoppers4.txt.executor": "Run",
+    "Application.HoppersPTUI.executor": "Run",
+    "Gradle.hoppers [init].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "Merging main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/TORIS/Downloads/personal projects/hoppers",
+    "list.type.of.created.stylesheet": "CSS",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\TORIS\Downloads\personal projects\hoppers" />
@@ -119,7 +127,8 @@
   </component>
   <component name="RunManager" selected="Application.HoppersGUI hoppers4.txt">
     <configuration name="HoppersGUI hoppers4.txt" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="liberica-25" />
+      <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../../../../../Program Files/BellSoft/LibericaJDK-25-Full" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="core.hoppers.gui.HoppersGUI" />
       <module name="hoppers" />
       <option name="PROGRAM_PARAMETERS" value="data/default/hoppers-4.txt" />
@@ -128,12 +137,22 @@
       </method>
     </configuration>
     <configuration name="HoppersPTUI hoppers4.txt" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-25.0.1" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="core.hoppers.ptui.HoppersPTUI" />
-      <module name="hoppers" />
       <option name="PROGRAM_PARAMETERS" value="data/default/hoppers-4.txt" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Application.HoppersGUI hoppers4.txt" />
@@ -184,6 +203,7 @@
       <workItem from="1783204527148" duration="297000" />
       <workItem from="1787003438725" duration="711000" />
       <workItem from="1787004161409" duration="852000" />
+      <workItem from="1787005026890" duration="1008000" />
     </task>
     <task id="LOCAL-00088" summary="fixed event bubbling-up &amp; null pointer issue">
       <option name="closed" value="true" />

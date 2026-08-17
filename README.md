@@ -1,2 +1,101 @@
+<<<<<<< HEAD
 # hoppers
 // update l8tr
+=======
+<img width="1280" height="400" alt="The Pokémon Politoed enjoying its time in the sun!" src="https://github.com/user-attachments/assets/82363f8f-7b68-42d6-b5c5-7671ee554a95" />
+<h1 align="center">Hoppers</h1>
+
+<div align="center">
+<blockquote>
+Survey the pond, then jump frogs until only<br>
+ONE is left standing...Start simple and grow your<br>
+skills with each level. In no time at all you’ll be<br> 
+the smartest frog in the pond!<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-- Official Hoppers Manual<br>
+</blockquote>  
+</div>
+<h3 align="center">You stumble upon a pond chock-full of Politoeds... Can you catch them all?</h2>
+<p>Hoppers is a logic puzzle—to be more specific, a single-player peg-solitaire game—produced by the popular toy and board game company ThinkFun but invented by Nob Yoshigahara. However, in this iteration, you'll notice that the frog leaping isn't your typical amphibian—it's Politoed, the Frog <i>Pokémon</i>!</p>
+
+## Overview
+The primary components that build the backbone of this Java and JavaFX project are threefold:
+- The `solver`*, which intakes a configuration of the Hoppers game to find the shortest path to a given solution, implementing breadth-first search coupled with backtracking<br>
+<sub>*To adopt this algorithm for your own use, visit its repository [here](https://github.com/TORITZA/solver).</sub>
+
+- `HoppersPTUI`, encompassing the text-based user interface, allowing play directly from the developer console
+  
+- `HoppersGUI`, encapsulating the graphical user interface, which replicates a pond populated with the Pokémon Politoed in lieu of the usual frogs!
+<div align="center">
+  <img width="900" height="477" alt="Hoppers MVC" src="https://github.com/user-attachments/assets/02d40458-7ce8-4371-9185-b317eab17186"/>
+</div>
+
+<div align="center"><sup>Left-hand diagram is of the interactions in MVC's Smalltalk-80 interpretation</sup></div>
+
+Both of the aforementioned classes incorporate the model-view-controller architecture, relying on `HoppersModel` to store the internal logic of their respective games.
+
+Default Hoppers puzzles are provided in the `data/default`. Included in this directory is also a subfolder ('data/custom`) that contains any custom puzzles the user may create. 
+
+
+Further documentation is detailed in the source code for not only all the classes listed but also any providers or supplementary programs. 
+
+## Features
+This section aims to cover the core features included with either iteration of the Hoppers puzzle game: `HoppersPTUI` or `HoppersGUI`.*
+
+- <b>Assist Mechanism</b>: Get stuck? The <i>Hint</i> command uses the `solver` algorithm to find the next best step forward given the current state of the Hoppers puzzle. Should the puzzle in its present configuration be insoluble, the app will output as such.
+- <b>File Importing & Parsing</b>: Aptly named, the <i>Load</i> action constructs a puzzle representation of the Hoppers data file provided.
+- <b>Issue Alert System</b>: Ran into a bug? Send in a trouble ticket straight from the menu!
+- <b>Creation Mode</b>: The pond is your oyster in <i>Creation Mode</i>! Create Hoppers puzzles uninhibited, whether to share with others or to solve yourself.
+
+While their implementations of these features are similar, both UIs interact and display the internal model in different ways.
+
+<sup>*Specific instructions on how to play Hoppers, how to operate the app's controls, and how to navigate Creation Mode can be found in `HoppersGUI`'s <b>Help</b> menu.</sup>
+
+
+
+<h3>HoppersPTUI</h3>
+For the interface to work properly, a Hoppers puzzle file must be inserted through the application's CLI arguments. The features enumerated above can then be accessed via the PTUI's starting menu:<br>
+<div>
+  <img width="493" height="196" alt="PTUI menu view in dev console" src="https://github.com/user-attachments/assets/0716b91b-34a8-484d-a296-0ff53e30f4a8" />
+</div>
+<sup>The PTUI menu view as shown in the developer console</sup>
+<br>
+Now, the user may navigate the app's primary features from the comfort of their command-line! 
+<div>
+  <img width="273" height="248" alt="user-inputted command" src="https://github.com/user-attachments/assets/fcc846cc-cdd1-4718-a1b6-3520b2a4975a" />
+</div>
+<sup>From the user's end, selecting the Red Frog located at (2,2) on the game board to then be moved</sup>
+
+
+<h3>HoppersGUI</h3>
+Similarly, the GUI also requires the insertion of a puzzle file upon start-up. The user will then first be met with the app's title screen, prompting a button press to navigate to their desired screen.
+<div align="center">
+  <img width="1260" height="678" alt="Hoppers's app map" src="https://github.com/user-attachments/assets/0031debc-3df0-4ea7-a3ff-f49c5a94d585" />
+</div>
+<div align="center"><sup>A macro-level blueprint of the application structure</sup></div>
+
+Among the windows in this hierarchy, those of particular note are:
+
+- <b>Main Screen</b>: Houses the game board and main control scheme while also being the entry point into <i>Creation Mode</i>.
+- <b>Help Menu</b>: Contains additional information on Hoppers, how the app controls, and Creation Mode. Also includes the dialog window to report a bug. 
+- <b>Creation Mode</b>: A separate though connected screen to the main one, this window supplements the saving and later distributing of custom Hoppers puzzles. 
+
+In this iteration of the game, the Pokémon Politoed stands in for the Green Frog game pieces, while a Pokéball replaces the Red one. 
+
+
+## Version Changelog
+
+Originally, this project was created for an assignment capping off the conclusion of my freshman year of college. Since then, I've added a slew of new features—changes that have been documented here, on this app's README!
+
+- `1.0.0` - Original project version. 
+- `1.1.0` - Added hub-and-spoke menu with multiple navigation pathways (Help menu, Credits section). Implemented a new means of app interaction with <i>Creation Mode</i>, allowing for both the construction and distribution of custom puzzles. Built in a bug reporting feature, set to be routed to me, the programmer.  
+
+## Credits & Licensing 
+
+<sup>For specific asset attributions, visit `HoppersGUI`'s Credits screen.</sup>
+
+In its initial stage, this project would not have been possible without the instruction and tutelage of RIT's CS department. Another huge thanks to my friend, Rotten ([@mof-rot](https://www.tumblr.com/mof-rot
+) on Tumblr), as well as [freeiconspng.com](https://www.freeiconspng.com/img/45338) and the game *Pokémon Smile* for the additional graphics.
+
+<sub>Pokémon is a trademark of Nintendo, Creatures Inc., and Game Freak. This is a non-commercial, fan-made project; as such, it claims [fair use](https://en.wikipedia.org/wiki/Fair_use). No copyright infringement is intended, and all assets along with imagery, whether official or affiliated, belong to their respective owners.</sub>
+
+>>>>>>> 55ad4406c508db299623a9bb43527ac82df54f29
