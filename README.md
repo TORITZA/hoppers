@@ -83,7 +83,9 @@ In this iteration of the game, the Pokémon Politoed stands in for the Green Fro
 Originally, this project was created for an assignment capping off the conclusion of my freshman year of college. Since then, I've added a slew of new features—changes that have been documented here, on this app's README!
 
 - `1.0.0` - Original project version. 
-- `1.1.0` - Added hub-and-spoke menu with multiple navigation pathways (Help menu, Credits section). Implemented a new means of app interaction with <i>Creation Mode</i>, allowing for both the construction and distribution of custom puzzles. Built in a bug reporting feature, set to be routed to me, the programmer.  
+- `1.1.0` - Added hub-and-spoke menu with multiple navigation pathways (Help menu, Credits section). Implemented a new means of app interaction with <i>Creation Mode</i>, allowing for both the construction and distribution of custom puzzles. Built in a bug reporting feature, set to be routed to me, the programmer.
+
+<sub>Hoppers's versioning scheme follows the MAJOR.MINOR.PATCH format of [SemVer](https://semver.org/) but interprets it differently. As a software, the MAJOR version is incremented if Hoppers has undergone an app-wide reinvention, where the source code itself has either been entirely overhauled or substantially altered. The MINOR version is incremented upon each new wave of added features; this could range from many small ones, to a single yet significant new functionality. Finally, the PATCH version is incremented upon any completed bug fixes, whose amount may vary from version to version. This designation is subject to change and to become more definite as the project grows in scope.</sub>
 
 ## Credits & Licensing 
 
