@@ -32,7 +32,7 @@ Both of the aforementioned classes incorporate the model-view-controller archite
 Default Hoppers puzzles are provided in the `data/default`. Included in this directory is also a subfolder (`data/custom`) that contains any custom puzzles the user may create. 
 
 
-Further documentation is detailed in the source code for not only all the classes listed but also any providers or supplementary programs. Conversely, if directed to view one of Hoppers's information screens (i.e., the Help menu, the Credits page, etc.), they have been provided as raw markdown as well as text files in `game information` for easier and swifter access. The contents there are how they appear within the application. 
+Further documentation is detailed in the source code for not only all the classes listed but also any providers or supplementary programs. Additionally, whenever directed to an instructional screen in `HoppersGUI`, for simplified access, check out this project's `game information` directory! Attached there are markdown and text files for the information displayed on the corresponding screen; the contents there are precisely how they appear within the application. 
 
 ## Features
 This section aims to cover the core features included with either iteration of the Hoppers puzzle game: `HoppersPTUI` or `HoppersGUI`.*
