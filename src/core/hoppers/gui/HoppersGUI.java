@@ -747,7 +747,7 @@ public class HoppersGUI extends Application implements Observer<HoppersModel, St
 
         gitLink.setOnAction(e -> getHostServices().showDocument("https://github.com/TORITZA/hoppers"));
 
-        tumblr.setOnAction(e -> getHostServices().showDocument("https://www.tumblr.com/mof-rot"));
+        tumblr.setOnAction(e -> getHostServices().showDocument("https://www.tumblr.com/rotten-ichor?source=share"));
 
         freeImg.setOnAction(e -> getHostServices().showDocument("https://www.freeiconspng.com/img/45338"));
 
